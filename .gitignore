@@ -1,0 +1,38 @@
+# ── macOS / OS ──────────────────────────────────────
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# ── Editors / IDEs ──────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ── Local tooling (preview server config, agent state) ──
+.claude/
+
+# ── Logs & temp ─────────────────────────────────────
+*.log
+tmp/
+.cache/
+
+# ── Env / secrets ───────────────────────────────────
+.env
+.env.*
+!.env.example
+
+# ── Node (only relevant if build tooling is added later) ──
+node_modules/
+npm-debug.log*
+
+# ── Generated build artifacts ───────────────────────
+# The exercise zip is regenerated from exercise-files/ and embedded in
+# index.html as a base64 data: URI, so the standalone file isn't tracked.
+claude-101-exercise.zip
+dist/

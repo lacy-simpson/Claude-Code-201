@@ -1,0 +1,147 @@
+RESEARCH SUMMARY — FRAME Step F
+Claude 101: Orient, Access, and Activate
+Status: COMPLETE
+Sources: Two Perplexity Pro research outputs (see ID-Resources/ for originals)
+  - "Big picture_ what research says.md"
+  - "Reframed big picture (with Anthropic heavily weigh.md"
+
+════════════════════════════════════════════════════════
+SYNTHESIS: KEY FINDINGS FOR THIS COURSE
+════════════════════════════════════════════════════════
+
+This summary is the rulebook for all AI-assisted content generation on this project.
+Every subsequent prompt must reference it.
+
+────────────────────────────────────────────────────────
+FINDING 1: Each Claude surface has a "signature move"
+────────────────────────────────────────────────────────
+Anthropic's analysis of 50,000+ Claude conversations shows that one gateway behavior
+predicts nearly every other fluency indicator per surface:
+
+  - Claude Chat: ITERATION — users who routinely send follow-ups to refine outputs
+    show higher critical evaluation and better prompting behaviors overall.
+    "One-and-done" users exhibit almost no observable critical evaluation.
+  - Claude Code / Cowork: CLARIFY THE GOAL — users who clearly state what they want
+    before execution also specify format more often and break down tasks more effectively.
+
+DESIGN RULE: Session 1 focuses on Chat. The signature move to drill is ITERATION.
+Every practice activity must include at least one follow-up prompt — not just a first ask.
+
+────────────────────────────────────────────────────────
+FINDING 2: Discernment does NOT improve naturally — it must be taught
+────────────────────────────────────────────────────────
+Description skills (adding context, shaping tone, using Projects) tend to grow with
+continued use. Discernment — evaluating and questioning outputs — does NOT naturally
+improve, even with experienced users.
+
+This is consistent with automation bias research: users overweight AI recommendations,
+under-check errors, and accept plausible-but-false content. Experienced users are not
+immune.
+
+DESIGN RULE: Allocate disproportionate time to Discernment. Every practice activity
+must include a "now question it" step. Include at least one moment where Claude produces
+output participants must critique, not just use.
+
+────────────────────────────────────────────────────────
+FINDING 3: Adults need authentic, problem-centered practice — not feature tours
+────────────────────────────────────────────────────────
+Adults adopt tools when training connects to real, immediate problems. Training that only
+demonstrates features without practice on real tasks produces awareness, not behavior change.
+One-off sessions without workflow integration decay quickly.
+
+DESIGN RULE: All demos and activities must use role-relevant, real-work scenarios.
+No toy prompts. No generic "write me a poem" examples. Use actual UiPath role contexts
+(email drafting, case summaries, report writing, etc.).
+
+────────────────────────────────────────────────────────
+FINDING 4: Mental models must be explicitly surfaced and corrected
+────────────────────────────────────────────────────────
+Common (wrong) mental models that persist without explicit correction:
+  - AI as search engine: leads to shallow, single-turn querying and misunderstanding
+    of generative outputs
+  - Anthropomorphization: "Claude understands / thinks" language encourages treating
+    the system as an intentional agent, distorting expectations and blame
+  - Overtrust / undertrust: both patterns persist unless actively calibrated
+
+DESIGN RULE: Use precise language — "AI system," "generated output," "model" — never
+"Claude thinks" or "Claude knows." Include a visible moment where Claude gets something
+wrong and participants must spot and correct it.
+
+────────────────────────────────────────────────────────
+FINDING 5: Three keystone habits drive sustained use
+────────────────────────────────────────────────────────
+Combined Anthropic + TAM/UTAUT findings identify three micro-habits that predict
+whether first-use becomes sustained practice:
+
+  1. Always iterate (Chat): send at least one follow-up to refine the output
+  2. Use at least one Description lever: add context, tone, audience, or attach a
+     real file — not just a bare question
+  3. Run a Discernment check before using the output: verify key facts, check policy
+     fit, look for missing constraints
+
+DESIGN RULE: Frame the session's success criteria as "you practiced these three
+micro-habits in your own context." Not: "you saw a demo" or "you know what Claude is."
+
+────────────────────────────────────────────────────────
+FINDING 6: Short sessions stick only when embedded in workflow + followed up
+────────────────────────────────────────────────────────
+A 50-minute live session is not enough on its own. Behavior change research shows that:
+  - Implementation intentions ("When I [cue], I will use AI to [task]") significantly
+    improve follow-through vs. ending with "any questions?"
+  - Manager expectations and social reinforcement sustain use after training
+  - Simple reusable artifacts (prompt recipes, checklists) that travel with the learner
+    into their workflow are critical scaffolds
+
+DESIGN RULE: End the session with one concrete implementation intention, not a Q&A.
+Provide a leave-behind resource participants can use in their workflow next week.
+The Skill Jar handoff is not optional — it is the follow-through mechanism.
+
+════════════════════════════════════════════════════════
+PRACTICAL TLDR TABLE
+════════════════════════════════════════════════════════
+
+Principle                        | Evidence strength | Implication for Claude 101
+---------------------------------|-------------------|-------------------------------------------
+Signature move = iteration       | Strong (Anthropic | Drill at least one follow-up prompt in
+(Chat)                           | telemetry + adult | every practice activity. Make it feel
+                                 | learning research)| normal, not extra.
+---------------------------------|-------------------|-------------------------------------------
+Discernment doesn't auto-improve | Strong (Anthropic | Include a "question the output" step in
+                                 | data + automation | the demo. Don't only show good outputs.
+                                 | bias literature)  |
+---------------------------------|-------------------|-------------------------------------------
+Authentic tasks only             | Robust (adult     | Use real UiPath role scenarios — email,
+                                 | learning theory)  | case notes, reports. No toy examples.
+---------------------------------|-------------------|-------------------------------------------
+Mental models must be corrected  | Supported (mental | Explicitly name the "search engine"
+                                 | model + XAI       | misconception. Use system-based language
+                                 | research)         | throughout.
+---------------------------------|-------------------|-------------------------------------------
+3 keystone habits drive use      | Strong (Anthropic | Frame the session around 3 micro-habits.
+                                 | + TAM/UTAUT)      | Make them the explicit success criteria.
+---------------------------------|-------------------|-------------------------------------------
+Implementation intentions work   | Strong (behavior  | End with "when I [X], I will use Claude
+                                 | change research)  | for [Y]" — not open Q&A.
+---------------------------------|-------------------|-------------------------------------------
+Leave-behinds + Skill Jar = the  | Supported (workplace| The Skill Jar handoff is the follow-
+follow-through mechanism         | adoption surveys) | through. Treat it as required, not optional.
+
+════════════════════════════════════════════════════════
+IMPLICATIONS FOR LEARNING OBJECTIVES REVIEW
+════════════════════════════════════════════════════════
+
+The current learning objectives (learning_objectives.md) should be checked against
+these findings before development begins:
+
+1. OBJECTIVE TO ADD or STRENGTHEN: "Perform a Discernment check on a Claude output"
+   — this is currently underweighted. The research is clear it must be explicitly taught.
+
+2. OBJECTIVE TO STRENGTHEN: The follow-along activity (type one sentence, see what it
+   asks you) is good for confidence but does not drill iteration. Consider building
+   iteration explicitly into the activity: type one sentence, get a response, then
+   send one follow-up.
+
+3. OBJECTIVE TO WATCH: Objective 6 (explain the difference between chat and Project)
+   is valuable but is a cognitive/recall objective. The research suggests the Project
+   setup activity (Objective 5) is the more behaviorally important one. If time is
+   tight, protect 5 before 6.

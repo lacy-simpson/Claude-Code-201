@@ -1,0 +1,2999 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Getting Started with Claude Code — L200 Overview</title>
+<script>
+(function(){
+  try{
+    var t=localStorage.getItem('cc-theme');if(t)document.documentElement.setAttribute('data-theme',t);
+    var s=localStorage.getItem('cc-sidebar');
+    document.documentElement.setAttribute('data-sidebar',s==='closed'?'closed':'open');
+  }catch(e){
+    document.documentElement.setAttribute('data-sidebar','open');
+  }
+})();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* ── TOKENS — UiPath Brand System ─────────────────────────── */
+:root{
+  /* Primary — Robotic Orange */
+  --indigo:        #FA4616;
+  --indigo-deep:   #c53610;
+  --indigo-soft:   rgba(250,70,22,0.09);
+  --indigo-mid:    rgba(250,70,22,0.22);
+  --indigo-glow:   rgba(250,70,22,0.40);
+
+  /* Amber — warnings/caution */
+  --coral:         #F59E0B;
+  --coral-deep:    #b37408;
+  --coral-soft:    rgba(245,158,11,0.09);
+  --coral-mid:     rgba(245,158,11,0.22);
+
+  /* Teal — agentic/success (UiPath Agentic Teal) */
+  --mint:          #0BA2B3;
+  --mint-deep:     #077a87;
+  --mint-soft:     rgba(11,162,179,0.09);
+  --mint-mid:      rgba(11,162,179,0.22);
+
+  /* Gold — key takeaway accents */
+  --yellow:        #E8960C;
+  --yellow-deep:   #8b5a08;
+  --yellow-soft:   rgba(232,150,12,0.09);
+  --yellow-mid:    rgba(232,150,12,0.24);
+
+  /* Spark — checkpoint / capstone (bright teal) */
+  --magenta:       #06CDD9;
+  --magenta-deep:  #047f88;
+  --magenta-soft:  rgba(6,205,217,0.09);
+  --magenta-mid:   rgba(6,205,217,0.22);
+
+  --r-xl:6px;--r-lg:5px;--r-md:4px;--r-sm:3px;
+}
+/* Dark theme — UiPath deep blue night */
+:root{
+  --bg:#0d1316;
+  --bg-2:#131d22;
+  --surface:#1a2428;
+  --surface-2:#1f2d33;
+  --surface-3:#263740;
+  --ink:#c4d8e0;
+  --ink-strong:#e0eef3;
+  --muted:#668899;
+  --muted-2:#3f5e6c;
+  --line:rgba(255,255,255,0.06);
+  --line-hi:rgba(255,255,255,0.10);
+  --shadow:0 8px 32px rgba(0,0,0,0.45);
+  --shadow-sm:0 2px 12px rgba(0,0,0,0.32);
+  --topbar-bg:#0a1013;
+  --sidebar-bg:#0a1013;
+  --code-bg:#070c0f;
+  --code-ink:#b0cad4;
+}
+html[data-theme='light']{
+  --bg:#f2f5f6;
+  --bg-2:#e4eaec;
+  --surface:#ffffff;
+  --surface-2:#eff3f5;
+  --surface-3:#e2eaed;
+  --ink:#1e3340;
+  --ink-strong:#0d1c23;
+  --muted:#4a6b7a;
+  --muted-2:#8aa4ae;
+  --line:rgba(14,28,35,0.10);
+  --line-hi:rgba(14,28,35,0.16);
+  --shadow:0 8px 32px rgba(14,28,35,0.10);
+  --shadow-sm:0 2px 12px rgba(14,28,35,0.07);
+  --topbar-bg:#0d1316;
+  --sidebar-bg:#0d1316;
+  --code-bg:#0d1316;
+  --code-ink:#b8d2dc;
+  --indigo-soft:rgba(250,70,22,0.08);
+  --indigo-mid:rgba(250,70,22,0.18);
+  --coral-soft:rgba(245,158,11,0.08);
+  --mint-soft:rgba(11,162,179,0.09);
+}
+
+/* ── RESET ────────────────────────────────────────────────── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;overflow:hidden}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased}
+a{color:var(--indigo);text-decoration:none}
+html[data-theme='light'] a{color:var(--indigo-deep)}
+code,pre{font-family:'JetBrains Mono','SF Mono','Fira Code',ui-monospace,monospace}
+
+/* ── APP SHELL ────────────────────────────────────────────── */
+.app{display:flex;height:100vh;overflow:hidden}
+
+/* ── SIDEBAR ──────────────────────────────────────────────── */
+.sidebar{width:286px;flex-shrink:0;background:var(--sidebar-bg);border-right:1px solid var(--line);overflow:hidden;transition:width .28s cubic-bezier(.4,0,.2,1),opacity .22s;z-index:40;display:flex;flex-direction:column;}
+.sb-inner{flex:1;overflow-y:auto;overflow-x:hidden;display:flex;flex-direction:column;}
+html[data-sidebar='closed'] .sidebar{width:0;opacity:0;pointer-events:none}
+.sb-head{flex-shrink:0;padding:18px 16px 14px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:10px}
+.sb-brand{display:flex;align-items:center;gap:10px}
+.sb-mark{
+  width:30px;height:30px;border-radius:4px;
+  background:var(--indigo);
+  display:grid;place-items:center;flex-shrink:0;
+  box-shadow:0 0 0 1px rgba(250,70,22,.36),0 4px 14px rgba(250,70,22,.28);
+  position:relative;overflow:hidden;
+}
+.sb-mark::after{content:none}
+.sb-mark-glyph{
+  font-family:'JetBrains Mono',monospace;
+  font-size:.78rem;font-weight:700;color:#fff;
+  letter-spacing:-.04em;position:relative;z-index:1;
+  text-shadow:0 1px 2px rgba(0,0,0,.3);
+}
+.sb-name{font-family:'Poppins',sans-serif;font-size:.88rem;font-weight:700;color:#fff;letter-spacing:-.012em;line-height:1.15}
+.sb-sub{font-size:.59rem;font-weight:700;color:rgba(255,255,255,.45);letter-spacing:.10em;text-transform:uppercase;margin-top:2px}
+.sb-close{width:26px;height:26px;border-radius:7px;border:none;background:rgba(255,255,255,.06);color:rgba(255,255,255,.4);display:grid;place-items:center;cursor:pointer;flex-shrink:0;transition:all .13s}
+.sb-close:hover{background:rgba(255,255,255,.12);color:#fff}
+.sb-nav{flex:1;overflow-y:auto;padding:10px 8px}
+.sb-nav::-webkit-scrollbar{width:3px}
+.sb-nav::-webkit-scrollbar-thumb{background:var(--line-hi);border-radius:2px}
+
+.sb-item{width:100%;display:flex;align-items:flex-start;gap:11px;padding:10px 11px;border-radius:10px;border:1px solid transparent;background:transparent;color:var(--ink);cursor:pointer;text-align:left;transition:background .13s;margin-bottom:2px;appearance:none;-webkit-appearance:none;font:inherit}
+.sb-item:hover{background:rgba(255,255,255,.05)}
+.sb-item.active{
+  background:linear-gradient(135deg,rgba(250,70,22,0.16),rgba(250,70,22,0.06));
+  border-color:rgba(250,70,22,0.32);
+  box-shadow:inset 0 1px 0 rgba(250,70,22,.10);
+}
+.sb-num{
+  width:30px;height:30px;border-radius:9px;
+  background:var(--surface-3);color:var(--muted);
+  display:grid;place-items:center;
+  font-family:'JetBrains Mono',monospace;
+  font-size:.7rem;font-weight:700;flex-shrink:0;margin-top:1px;
+  transition:all .15s;letter-spacing:-.02em;
+}
+.sb-item.active .sb-num{
+  background:var(--indigo);
+  color:#fff;
+  box-shadow:0 0 0 2px rgba(250,70,22,.22),0 3px 10px rgba(250,70,22,.28);
+}
+.sb-item.visited:not(.active) .sb-num{
+  background:var(--indigo-soft);color:var(--indigo);
+  border:1px solid var(--indigo-mid);
+}
+.sb-item-body{flex:1;min-width:0;color:#dfe4f5 !important}
+.sb-item .sb-item-title{display:block;font-size:.84rem;font-weight:600;color:#dfe4f5 !important;line-height:1.32;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sb-item.active .sb-item-title{color:#f0f2fb !important}
+.sb-item.visited:not(.active) .sb-item-title{color:#edf0fb !important}
+.sb-item .sb-item-meta{font-size:.66rem;color:#7c83a8 !important;font-weight:600;margin-top:2px;display:block}
+.sb-item.active .sb-item-meta{color:var(--indigo) !important}
+.sb-foot{flex-shrink:0;padding:12px 16px 8px;border-top:1px solid var(--line);font-size:.68rem;font-weight:700;color:var(--muted-2);display:flex;align-items:center;gap:6px}
+.sb-attr{flex-shrink:0;padding:2px 16px 14px;font-size:.68rem;font-weight:500;color:rgba(255,255,255,.40);text-align:center;line-height:1.5;letter-spacing:.01em;}
+.sb-backdrop{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:39;backdrop-filter:blur(2px)}
+
+/* ── MAIN ─────────────────────────────────────────────────── */
+.main{flex:1;min-width:0;display:flex;flex-direction:column;overflow:hidden;}
+
+/* ── TOPBAR ───────────────────────────────────────────────── */
+.topbar{flex-shrink:0;height:54px;background:var(--topbar-bg);border-bottom:1px solid rgba(250,70,22,0.25);display:flex;align-items:center;gap:14px;padding:0 18px;z-index:30}
+.tb-toggle{width:32px;height:32px;border-radius:9px;border:none;background:rgba(255,255,255,.06);color:rgba(255,255,255,.5);display:grid;place-items:center;cursor:pointer;flex-shrink:0;transition:all .13s}
+.tb-toggle:hover{background:rgba(255,255,255,.12);color:#fff}
+.progress-rail{flex:1;height:3px;background:rgba(255,255,255,.08);border-radius:999px;overflow:hidden}
+.progress-bar{height:100%;background:var(--indigo);border-radius:inherit;transition:width .5s cubic-bezier(.22,.68,0,1.2);box-shadow:0 0 10px rgba(250,70,22,.45)}
+.tb-count{font-family:'JetBrains Mono',monospace;font-size:.72rem;font-weight:700;color:rgba(255,255,255,.55);white-space:nowrap;font-variant-numeric:tabular-nums}
+.tb-session{display:flex;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;font-size:.7rem;font-weight:600;color:rgba(255,255,255,.45);flex-shrink:0}
+.tb-sep{width:1px;height:18px;background:rgba(255,255,255,.10);flex-shrink:0}
+.theme-btn{width:30px;height:30px;border-radius:8px;border:none;background:rgba(255,255,255,.06);color:rgba(255,255,255,.5);display:grid;place-items:center;cursor:pointer;transition:all .13s;flex-shrink:0}
+.theme-btn:hover{background:rgba(255,255,255,.11);color:#fff}
+
+/* ── CONTENT ──────────────────────────────────────────────── */
+.content{flex:1;overflow-y:auto;background:var(--bg)}
+.content::-webkit-scrollbar{width:5px}
+.content::-webkit-scrollbar-thumb{background:var(--line-hi);border-radius:2px}
+.lesson{display:none}
+.lesson.active{display:block;animation:fadeIn .34s cubic-bezier(.22,.68,0,1.1) both}
+@keyframes fadeIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── LESSON HEADER BAND ───────────────────────────────────── */
+.lesson-header-band{
+  padding:60px max(44px, calc((100% - 1140px) / 2)) 44px;
+  border-bottom:1px solid var(--line);
+  background-color:var(--bg-2);
+  background-image:
+    linear-gradient(rgba(250,70,22,0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(250,70,22,0.035) 1px, transparent 1px);
+  background-size:24px 24px;
+  position:relative;
+}
+.lesson-header-band::after{
+  content:'UiPath Internal Only';
+  position:absolute;bottom:12px;left:0;right:0;
+  text-align:center;
+  font-family:'Inter',sans-serif;font-size:.68rem;font-weight:600;
+  color:rgba(255,255,255,.38);letter-spacing:.09em;text-transform:uppercase;
+  pointer-events:none;
+}
+html[data-theme='light'] .lesson-header-band::after{color:rgba(14,28,35,.45)}
+.lesson-body{max-width:1140px;margin:0 auto;padding:44px 56px 160px}
+
+/* ── LESSON HEADER ────────────────────────────────────────── */
+.lh-eyebrow{display:flex;align-items:flex-start;gap:14px;margin-bottom:0;flex-wrap:wrap}
+.lh-num{
+  width:42px;height:42px;border-radius:4px;
+  background:var(--indigo);color:#fff;
+  font-family:'JetBrains Mono',monospace;
+  font-size:.82rem;font-weight:800;
+  display:grid;place-items:center;flex-shrink:0;
+  box-shadow:3px 3px 0px rgba(0,0,0,0.35);
+  letter-spacing:-.02em;
+}
+html[data-theme='light'] .lh-num{box-shadow:3px 3px 0px rgba(0,0,0,0.20)}
+.lh-meta{margin-top:18px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.time-pill{display:inline-flex;align-items:center;gap:5px;padding:4px 11px;border-radius:999px;background:var(--coral-soft);border:1px solid var(--coral-mid);color:var(--coral);font-size:.7rem;font-weight:700;font-family:'JetBrains Mono',monospace}
+html[data-theme='light'] .time-pill{color:var(--coral-deep)}
+.lt-countdown{display:inline-flex;align-items:center;gap:6px;padding:5px 14px;border-radius:999px;background:var(--coral-soft);border:1px solid rgba(245,158,11,0.28);color:var(--coral);font-size:.88rem;font-weight:700;font-family:'JetBrains Mono',monospace;font-variant-numeric:tabular-nums;letter-spacing:.02em}
+.lt-countdown.warn{color:var(--coral);border-color:rgba(245,158,11,0.45)}
+.lt-countdown.danger{color:var(--magenta);border-color:rgba(6,205,217,0.4)}
+html[data-theme='light'] .lt-countdown{color:var(--coral-deep,var(--coral))}
+.type-pill{display:inline-flex;align-items:center;gap:5px;padding:4px 11px;border-radius:999px;background:var(--indigo-soft);border:1px solid var(--indigo-mid);color:var(--indigo);font-size:.7rem;font-weight:700}
+html[data-theme='light'] .type-pill{color:var(--indigo-deep)}
+.lh-title{
+  font-family:'Poppins',sans-serif;
+  font-size:clamp(2rem,4.4vw,2.95rem);
+  font-weight:700;line-height:1.04;letter-spacing:-.024em;
+  color:var(--ink-strong);max-width:840px;margin-top:6px;
+}
+.lh-lead{margin-top:16px;color:var(--muted);font-size:1.08rem;line-height:1.65;max-width:780px}
+
+/* ── LESSON SECTION ───────────────────────────────────────── */
+.ls{margin-top:60px;position:relative}
+.ls:first-child{margin-top:0}
+.ls-title{
+  font-family:'Poppins',sans-serif;
+  font-size:clamp(1.4rem,2.4vw,1.7rem);
+  font-weight:700;line-height:1.18;letter-spacing:-.024em;
+  color:var(--ink-strong);
+  margin-bottom:24px;display:flex;flex-direction:column;gap:0;
+}
+.ls-title::before{
+  content:'';display:block;width:44px;height:2px;
+  background:linear-gradient(90deg,var(--indigo) 0%,rgba(250,70,22,0.18) 100%);
+  margin-bottom:18px;border-radius:2px;
+}
+.ls-lead{font-size:1.04rem;line-height:1.7;color:var(--muted);max-width:880px;margin:0 0 24px}
+
+/* ── BODY TEXT ────────────────────────────────────────────── */
+.lesson-body p{font-size:1.05rem;line-height:1.72;color:var(--ink)}
+.lesson-body p+p{margin-top:14px}
+.lesson-body strong{color:var(--ink-strong);font-weight:700}
+
+/* ── CARDS ────────────────────────────────────────────────── */
+.grid{display:grid;gap:16px}
+.col2{grid-template-columns:repeat(2,1fr)}
+.col3{grid-template-columns:repeat(3,1fr)}
+.card{
+  background:linear-gradient(180deg,var(--surface) 0%,var(--surface-2) 100%);
+  border:1px solid var(--line-hi);border-radius:var(--r-xl);
+  padding:26px 28px;box-shadow:0 2px 16px rgba(0,0,0,.18),inset 0 1px 0 rgba(255,255,255,.04);
+  transition:box-shadow .2s ease;
+}
+html[data-theme='light'] .card{background:linear-gradient(180deg,#fff,var(--surface-2));box-shadow:0 2px 10px rgba(0,0,0,.06)}
+.card-label{
+  font-family:'JetBrains Mono',monospace;
+  font-size:.65rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:18px;display:flex;align-items:center;gap:10px;
+}
+.card-label::before{content:'';width:14px;height:1px;background:var(--indigo);flex-shrink:0}
+.card-title{font-family:'Inter',system-ui,sans-serif;font-size:1.02rem;font-weight:700;letter-spacing:-.012em;margin-bottom:10px;color:var(--ink-strong)}
+
+/* ── CALLOUTS ─────────────────────────────────────────────── */
+.callout{border-radius:var(--r-lg);padding:20px 22px;display:flex;gap:14px;align-items:flex-start}
+.callout.tip{background:var(--indigo-soft);border:1px solid var(--indigo-mid)}
+.callout.tip .callout-body strong{color:var(--indigo)}
+html[data-theme='light'] .callout.tip .callout-body strong{color:var(--indigo-deep)}
+.callout.warn{background:var(--coral-soft);border:1px solid var(--coral-mid)}
+.callout.warn .callout-body strong{color:var(--coral)}
+html[data-theme='light'] .callout.warn .callout-body strong{color:var(--coral-deep)}
+.callout.activity{background:var(--mint-soft);border:1px solid var(--mint-mid)}
+.callout.activity .callout-body strong{color:var(--mint)}
+html[data-theme='light'] .callout.activity .callout-body strong{color:var(--mint-deep)}
+.callout.checkpoint{
+  background:linear-gradient(135deg,rgba(233,30,140,.10),rgba(233,30,140,.04));
+  border:1px solid var(--magenta-mid);
+  border-left:3px solid var(--magenta);
+}
+.callout.checkpoint .callout-body strong{color:var(--magenta)}
+html[data-theme='light'] .callout.checkpoint .callout-body strong{color:var(--magenta-deep)}
+.callout.gold{
+  background:linear-gradient(135deg,rgba(232,150,12,0.12),rgba(232,150,12,0.04));
+  border:1px solid var(--yellow-mid);
+  border-left:3px solid var(--yellow);
+}
+.callout.gold .callout-icon{color:var(--yellow)}
+.callout.gold .callout-body strong{color:var(--yellow)}
+html[data-theme='light'] .callout.gold .callout-icon{color:var(--yellow-deep)}
+html[data-theme='light'] .callout.gold .callout-body strong{color:var(--yellow-deep)}
+.callout-icon{font-size:1.15rem;line-height:1;padding-top:1px;flex-shrink:0;font-family:'JetBrains Mono',monospace;font-weight:800}
+.callout.tip .callout-icon{color:var(--indigo)}
+.callout.warn .callout-icon{color:var(--coral)}
+.callout.activity .callout-icon{color:var(--mint)}
+.callout.checkpoint .callout-icon{color:var(--magenta)}
+.callout-body{font-size:1.01rem;line-height:1.7;color:var(--ink);flex:1}
+.callout-body strong{display:block;font-family:'Inter',system-ui,sans-serif;font-size:1rem;font-weight:700;margin-bottom:6px;letter-spacing:-.01em}
+
+/* ── DIVE DEEPER (explorable tip accordion) ───────────────── */
+.dive{
+  margin-top:14px;
+  border-radius:12px;
+  border:1px solid var(--line);
+  background:transparent;
+  overflow:hidden;
+  transition:background .22s,border-color .22s;
+}
+.dive:hover{border-color:var(--line-hi)}
+.dive[open]{
+  background:linear-gradient(180deg,var(--surface) 0%,var(--surface-2) 100%);
+  border-color:var(--indigo-mid);
+}
+.dive summary{
+  padding:14px 18px;
+  font-size:.94rem;font-weight:600;color:var(--ink);
+  display:flex;align-items:center;gap:12px;
+  list-style:none;cursor:pointer;
+}
+.dive summary::-webkit-details-marker{display:none}
+.dive-icon{
+  width:22px;height:22px;border-radius:7px;
+  background:var(--indigo-soft);border:1px solid var(--indigo-mid);
+  color:var(--indigo);
+  font-family:'JetBrains Mono',monospace;font-size:.66rem;font-weight:800;
+  display:grid;place-items:center;flex-shrink:0;
+}
+html[data-theme='light'] .dive-icon{color:var(--indigo-deep)}
+.dive-label{flex:1;font-family:'Inter',system-ui,sans-serif}
+.dive summary::after{
+  content:'';width:18px;height:18px;flex-shrink:0;
+  background-image:url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='%237c5cff' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round' d='M4 6l4 4 4-4'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:center;
+  transition:transform .3s cubic-bezier(.4,0,.2,1);
+}
+.dive[open] summary::after{transform:rotate(180deg)}
+.dive-body{padding:4px 18px 20px 52px;font-size:.96rem;line-height:1.72;color:var(--muted)}
+.dive-body p+p{margin-top:10px}
+.dive-body code{
+  font-family:'JetBrains Mono',monospace;font-size:.86em;
+  background:var(--indigo-soft);border:1px solid var(--indigo-mid);
+  color:var(--indigo);padding:1px 6px;border-radius:4px;font-weight:600;
+}
+html[data-theme='light'] .dive-body code{color:var(--indigo-deep)}
+
+/* ── KEY TAKEAWAY ─────────────────────────────────────────── */
+.key-takeaway{
+  margin-top:48px;padding:28px 32px;
+  background:linear-gradient(135deg,rgba(255,214,0,0.10),rgba(255,214,0,0.03));
+  border:1px solid var(--yellow-mid);
+  border-left:4px solid var(--yellow);
+  border-radius:var(--r-lg);position:relative;overflow:hidden;
+  box-shadow:inset 0 1px 0 rgba(255,214,0,.10),0 2px 18px rgba(255,214,0,.05);
+}
+.key-takeaway::after{
+  content:'';position:absolute;top:-30px;right:-30px;
+  width:100px;height:100px;
+  background:radial-gradient(circle,rgba(255,214,0,.10),transparent 70%);
+  pointer-events:none;
+}
+.kt-label{
+  font-family:'JetBrains Mono',monospace;
+  font-size:.62rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--yellow);display:block;margin-bottom:10px;
+}
+html[data-theme='light'] .kt-label{color:var(--yellow-deep)}
+.kt-text{font-family:'Inter',sans-serif;font-size:1.05rem;font-weight:500;line-height:1.62;color:var(--ink-strong)}
+.kt-text strong{color:var(--ink-strong);font-weight:700}
+
+/* ── LESSON PREVIEW ───────────────────────────────────────── */
+.lesson-preview{
+  border:none;border-radius:6px;
+  background:linear-gradient(90deg,transparent 0%,rgba(250,70,22,0.06) 4%,rgba(250,70,22,0.06) 96%,transparent 100%);
+  padding:18px 24px;margin-bottom:48px;
+}
+.lp-label{
+  font-family:'JetBrains Mono',monospace;
+  font-size:.62rem;letter-spacing:.18em;color:var(--indigo);
+  font-weight:700;display:block;margin-bottom:12px;
+}
+html[data-theme='light'] .lp-label{color:var(--indigo-deep)}
+.lp-list{display:grid;grid-template-columns:1fr 1fr;gap:6px 32px;list-style:none;padding:0;margin:0}
+.lp-list li{font-size:.88rem;color:var(--muted);line-height:1.5;display:flex;align-items:baseline;gap:0}
+.lp-list li::before{content:'—';color:var(--indigo);flex-shrink:0;margin-right:9px;font-size:.7em;opacity:.85}
+@media(max-width:720px){.lp-list{grid-template-columns:1fr}}
+
+/* ── OBJ / CHECK / WARN LISTS ─────────────────────────────── */
+.obj-list{list-style:none;display:grid;gap:12px}
+.obj-item{display:flex;gap:12px;align-items:flex-start}
+.obj-n{
+  width:26px;height:26px;border-radius:4px;
+  background:var(--indigo);color:#fff;
+  font-family:'JetBrains Mono',monospace;font-size:.7rem;font-weight:800;
+  display:grid;place-items:center;flex-shrink:0;margin-top:1px;
+  box-shadow:0 0 0 1px rgba(250,70,22,.32),0 2px 8px rgba(250,70,22,.18);
+}
+.obj-item span{font-size:1.01rem;line-height:1.62;color:var(--ink)}
+.obj-item strong{color:var(--ink-strong)}
+.check-list,.warn-list{list-style:none;display:grid;gap:10px}
+.check-list li,.warn-list li{display:block;padding-left:32px;position:relative;font-size:1rem;line-height:1.6;color:var(--ink)}
+.check-list li::before{
+  content:'✓';width:20px;height:20px;border-radius:7px;
+  background:var(--mint-soft);border:1px solid var(--mint-mid);color:var(--mint);
+  font-size:.68rem;font-weight:800;display:grid;place-items:center;
+  position:absolute;left:0;top:2px;
+}
+html[data-theme='light'] .check-list li::before{color:var(--mint-deep)}
+.warn-list li{color:var(--muted)}
+.warn-list li::before{
+  content:'!';width:20px;height:20px;border-radius:7px;
+  background:var(--coral-soft);border:1px solid var(--coral-mid);color:var(--coral);
+  font-size:.68rem;font-weight:800;display:grid;place-items:center;
+  position:absolute;left:0;top:2px;
+}
+html[data-theme='light'] .warn-list li::before{color:var(--coral-deep)}
+
+/* ── INTERACTIVE CHECKLIST (custom checkboxes) ────────────── */
+.interactive-checklist{display:grid;gap:12px}
+.task-row{
+  border-radius:12px;
+  background:linear-gradient(160deg,var(--surface-2),var(--surface-3));
+  border:1px solid var(--line);
+  overflow:hidden;
+  transition:border-color .18s,background .18s;
+}
+.task-row:hover{border-color:var(--indigo-mid)}
+.task-row:has(.task-check input:checked){
+  border-color:var(--indigo-mid);
+  background:linear-gradient(160deg,rgba(250,70,22,.08),rgba(250,70,22,.025));
+}
+.task-check{
+  display:flex;align-items:flex-start;gap:14px;
+  padding:14px 16px;cursor:pointer;
+}
+.task-check input{
+  appearance:none;-webkit-appearance:none;
+  width:22px;height:22px;border-radius:7px;
+  border:1.5px solid var(--line-hi);background:var(--surface);
+  flex-shrink:0;margin:0;cursor:pointer;
+  transition:all .2s;
+  background-repeat:no-repeat;background-position:center;
+}
+.task-check input:checked{
+  background-color:var(--indigo);
+  background-image:url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='%23ffffff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round' d='M3.5 8.5l3 3 6-7'/%3E%3C/svg%3E");
+  background-size:13px 13px;border-color:var(--indigo);
+  box-shadow:0 0 0 3px rgba(250,70,22,.22),0 2px 10px rgba(250,70,22,.28);
+}
+.task-check span{flex:1;font-size:.96rem;line-height:1.6;color:var(--ink);padding-top:1px}
+.task-row:has(.task-check input:checked) .task-check span{color:var(--muted)}
+/* Dive disclosure inside a task-row — flush, no separate card chrome */
+.task-row .dive{
+  margin:0;border:none;border-top:1px dashed var(--line-hi);
+  border-radius:0;background:transparent;
+}
+.task-row .dive[open]{background:rgba(250,70,22,.04);border-top-color:var(--indigo-mid)}
+.task-row .dive summary{padding:11px 16px 11px 52px;font-size:.86rem;color:var(--muted)}
+.task-row .dive summary:hover{color:var(--ink)}
+.task-row .dive-body{padding:2px 18px 18px 52px}
+
+/* ── HOWTO TABS (per-step: Claude Desktop GUI vs VS Code/Terminal) ── */
+.howto{
+  margin-top:14px;
+  border:1px solid var(--line-hi);
+  border-radius:var(--r-lg);
+  background:linear-gradient(180deg,var(--surface) 0%,var(--surface-2) 100%);
+  overflow:hidden;
+  box-shadow:0 2px 14px rgba(0,0,0,.14),inset 0 1px 0 rgba(255,255,255,.04);
+}
+html[data-theme='light'] .howto{background:linear-gradient(180deg,#fff,var(--surface-2));box-shadow:0 2px 10px rgba(0,0,0,.06)}
+.howto-tabs{
+  display:flex;gap:0;
+  border-bottom:1px solid var(--line);
+  background:var(--bg-2);
+  padding:0 4px;
+  position:relative;
+}
+html[data-theme='light'] .howto-tabs{background:var(--surface-3)}
+.howto-tab{
+  appearance:none;-webkit-appearance:none;
+  background:transparent;border:none;
+  font:inherit;cursor:pointer;
+  padding:13px 18px 11px;
+  color:var(--muted);
+  font-size:.85rem;font-weight:600;
+  letter-spacing:-.005em;
+  display:flex;align-items:center;gap:8px;
+  position:relative;
+  transition:color .15s;
+  border-bottom:2px solid transparent;margin-bottom:-1px;
+}
+.howto-tab:hover{color:var(--ink)}
+.howto-tab[aria-selected="true"]{
+  color:var(--ink-strong);
+  border-bottom-color:var(--indigo);
+}
+.howto-tab[aria-selected="true"] .howto-tab-icon{
+  background:var(--indigo);
+  color:#fff;border-color:rgba(250,70,22,.45);
+}
+.howto-tab-icon{
+  width:22px;height:22px;border-radius:6px;
+  display:grid;place-items:center;
+  background:var(--surface-3);
+  border:1px solid var(--line-hi);
+  color:var(--muted);
+  transition:all .15s;flex-shrink:0;
+}
+.howto-tab-icon svg{display:block}
+.howto-panel{display:none;padding:20px 22px 18px}
+.howto-panel[data-active="true"]{display:block;animation:howtoFade .22s ease}
+@keyframes howtoFade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+.howto-panel>*:first-child{margin-top:0}
+.howto-panel p{font-size:.97rem;line-height:1.65;color:var(--ink)}
+.howto-panel p+p{margin-top:10px}
+.howto-fig{display:block;margin:14px auto 0;border:1px solid var(--line-hi);border-radius:6px;overflow:hidden;max-width:480px;cursor:zoom-in}
+.howto-fig img{display:block;width:100%;height:auto}
+.img-lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:10000;align-items:center;justify-content:center;cursor:zoom-out;padding:24px}
+.img-lightbox.open{display:flex}
+.img-lightbox img{max-width:90vw;max-height:90vh;border-radius:6px;object-fit:contain;box-shadow:0 8px 40px rgba(0,0,0,.6)}
+.howto-panel ol{padding-left:22px;margin:0;display:grid;gap:8px}
+.howto-panel ol li{font-size:.97rem;line-height:1.6;color:var(--ink)}
+.howto-panel ol li::marker{color:var(--indigo);font-weight:700;font-family:'JetBrains Mono',monospace}
+html[data-theme='light'] .howto-panel ol li::marker{color:var(--indigo-deep)}
+.howto-panel .code-block{margin:10px 0}
+.howto-shot{
+  margin-top:14px;
+  padding:36px 18px;
+  border:1.5px dashed var(--indigo-mid);
+  border-radius:10px;
+  background:var(--indigo-soft);
+  text-align:center;
+  font-family:'JetBrains Mono',monospace;
+  font-size:.78rem;color:var(--muted);
+  letter-spacing:.04em;line-height:1.5;
+}
+.howto-shot strong{display:block;color:var(--indigo);margin-bottom:4px;letter-spacing:.06em;text-transform:uppercase;font-size:.66rem}
+html[data-theme='light'] .howto-shot strong{color:var(--indigo-deep)}
+.howto-path{
+  display:inline-flex;align-items:center;gap:6px;
+  font-family:'JetBrains Mono',monospace;font-size:.84rem;font-weight:600;
+  background:var(--surface-3);border:1px solid var(--line-hi);
+  padding:3px 10px;border-radius:6px;color:var(--ink-strong);
+}
+.howto-path .howto-arrow{color:var(--muted-2);font-weight:400;margin:0 2px}
+
+/* ── INLINE CODE / SKILL CHIP ─────────────────────────────── */
+code.inline,.inline-code{
+  font-family:'JetBrains Mono',monospace;font-size:.86em;
+  background:var(--indigo-soft);border:1px solid var(--indigo-mid);
+  color:var(--indigo);padding:1.5px 7px;border-radius:5px;font-weight:600;
+}
+html[data-theme='light'] code.inline,html[data-theme='light'] .inline-code{color:var(--indigo-deep)}
+.skill-chip{
+  display:inline-flex;align-items:center;gap:0;
+  font-family:'JetBrains Mono',monospace;font-size:.84em;font-weight:600;
+  background:linear-gradient(135deg,rgba(250,70,22,.16),rgba(250,70,22,.06));
+  border:1px solid var(--indigo-mid);color:var(--indigo);
+  padding:2px 9px;border-radius:6px;
+  box-shadow:0 0 0 1px rgba(250,70,22,.10),0 2px 8px rgba(250,70,22,.10);
+}
+.skill-chip::before{
+  content:'/';color:var(--indigo);font-weight:800;font-size:.95em;
+}
+html[data-theme='light'] .skill-chip{color:var(--indigo-deep)}
+html[data-theme='light'] .skill-chip::before{color:var(--indigo-deep)}
+
+/* ── CODE BLOCK ───────────────────────────────────────────── */
+.code-block{
+  position:relative;
+  background:var(--code-bg);
+  border:1px solid var(--line-hi);
+  border-radius:var(--r-lg);
+  padding:18px 20px;
+  margin:14px 0;
+  overflow-x:auto;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.03);
+}
+.code-block pre{
+  font-family:'JetBrains Mono',monospace;
+  font-size:.86rem;line-height:1.7;color:var(--code-ink);
+  white-space:pre;tab-size:2;
+}
+.code-block .cb-comment{color:#7785a8;font-style:italic}
+.code-block .cb-prompt{color:var(--mint);user-select:none}
+.code-block .cb-cmd{color:#f0f2fb;font-weight:600}
+.code-block .cb-flag{color:#ffb978}
+.code-block .cb-str{color:#ff7a50}
+.code-block .cb-key{color:#ff8a5b}
+.copy-btn{
+  position:absolute;top:10px;right:10px;
+  font-family:'JetBrains Mono',monospace;font-size:.66rem;font-weight:700;
+  background:rgba(250,70,22,.10);border:1px solid var(--indigo-mid);color:#ff7a50;
+  padding:4px 10px;border-radius:6px;cursor:pointer;
+  display:flex;align-items:center;gap:5px;
+  transition:all .15s;
+}
+.copy-btn:hover{background:rgba(250,70,22,.20);color:#fff}
+.copy-btn.ok{background:var(--mint-soft);border-color:var(--mint-mid);color:var(--mint)}
+html[data-theme='light'] .copy-btn.ok{color:var(--mint-deep)}
+
+/* ── BOTTOMBAR ────────────────────────────────────────────── */
+.bottombar{flex-shrink:0;height:86px;background:var(--topbar-bg);border-top:1px solid var(--line-hi);display:flex;align-items:center;gap:12px;padding:0 18px;z-index:30;position:relative}
+.tb-nav-btns{position:absolute;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:8px}
+.sec-name{flex:1;font-family:'Poppins',sans-serif;font-size:.92rem;font-weight:600;color:rgba(255,255,255,.85);letter-spacing:-.012em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.timer-time{font-family:'JetBrains Mono',monospace;font-size:.84rem;font-weight:700;color:rgba(255,255,255,.78);font-variant-numeric:tabular-nums;min-width:48px;text-align:right}
+.timer-time.warn{color:var(--coral)}
+.timer-time.danger{color:var(--magenta)}
+.tb-btn{height:32px;border-radius:9px;border:1px solid var(--line-hi);background:rgba(255,255,255,.05);color:rgba(255,255,255,.8);padding:0 12px;font-size:.78rem;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:6px;transition:all .14s;font-family:inherit}
+.tb-btn:hover:not(:disabled){background:rgba(255,255,255,.10);color:#fff}
+.tb-btn:disabled{opacity:.35;cursor:not-allowed}
+.tb-btn.icon{width:32px;padding:0;justify-content:center}
+.tb-btn.primary{
+  background:var(--indigo);
+  color:#fff;border-color:rgba(250,70,22,.45);
+  box-shadow:0 0 0 1px rgba(250,70,22,.20),0 4px 18px rgba(250,70,22,.25);
+  font-weight:700;
+}
+.tb-btn.primary:hover:not(:disabled){background:var(--indigo-deep)}
+
+/* ── MODAL ────────────────────────────────────────────────── */
+.modal-overlay{
+  position:fixed;inset:0;background:rgba(8,12,30,.75);backdrop-filter:blur(4px);
+  z-index:100;display:none;align-items:center;justify-content:center;padding:24px;
+}
+.modal-overlay.open{display:flex}
+.modal-box{
+  max-width:560px;width:100%;background:var(--surface);
+  border:1px solid var(--line-hi);border-radius:var(--r-xl);
+  padding:32px 34px;box-shadow:var(--shadow);position:relative;
+  max-height:80vh;overflow-y:auto;
+}
+.modal-close{
+  position:absolute;top:14px;right:14px;
+  width:30px;height:30px;border-radius:8px;border:none;
+  background:rgba(255,255,255,.06);color:var(--muted);
+  cursor:pointer;font-size:.9rem;font-weight:700;
+  display:grid;place-items:center;
+}
+.modal-close:hover{background:rgba(255,255,255,.12);color:var(--ink-strong)}
+.modal-title{font-family:'Poppins',sans-serif;font-size:1.18rem;font-weight:700;color:var(--ink-strong);margin-bottom:14px;letter-spacing:-.014em}
+.modal-body{font-size:.98rem;line-height:1.7;color:var(--ink)}
+.modal-body p+p{margin-top:10px}
+.modal-resources{margin-top:18px;padding-top:18px;border-top:1px solid var(--line)}
+.modal-res-label{font-family:'JetBrains Mono',monospace;font-size:.62rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:8px}
+.modal-res-link{display:block;font-size:.94rem;font-weight:600;color:var(--indigo);margin-top:6px}
+html[data-theme='light'] .modal-res-link{color:var(--indigo-deep)}
+
+/* ── STARTER BRIEF MODAL ──────────────────────────────────── */
+.brief-eyebrow{
+  font-family:'JetBrains Mono',monospace;font-size:.62rem;font-weight:700;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--indigo);
+  display:block;margin-bottom:8px;
+}
+html[data-theme='light'] .brief-eyebrow{color:var(--indigo-deep)}
+.brief-title{
+  font-family:'JetBrains Mono',monospace;font-size:1.1rem;font-weight:700;
+  color:var(--ink-strong);letter-spacing:-.014em;margin-bottom:6px;
+}
+.brief-tagline{
+  font-size:1rem;line-height:1.62;color:var(--muted);margin-bottom:18px;
+}
+.brief-section{margin-top:18px}
+.brief-section h4{
+  font-family:'JetBrains Mono',monospace;font-size:.62rem;font-weight:700;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--muted);
+  margin-bottom:8px;display:flex;align-items:center;gap:8px;
+}
+.brief-section h4::before{content:'';width:14px;height:1px;background:var(--indigo);flex-shrink:0}
+.brief-section p,.brief-section li{font-size:.95rem;line-height:1.62;color:var(--ink)}
+.brief-section ul{list-style:none;display:grid;gap:7px}
+.brief-section ul li{display:flex;gap:9px;align-items:flex-start}
+.brief-section ul li::before{
+  content:'';width:5px;height:5px;border-radius:50%;background:var(--indigo);
+  flex-shrink:0;margin-top:9px;
+}
+.brief-io{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--line-hi);border-radius:10px;overflow:hidden;margin-top:6px}
+.brief-io-col{padding:12px 14px}
+.brief-io-col+.brief-io-col{border-left:1px solid var(--line)}
+.brief-io-lab{font-family:'JetBrains Mono',monospace;font-size:.6rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;display:block}
+.brief-io-val{font-size:.92rem;line-height:1.5;color:var(--ink)}
+.conn-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:2px}
+.conn-chip{
+  display:inline-flex;align-items:center;gap:5px;
+  font-family:'JetBrains Mono',monospace;font-size:.74rem;font-weight:600;
+  padding:3px 9px;border-radius:6px;
+}
+.conn-chip.mcp{background:var(--mint-soft);color:var(--mint);border:1px solid var(--mint-mid)}
+.conn-chip.script{background:var(--coral-soft);color:var(--coral);border:1px solid var(--coral-mid)}
+.conn-chip.local{background:rgba(255,255,255,.05);color:var(--muted);border:1px solid var(--line-hi)}
+.conn-chip.none{background:var(--surface-3);color:var(--muted);border:1px solid var(--line-hi)}
+html[data-theme='light'] .conn-chip.mcp{color:var(--mint-deep)}
+html[data-theme='light'] .conn-chip.script{color:var(--coral-deep)}
+.conn-chip::before{content:'';width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.conn-chip.mcp::before{background:var(--mint)}
+.conn-chip.script::before{background:var(--coral)}
+.conn-chip.local::before{background:var(--muted)}
+.conn-chip.none::before{background:var(--muted-2)}
+.brief-stretch{margin-top:18px;padding:12px 14px;border-radius:10px;background:var(--indigo-soft);border:1px solid var(--indigo-mid)}
+.brief-stretch-lab{font-family:'JetBrains Mono',monospace;font-size:.6rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--indigo);display:block;margin-bottom:6px}
+html[data-theme='light'] .brief-stretch-lab{color:var(--indigo-deep)}
+.modal-box.brief{max-width:620px}
+
+.learn-more-btn{
+  background:none;border:none;color:var(--indigo);
+  font-family:inherit;font-size:inherit;font-weight:600;
+  cursor:pointer;text-decoration:underline;text-decoration-style:dotted;
+  text-underline-offset:3px;padding:0;
+}
+html[data-theme='light'] .learn-more-btn{color:var(--indigo-deep)}
+
+/* ── REVEAL PATTERN (prereq task-item accordion) ──────────── */
+.task-item{border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-top:10px}
+.task-item:first-child{margin-top:0}
+.task-item .task-check{background:linear-gradient(160deg,var(--surface-2),var(--surface-3));transition:background .18s}
+.task-item:has(.task-check input:checked){border-color:var(--indigo-mid)}
+.task-item .task-check:has(input:checked){background:linear-gradient(160deg,rgba(250,70,22,.07),rgba(250,70,22,.02))}
+.reveal{border-top:1px solid var(--line);overflow:hidden}
+.reveal summary{list-style:none;cursor:pointer;padding:12px 14px;font-size:.8rem;font-weight:700;color:var(--ink-strong);display:flex;align-items:center;justify-content:space-between}
+.reveal summary::-webkit-details-marker{display:none}
+.reveal summary::after{content:'+';color:var(--mint);font-size:1rem;line-height:1;flex-shrink:0;margin-left:8px}
+html[data-theme='light'] .reveal summary::after{color:var(--mint-deep)}
+.reveal[open] summary::after{content:'–'}
+.reveal-body{padding:10px 14px 14px;border-top:1px solid var(--line);font-size:.82rem;line-height:1.6;color:var(--muted)}
+.reveal-body strong{color:var(--ink-strong)}
+.reveal-body p{font-size:.82rem;line-height:1.6;color:var(--muted);margin:0}
+.reveal-body p+p{margin-top:8px}
+.reveal-body a{color:var(--indigo);font-weight:600}
+html[data-theme='light'] .reveal-body a{color:var(--indigo-deep)}
+.reveal-body .code-block{margin:8px 0;padding:10px 12px}
+.reveal-body .code-block pre{font-size:.82rem}
+.reveal-body .callout{margin:10px 0;padding:14px 16px}
+.reveal-body .callout-body{font-size:.82rem}
+/* nested reveal (e.g. GitHub Enterprise comparison) */
+.reveal-body .reveal{border:1px solid var(--line-hi);border-radius:var(--r-sm);background:var(--surface-2);margin-top:10px}
+.reveal-body .reveal .reveal-body{border-top:1px solid var(--line)}
+/* Git-style code blocks with header bar */
+.code-block:has(.code-bar){padding:0}
+.code-bar{display:flex;align-items:center;gap:8px;padding:7px 13px;background:rgba(255,255,255,.03);border-bottom:1px solid rgba(255,255,255,.06)}
+.code-body{padding:12px 14px;overflow-x:auto}
+.code-body code{font-family:'JetBrains Mono',monospace;font-size:.82rem;line-height:1.8;color:var(--code-ink);white-space:pre;display:block}
+.code-lang{font-family:'JetBrains Mono',monospace;font-size:.62rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+/* Expected output block: appears below the command in a stepper code-block */
+.code-output{padding:8px 14px;background:rgba(11,162,179,0.06);border-top:1px solid var(--mint-mid)}
+.code-output code{font-family:'JetBrains Mono',monospace;font-size:.78rem;color:rgba(183,239,58,0.85);white-space:pre;display:block;line-height:1.7}
+
+/* ── STEPPER (numbered procedural steps) ──────────────────── */
+.stepper{display:flex;flex-direction:column}
+.st-step{display:grid;grid-template-columns:40px minmax(0,1fr);gap:14px}
+.st-track{display:flex;flex-direction:column;align-items:center;padding-top:2px}
+.st-dot{
+  width:36px;height:36px;border-radius:50%;
+  background:var(--mint);color:#fff;
+  display:grid;place-items:center;
+  font-family:'Poppins',sans-serif;font-size:.82rem;font-weight:800;
+  flex-shrink:0;box-shadow:0 0 0 3px var(--mint-soft);
+}
+.st-line{flex:1;width:2px;min-height:16px;background:var(--line-hi);margin:6px 0 0;border-radius:1px}
+.st-step:last-child .st-line{display:none}
+.st-body{padding-bottom:24px;min-width:0}
+/* Prose variant for long natural-language prompts inside a code block */
+.code-block.prose .code-body code{white-space:pre-wrap;word-break:break-word}
+.st-body h3{font-family:'Poppins',sans-serif;font-size:1.04rem;font-weight:700;color:var(--ink-strong);margin-bottom:7px;letter-spacing:-.01em}
+.st-body .st-desc{font-size:.97rem;color:var(--ink);line-height:1.62;margin-bottom:8px}
+.st-body p{font-size:.97rem;color:var(--muted);line-height:1.62}
+.st-body p + p{margin-top:8px}
+.st-body ol,.st-body ul{margin:8px 0;padding-left:22px}
+.st-body ol li,.st-body ul li{font-size:.97rem;color:var(--ink);line-height:1.62;margin-bottom:4px}
+.st-body figure.howto-fig{margin:10px 0}
+
+/* ── STATE CHECK CALLOUT (success/verification) ───────────── */
+.callout.state-check{background:var(--mint-soft);border:1px solid var(--mint-mid)}
+.callout.state-check .callout-body strong{color:var(--mint)}
+.callout.state-check .callout-icon{color:var(--mint)}
+html[data-theme='light'] .callout.state-check .callout-body strong{color:var(--mint-deep)}
+
+/* ── HINT CALLOUT (supplemental, non-semantic) ────────────── */
+.callout.hint{background:var(--surface-2);border:1px solid var(--line-hi)}
+.callout.hint .callout-body strong{color:var(--ink-strong)}
+
+/* ── CHECKLIST EYEBROW (section label within a checklist) ──── */
+.checklist-eyebrow{
+  font-family:'JetBrains Mono',monospace;
+  font-size:.63rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  padding:8px 12px;border-radius:var(--r-sm);
+  margin-top:20px;
+  display:flex;align-items:center;gap:9px;
+}
+.checklist-eyebrow:first-child{margin-top:0}
+.checklist-eyebrow::before{content:'';width:3px;height:14px;border-radius:2px;flex-shrink:0}
+.checklist-eyebrow.recommended{background:var(--mint-soft);border:1px solid var(--mint-mid);color:var(--mint)}
+.checklist-eyebrow.recommended::before{background:var(--mint)}
+html[data-theme='light'] .checklist-eyebrow.recommended{color:var(--mint-deep)}
+.checklist-eyebrow.required{background:var(--indigo-soft);border:1px solid var(--indigo-mid);color:var(--indigo)}
+.checklist-eyebrow.required::before{background:var(--indigo)}
+html[data-theme='light'] .checklist-eyebrow.required{color:var(--indigo-deep)}
+.checklist-eyebrow.optional{background:var(--coral-soft);border:1px solid var(--coral-mid);color:var(--coral)}
+.checklist-eyebrow.optional::before{background:var(--coral)}
+html[data-theme='light'] .checklist-eyebrow.optional{color:var(--coral-deep)}
+
+/* prereq tag pills */
+.prereq-tag{
+  display:inline-flex;align-items:center;
+  font-family:'JetBrains Mono',monospace;font-size:.58rem;font-weight:700;
+  letter-spacing:.08em;text-transform:uppercase;
+  padding:2px 7px;border-radius:4px;vertical-align:middle;
+  margin-left:8px;flex-shrink:0;white-space:nowrap;
+}
+.prereq-tag.required{background:var(--indigo-soft);border:1px solid var(--indigo-mid);color:var(--indigo)}
+html[data-theme='light'] .prereq-tag.required{color:var(--indigo-deep)}
+.prereq-tag.optional{background:var(--mint-soft);border:1px solid var(--mint-mid);color:var(--mint)}
+html[data-theme='light'] .prereq-tag.optional{color:var(--mint-deep)}
+.prereq-tag.session1{background:var(--magenta-soft);border:1px solid var(--magenta-mid);color:var(--magenta)}
+html[data-theme='light'] .prereq-tag.session1{color:var(--magenta-deep)}
+
+/* kv-block for Standard vs Enterprise comparison */
+.kv-block{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+.kv-side{padding:12px;border-radius:var(--r-sm)}
+.kv-side.teal{background:var(--mint-soft);border:1px solid var(--mint-mid)}
+.kv-side.amber{background:var(--coral-soft);border:1px solid var(--coral-mid)}
+.kv-side strong{display:block;font-size:.8rem;margin-bottom:6px}
+.kv-side.teal strong{color:var(--mint)}
+.kv-side.amber strong{color:var(--coral)}
+html[data-theme='light'] .kv-side.teal strong{color:var(--mint-deep)}
+html[data-theme='light'] .kv-side.amber strong{color:var(--coral-deep)}
+.kv-side ul{list-style:none;display:grid;gap:4px;margin:0;padding:0}
+.kv-side ul li{font-size:.78rem;color:var(--muted)}
+.kv-side ul li::before{content:'• '}
+
+/* ── DESKTOP MIN HEIGHT (Rise iframe escape hatch) ────────── */
+@media(min-width:901px){
+  html,body{
+    height:auto;
+    min-height:1200px;
+    overflow:auto;
+  }
+  .app{
+    min-height:1200px;
+    height:max(100vh, 1200px);
+  }
+  .sidebar,
+  .main{
+    min-height:1200px;
+  }
+}
+
+/* ── MOBILE ───────────────────────────────────────────────── */
+@media(max-width:900px){
+  .sidebar{position:fixed;top:0;bottom:0;left:0;width:286px;z-index:50}
+  html[data-sidebar='open'] .sb-backdrop{display:block}
+}
+@media(max-width:640px){
+  .lesson-body{padding:32px 22px 140px}
+  .lesson-header-band{padding:36px 22px 28px}
+  .card{padding:22px 22px}
+  .ls{margin-top:44px}
+}
+/* ── CLAUDE ECOSYSTEM COMPARISON ───────────────────────────── */
+/* ── ECOSYSTEM CAROUSEL ───────────────────────────── */
+.eco-carousel{position:relative;margin-top:24px;outline:none;overflow:hidden;padding-bottom:32px}
+.eco-3d-stage{position:relative;perspective:1100px;overflow:visible}
+.eco-slide{
+  position:absolute;width:72%;left:14%;top:0;
+  border-radius:var(--r-xl);overflow:hidden;
+  border:1px solid var(--line-hi);
+  box-shadow:0 2px 10px rgba(0,0,0,0.18);
+  transition:transform .3s cubic-bezier(.4,0,.2,1),
+             opacity  .3s cubic-bezier(.4,0,.2,1),
+             box-shadow .3s;
+  transform-origin:center center;
+  will-change:transform,opacity;
+}
+.eco-slide.is-active{z-index:3;opacity:1;cursor:default;box-shadow:0 4px 14px rgba(0,0,0,0.22)}
+.eco-slide.is-left{z-index:2;opacity:0.48;cursor:pointer;transform:translateX(-86%) rotateY(58deg) scale(0.84)}
+.eco-slide.is-right{z-index:2;opacity:0.48;cursor:pointer;transform:translateX(86%) rotateY(-58deg) scale(0.84)}
+.eco-slide.is-far{z-index:1;opacity:0;pointer-events:none;transform:translateX(0) translateZ(-220px)}
+.eco-slide.is-left:hover{opacity:0.72;transform:translateX(-86%) rotateY(38deg) scale(0.86)}
+.eco-slide.is-right:hover{opacity:0.72;transform:translateX(86%) rotateY(-38deg) scale(0.86)}
+.cc-header{padding:22px 26px 18px;display:flex;align-items:center;gap:14px}
+.cc-header-chat{background:linear-gradient(135deg,#FA4616,#c53610)}
+.cc-header-cowork{background:linear-gradient(135deg,#0BA2B3,#077a87)}
+.cc-header-code{background:linear-gradient(135deg,#182126,#1f3040);border-bottom:2px solid #0BA2B3}
+.cc-header-human{background:linear-gradient(135deg,#E8960C,#b37408)}
+.cc-icon{width:38px;height:38px;border-radius:8px;flex-shrink:0;background:rgba(255,255,255,0.18);display:grid;place-items:center;font-size:1.1rem;line-height:1}
+.cc-name{font-family:'Poppins',sans-serif;font-size:1.1rem;font-weight:700;color:#fff;letter-spacing:-.018em}
+.cc-badge{margin-left:auto;white-space:nowrap;font-family:'JetBrains Mono',monospace;font-size:.6rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:4px 10px;border-radius:4px;background:rgba(255,255,255,0.18);color:rgba(255,255,255,0.92)}
+.cc-body{background:linear-gradient(180deg,var(--surface) 0%,var(--surface-2) 100%);padding:22px 26px 24px}
+html[data-theme='light'] .cc-body{background:linear-gradient(180deg,#fff,var(--surface-2))}
+.cc-section{display:flex;flex-direction:column;gap:5px;margin-bottom:14px}
+.cc-section:last-child{margin-bottom:0}
+.cc-label{font-family:'JetBrains Mono',monospace;font-size:.6rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:2px}
+.cc-label-chat{color:#FA4616}
+.cc-label-cowork{color:#0BA2B3}
+html[data-theme='light'] .cc-label-cowork{color:#077a87}
+.cc-label-code{color:var(--mint)}
+html[data-theme='light'] .cc-label-code{color:var(--mint-deep)}
+.cc-label-human{color:#b37408}
+html[data-theme='light'] .cc-label-human{color:#b37408}
+.cc-list{list-style:none;padding:0;margin:0;display:grid;gap:4px}
+.cc-list li{font-size:.92rem;line-height:1.55;color:var(--ink);display:flex;gap:7px;align-items:baseline}
+.cc-list li::before{content:'·';color:var(--muted-2);flex-shrink:0;font-size:1.1em;line-height:1}
+.cc-body .cc-text{font-size:.92rem;line-height:1.55;color:var(--ink);margin:0}
+.cc-use-when{margin-top:4px;padding:14px 16px;border-radius:8px;font-size:.92rem;line-height:1.6;color:var(--ink)}
+.cc-use-when.chat  {background:rgba(250,70,22,0.09);  border:1px solid rgba(250,70,22,0.22)}
+.cc-use-when.cowork{background:rgba(11,162,179,0.09);  border:1px solid rgba(11,162,179,0.22)}
+.cc-use-when.code  {background:rgba(11,162,179,0.09);  border:1px solid rgba(11,162,179,0.22)}
+/* dots */
+.eco-dots{display:flex;justify-content:center;gap:8px;margin-top:18px}
+.eco-dot-btn{height:8px;border-radius:4px;border:none;padding:0;cursor:pointer;background:var(--muted-2);transition:all .25s cubic-bezier(.4,0,.2,1);width:8px}
+.eco-dot-btn.active{width:26px}
+.eco-dot-btn.active.chat  {background:#FA4616}
+.eco-dot-btn.active.cowork{background:#0BA2B3}
+.eco-dot-btn.active.code  {background:#0BA2B3}
+.eco-counter{text-align:center;margin-top:9px;font-family:'JetBrains Mono',monospace;font-size:.68rem;font-weight:600;letter-spacing:.1em;color:var(--muted)}
+
+/* ── PREREQ GROUP (collapsible checklist card) ──────────────── */
+.prereq-group{
+  border-radius:var(--r-xl);
+  border:1px solid var(--line-hi);
+  background:linear-gradient(180deg,var(--surface) 0%,var(--surface-2) 100%);
+  box-shadow:0 2px 16px rgba(0,0,0,.18),inset 0 1px 0 rgba(255,255,255,.04);
+  overflow:hidden;
+}
+html[data-theme='light'] .prereq-group{background:linear-gradient(180deg,#fff,var(--surface-2));box-shadow:0 2px 10px rgba(0,0,0,.06)}
+.prereq-group+.prereq-group{margin-top:18px}
+.prereq-group>summary{
+  padding:18px 22px;
+  display:flex;align-items:center;gap:12px;
+  cursor:pointer;list-style:none;
+  font-family:'Inter',system-ui,sans-serif;
+  font-weight:600;font-size:1rem;
+  color:var(--ink-strong);
+  border-bottom:1px solid transparent;
+  transition:background .15s,border-color .18s;
+  user-select:none;
+}
+.prereq-group>summary::-webkit-details-marker{display:none}
+.prereq-group[open]>summary{border-bottom-color:var(--line-hi);background:rgba(250,70,22,.025)}
+.prereq-group>summary:hover{background:rgba(255,255,255,.04)}
+html[data-theme='light'] .prereq-group>summary:hover{background:rgba(0,0,0,.02)}
+.prereq-group-body{padding:14px 28px 28px}
+.prereq-count-badge{
+  font-family:'JetBrains Mono',monospace;font-size:.66rem;font-weight:700;
+  background:var(--indigo-soft);border:1px solid var(--indigo-mid);
+  color:var(--indigo);padding:2px 8px;border-radius:4px;
+  letter-spacing:.06em;flex-shrink:0;
+}
+html[data-theme='light'] .prereq-count-badge{color:var(--indigo-deep)}
+.prereq-chevron{
+  margin-left:auto;color:var(--muted);font-size:.75rem;
+  transition:transform .25s cubic-bezier(.4,0,.2,1);flex-shrink:0;
+}
+.prereq-group[open] .prereq-chevron{transform:rotate(180deg)}
+</style>
+</head>
+<body>
+<div class="app" id="app">
+  <aside class="sidebar" id="sidebar">
+    <div class="sb-inner">
+    <div class="sb-head">
+      <div class="sb-brand">
+        <div class="sb-mark"><span class="sb-mark-glyph">&gt;_</span></div>
+        <div>
+          <div class="sb-name">Getting Started with Claude Code</div>
+          <div class="sb-sub">UiPath · L200 Overview</div>
+        </div>
+      </div>
+      <button class="sb-close" id="sbCloseBtn" title="Close menu" aria-label="Close menu">
+        <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M.7.7 9.3 9.3M9.3.7.7 9.3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+    <nav class="sb-nav" id="sbNav">
+      <button class="sb-item active" data-idx="0"><span class="sb-num">01</span><div class="sb-item-body"><span class="sb-item-title">Intro</span><span class="sb-item-meta">8 min · Intro</span></div></button>
+      <button class="sb-item" data-idx="1"><span class="sb-num">02</span><div class="sb-item-body"><span class="sb-item-title">Claude Code Overview</span><span class="sb-item-meta">15 min · Concepts</span></div></button>
+      <button class="sb-item" data-idx="2"><span class="sb-num">03</span><div class="sb-item-body"><span class="sb-item-title">Best Practices and Responsible Use</span><span class="sb-item-meta">8 min · Habits</span></div></button>
+      <button class="sb-item" data-idx="3"><span class="sb-num">04</span><div class="sb-item-body"><span class="sb-item-title">Connection Methods</span><span class="sb-item-meta">10 min · Awareness</span></div></button>
+      <button class="sb-item" data-idx="4"><span class="sb-num">05</span><div class="sb-item-body"><span class="sb-item-title">Key Takeaways</span><span class="sb-item-meta">3 min · Reference</span></div></button>
+      <button class="sb-item" data-idx="5"><span class="sb-num">06</span><div class="sb-item-body"><span class="sb-item-title">What's Next</span><span class="sb-item-meta">4 min · Recap</span></div></button>
+    </nav>
+    <div class="sb-foot">
+      <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 5v3.5l2 1.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+      ~48 min · self-paced
+    </div>
+    <div class="sb-attr">Developed by UiPath Learning &amp; Performance</div>
+    </div><!-- /sb-inner -->
+  </aside>
+  <div class="sb-backdrop" id="sbBackdrop"></div>
+  <div class="main">
+    <header class="topbar">
+      <button class="tb-toggle" id="tbToggleBtn" title="Toggle navigation" aria-label="Toggle navigation"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M1 2.5h14M1 8h14M1 13.5h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+      <div class="progress-rail"><div class="progress-bar" id="pBar" style="width:16.66%"></div></div>
+      <span class="tb-count" id="pCount">1 / 6</span>
+      <div class="tb-sep"></div>
+      <span class="timer-time" id="timerEl">8:00</span>
+      <button class="tb-btn icon" id="resetTimerBtn" title="Reset timer" aria-label="Reset timer">↺</button>
+      <button class="tb-btn icon" id="playBtn" title="Start/pause" aria-label="Start/pause"><svg id="playIcon" width="11" height="11" viewBox="0 0 16 16" fill="currentColor"><path d="M5 3.5l8 4.5-8 4.5V3.5z"/></svg></button>
+      <div class="tb-sep"></div>
+      <div class="tb-session"><svg width="11" height="11" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 5v3.5l2 1.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg><span id="sessionEl">0:00 / ~48 min</span></div>
+      <button class="theme-btn" id="themeToggleBtn" title="Toggle theme" aria-label="Toggle theme"><svg id="themeIcon" width="13" height="13" viewBox="0 0 16 16" fill="currentColor"><path d="M8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6m0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8M8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0m0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13m8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5M3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8m10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0m-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0m9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707M4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708"/></svg></button>
+    </header>
+    <div class="content" id="viewport" data-screen-label="Course content">
+
+<!-- ═══════════════════════════════════════════════════════════
+     LESSON 01 — Intro
+     ═══════════════════════════════════════════════════════════ -->
+<div class="lesson active" id="s0" data-screen-label="01 Welcome">
+  <div class="lesson-header-band">
+    <div class="lh-eyebrow"><span class="lh-num">01</span><h1 class="lh-title">Intro</h1></div>
+    <p class="lh-lead">This overview gets you from "I've heard of Claude Code" to confidently running your first sessions and understanding how Claude Code fits into your work at UiPath.</p>
+    <div class="lh-meta"><span class="lt-countdown" id="lt-0">⏱ 8:00</span><span class="type-pill">Intro</span></div>
+  </div>
+  <div class="lesson-body">
+    <div class="lesson-preview">
+      <span class="lp-label">In this lesson</span>
+      <ul class="lp-list">
+        <li>What you'll learn</li>
+        <li>What this course is &amp; isn't</li>
+        <li>How the course flows</li>
+        <li>What you'll want set up first</li>
+      </ul>
+    </div>
+
+    <div class="ls">
+      <p>Welcome! Before we dive into Claude Code, let's get everyone on the same page. This is a L200 overview built to be practical first and deep second. You'll leave knowing what Claude Code is, how to get started with it at UiPath, and the habits that keep your sessions safe and productive.</p>
+    </div>
+
+    <div class="ls">
+      <h2 class="ls-title">What This Course Is</h2>
+      <ul class="obj-list" style="list-style:disc;padding-left:22px">
+        <li class="obj-item" style="display:list-item"><span>Understand what Claude Code is and where it fits among the Claude tools</span></li>
+        <li class="obj-item" style="display:list-item"><span>Get comfortable starting and running your own Claude Code sessions</span></li>
+        <li class="obj-item" style="display:list-item"><span>Learn what Agent Skills are and how they make repeat work faster</span></li>
+        <li class="obj-item" style="display:list-item"><span>Know how Claude connects to external services, and what that means for you</span></li>
+        <li class="obj-item" style="display:list-item"><span>Pick up the habits that produce good output and keep your work safe</span></li>
+      </ul>
+    </div>
+
+    <div class="ls">
+      <h2 class="ls-title">What This Course Is Not</h2>
+      <ul class="obj-list" style="list-style:disc;padding-left:22px">
+        <li class="obj-item" style="display:list-item"><span>A deep dive into every Claude Code feature or setting</span></li>
+        <li class="obj-item" style="display:list-item"><span>A training on Model Context Protocol (MCP) or how to configure MCP servers</span></li>
+        <li class="obj-item" style="display:list-item"><span>A developer or coding course, no programming experience is required or assumed</span></li>
+        <li class="obj-item" style="display:list-item"><span>A replacement for Anthropic's documentation, we'll point you to deeper resources where they're relevant</span></li>
+      </ul>
+    </div>
+
+    <div class="ls">
+      <h2 class="ls-title">How This Course Flows</h2>
+      <ul class="check-list">
+        <li>Work through the five lessons in order at your own pace</li>
+        <li>Concepts first, then the habits and connection methods that put them to use</li>
+        <li>"Dive deeper" callouts let you optionally explore a topic without breaking the flow</li>
+        <li>Use the built-in timer in the top bar if you'd like to keep a steady pace</li>
+      </ul>
+    </div>
+
+
+    <div class="ls">
+      <h2 class="ls-title">Before We Start</h2>
+
+      <details class="prereq-group">
+        <summary>Accounts &amp; Access <span class="prereq-count-badge">1 item</span><span class="prereq-tag required" style="margin-left:4px">Approval Required</span><span class="prereq-chevron">▾</span></summary>
+        <div class="prereq-group-body">
+          <div class="interactive-checklist">
+
+          <div class="task-item">
+            <label class="task-check">
+              <input type="checkbox">
+              <span><strong>Request Claude access</strong><span class="prereq-tag required">Required to Participate</span> — approval is required before you can sign in. Requests can take time to process; submit this early.</span>
+            </label>
+            <details class="reveal">
+              <summary>How to request Claude access</summary>
+              <div class="reveal-body">
+                <p>Submit your request via the IT portal using your UiPath SSO account — do not create a personal account. Your UiPath-issued account is for work only. Do not use it for personal tasks.</p>
+                <p><a href="https://uipath.atlassian.net/wiki/spaces/SUPPORTKB/pages/90724827143/Requesting+Claude+Access+Step-by-Step+Guide" target="_blank" rel="noreferrer">Requesting Claude Access: Step-by-Step Guide →</a></p>
+                <p>Once approved, sign in at <a href="https://claude.ai" target="_blank" rel="noreferrer">claude.ai</a> to verify access before you start.</p>
+              </div>
+            </details>
+          </div>
+
+          </div>
+        </div>
+      </details>
+
+      <details class="prereq-group">
+        <summary>Tools &amp; Configuration <span class="prereq-count-badge">4 items</span><span class="prereq-chevron">▾</span></summary>
+        <div class="prereq-group-body">
+          <div class="interactive-checklist">
+
+          <div class="task-item">
+            <label class="task-check">
+              <input type="checkbox">
+              <span>Create a <code class="inline-code">claude-practice</code> folder and add it to your Claude Code workspace</span>
+            </label>
+            <details class="reveal">
+              <summary>Set up your workspace folder</summary>
+              <div class="reveal-body">
+                <p>Claude Code treats each folder you add as its own context. Start with a small, specific folder rather than a large home directory.</p>
+                <ol style="margin:10px 0 0;padding-left:20px;display:grid;gap:8px">
+                  <li style="font-size:.93rem;line-height:1.6;color:var(--ink)">Open Claude Code.</li>
+                  <li style="font-size:.93rem;line-height:1.6;color:var(--ink)">Create a folder called <code class="inline-code">claude-practice</code> on your desktop or home directory.</li>
+                  <li style="font-size:.93rem;line-height:1.6;color:var(--ink)">In Claude Code: <span class="howto-path">Add Folder to Workspace<span class="howto-arrow">›</span>select claude-practice</span></li>
+                  <li style="font-size:.93rem;line-height:1.6;color:var(--ink)">Verify the folder appears in the project panel.</li>
+                  <li style="font-size:.93rem;line-height:1.6;color:var(--ink)">Create a test file inside it: <code class="inline-code">hello.txt</code> — type anything and save.</li>
+                  <li style="font-size:.93rem;line-height:1.6;color:var(--ink)">Confirm Claude Code can see it: ask Claude <em>"What files do you see in my workspace?"</em></li>
+                </ol>
+                <div class="callout tip" style="margin-top:14px">
+                  <span class="callout-icon">▸</span>
+                  <div class="callout-body">
+                    <strong>Why this matters</strong>
+                    Whatever folder you add, Claude can read, write, and run commands inside. Don't add folders you don't want it to touch.
+                  </div>
+                </div>
+              </div>
+            </details>
+          </div>
+
+          <div class="task-item">
+            <label class="task-check">
+              <input type="checkbox">
+              <span>A terminal window is open on your machine and ready for you to type commands</span>
+            </label>
+            <details class="reveal">
+              <summary>New to the terminal? Open this first.</summary>
+              <div class="reveal-body">
+                <strong>What is the terminal?</strong> A text-based window where you type commands instead of clicking buttons. Think of it as a faster way to navigate your computer.<br><br>
+                <strong>How to open it:</strong><br>
+                Mac: Press Cmd+Space, type "Terminal," press Enter.<br>
+                Windows: Open Git Bash (it comes with Git for Windows, which Claude Code uses). Press the Windows key, type "Git Bash," and press Enter.<br><br>
+                <strong>What you'll see:</strong> A blinking cursor waiting for you to type. That's normal.<br><br>
+                <strong>Key commands to know:</strong><br>
+                <code class="inline-code">pwd</code> — shows your current folder location (Mac/Linux)<br>
+                <code class="inline-code">cd folder-name</code> — moves into a folder<br>
+                <code class="inline-code">cd ..</code> — moves up one folder level
+              </div>
+            </details>
+          </div>
+
+          <div class="task-item">
+            <label class="task-check">
+              <input type="checkbox">
+              <span><strong>Visual Studio Code</strong><span class="prereq-tag optional">Optional</span> — or another text editor, handy for viewing the files Claude works with</span>
+            </label>
+            <details class="reveal">
+              <summary>Need to install VS Code? Open this.</summary>
+              <div class="reveal-body">
+                <p style="margin-bottom:10px">VS Code is a free, lightweight editor that pairs well with Claude Code. Go to <a href="https://code.visualstudio.com" target="_blank" rel="noreferrer">code.visualstudio.com</a>, download the installer for your OS, and run it with default settings.</p>
+                <p style="font-size:.81rem">Any text editor works if you already have one you prefer — Notepad++, Sublime Text, or even plain Notepad is fine for viewing files.</p>
+              </div>
+            </details>
+          </div>
+
+          <div class="task-item">
+            <label class="task-check">
+              <input type="checkbox">
+              <span><strong>Claude Code</strong><span class="prereq-tag required">Required to Participate</span> — run from inside the <strong>Claude desktop app (GUI)</strong>. Windows users also need Git for Windows. <em style="color:var(--muted-2)">(Codex can also be used, but is not covered in this material.)</em></span>
+            </label>
+            <details class="reveal">
+              <summary>Download, install, and open Claude Code (in the Claude desktop app)</summary>
+              <div class="reveal-body">
+                <p><strong>1.</strong> Go to <a href="https://claude.com/download" target="_blank" rel="noreferrer">claude.com/download</a> and download the Claude desktop app for your OS (macOS or Windows).</p>
+                <p><strong>2.</strong> Install and sign in with your UiPath SSO account.</p>
+                <p><strong>3.</strong> Open Claude Code from inside the app — look for the <code class="inline-code">&gt;_</code> Code icon in the left rail (or use <code class="inline-code">⌘ K</code> / <code class="inline-code">Ctrl K</code> and search for "Claude Code").</p>
+                <p><strong>4.</strong> When prompted, allow it to access the project folder you want to work in.</p>
+                <p><strong>Windows only:</strong> install <a href="https://git-scm.com/download/win" target="_blank" rel="noreferrer">Git for Windows</a> first — Claude Code uses its bundled bash shell.</p>
+                <div style="margin-top:14px;padding:38px 18px;border:1.5px dashed var(--indigo-mid);border-radius:var(--r-sm);background:var(--indigo-soft);text-align:center;font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--muted);letter-spacing:.04em">
+                  [ Screenshot placeholder — Claude desktop app with Claude Code panel highlighted ]
+                </div>
+              </div>
+            </details>
+          </div>
+
+          </div>
+
+          <div class="callout warn" style="margin-top:14px">
+            <span class="callout-icon">!</span>
+            <div class="callout-body">
+              <strong>Windows troubleshooting: "command not found" after installing?</strong>
+              This is almost always a PATH issue. When a CLI tool is installed on Windows, the PATH is updated in the registry — but your current terminal session doesn't pick it up until you open a new one. Close Git Bash completely, reopen it, and run the verify command again.
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <details class="prereq-group">
+        <summary>Recommended Courses <span class="prereq-count-badge">3 items</span><span class="prereq-chevron">▾</span></summary>
+        <div class="prereq-group-body">
+          <p style="font-size:.88rem;line-height:1.65;color:var(--muted);margin-bottom:14px">These short courses build the foundational AI knowledge this overview assumes. They're a helpful warm-up if you're newer to working with Claude.</p>
+          <div class="interactive-checklist">
+
+          <div class="task-item">
+            <label class="task-check">
+              <input type="checkbox">
+              <span>
+                <a href="https://cloud.uipath.com/gpstools/apps_/default/run/production/fee0bce6-9eb7-4ffd-aa92-72fe9e2766e7/6e573f8c-e041-4d31-916d-2c26c91fb5fc/ID0c0d6df7b11e4d1c9fea3f32a0fcd457?el=VB&uts=true" target="_blank" rel="noreferrer"><strong>Open the AI Learning Hub →</strong></a>
+                <ul style="list-style:disc;padding-left:18px;margin-top:6px;display:grid;gap:3px">
+                  <li style="font-size:.88rem;color:var(--muted)">AI Fluency: Framework &amp; Foundations</li>
+                  <li style="font-size:.88rem;color:var(--muted)">AI Capabilities and Limitations</li>
+                  <li style="font-size:.88rem;color:var(--muted)">Claude 101</li>
+                </ul>
+              </span>
+            </label>
+          </div>
+
+          </div>
+        </div>
+      </details>
+    </div>
+
+    <div class="key-takeaway">
+      <span class="kt-label">Key Takeaway</span>
+      <div class="kt-text">By the end of this course, you'll know <strong>what Claude Code is</strong>, <strong>how to start your own sessions safely</strong>, and how Agent Skills turn repeat work into something Claude can handle for you.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     LESSON 02 — CLAUDE CODE IN YOUR DAY
+     ═══════════════════════════════════════════════════════════ -->
+<div class="lesson" id="s1" data-screen-label="02 Claude Code Overview">
+  <div class="lesson-header-band">
+    <div class="lh-eyebrow"><span class="lh-num">02</span><h1 class="lh-title">Claude Code Overview</h1></div>
+    <p class="lh-lead">Not all Claude tools are created equal. This lesson is an introduction to what sets Claude Code apart, what Agent Skills are, and how combining the two can become one of the more powerful tools in your daily workflow.</p>
+    <div class="lh-meta"><span class="lt-countdown" id="lt-1">⏱ 15:00</span><span class="type-pill">Concepts</span></div>
+  </div>
+  <div class="lesson-body">
+    <div class="lesson-preview">
+      <span class="lp-label">In this lesson</span>
+      <ul class="lp-list">
+        <li>The Claude ecosystem at a glance</li>
+        <li>What Claude Code is</li>
+        <li>What an Agent Skill is</li>
+        <li>Where skills come from</li>
+        <li>Permissions: what you can allow Claude to do, or not</li>
+      </ul>
+    </div>
+
+    <div class="ls">
+      <h2 class="ls-title">The Claude Ecosystem</h2>
+      <p>Claude comes in several forms. This session focuses on <strong>Claude Code</strong>, but it's worth knowing where the others fit so you're reaching for the right tool.</p>
+
+      <div class="eco-carousel" id="ecoCarousel" tabindex="0">
+        <div class="eco-3d-stage" id="eco3dStage">
+
+          <!-- 1. Claude Chat -->
+          <div class="eco-slide">
+            <div class="cc-header cc-header-chat">
+              <div class="cc-icon">💬</div>
+              <div class="cc-name">Claude Chat</div>
+              <div class="cc-badge">Web + Mobile</div>
+            </div>
+            <div class="cc-body">
+              <div class="cc-section">
+                <span class="cc-label cc-label-chat">What it is</span>
+                <p class="cc-text">AI thinking partner for research, writing, and problem-solving</p>
+              </div>
+              <div class="cc-section">
+                <span class="cc-label cc-label-chat">Where it lives</span>
+                <ul class="cc-list">
+                  <li>claude.ai web + desktop &amp; mobile apps</li>
+                </ul>
+              </div>
+              <div class="cc-section">
+                <span class="cc-label cc-label-chat">Best for</span>
+                <ul class="cc-list">
+                  <li>Research, analysis &amp; brainstorming</li>
+                  <li>Writing, editing &amp; summarizing</li>
+                </ul>
+              </div>
+              <div class="cc-section">
+                <span class="cc-label cc-label-chat">Use when</span>
+                <div class="cc-use-when chat">You need to brainstorm, get answers, etc and don't need to modify files/data directly.</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2. Claude Cowork -->
+          <div class="eco-slide">
+            <div class="cc-header cc-header-cowork">
+              <div class="cc-icon">◈</div>
+              <div class="cc-name">Claude Cowork</div>
+              <div class="cc-badge">Desktop App</div>
+            </div>
+            <div class="cc-body">
+              <div class="cc-section">
+                <span class="cc-label cc-label-cowork">What it is</span>
+                <p class="cc-text">Agentic assistant that handles multi-step tasks across your files and data</p>
+              </div>
+              <div class="cc-section">
+                <span class="cc-label cc-label-cowork">Where it lives</span>
+                <ul class="cc-list">
+                  <li>Desktop app (Mac &amp; Windows)</li>
+                  <li>Works with local files, folders &amp; connected apps</li>
+                </ul>
+              </div>
+              <div class="cc-section">
+                <span class="cc-label cc-label-cowork">Best for</span>
+                <ul class="cc-list">
+                  <li>Building reports &amp; decks from source materials</li>
+                  <li>Compiling, extracting &amp; formatting data across files</li>
+                </ul>
+              </div>
+              <div class="cc-section">
+                <span class="cc-label cc-label-cowork">Use when</span>
+                <div class="cc-use-when cowork">You want to hand off a task and get back a polished deliverable.</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3. Claude Code -->
+          <div class="eco-slide">
+            <div class="cc-header cc-header-code">
+              <div class="cc-icon">&gt;_</div>
+              <div class="cc-name">Claude Code</div>
+              <div class="cc-badge">Focus: this session</div>
+            </div>
+            <div class="cc-body">
+              <div class="cc-section">
+                <span class="cc-label cc-label-code">What it is</span>
+                <p class="cc-text">Agentic coding assistant with full tool use and file access</p>
+              </div>
+              <div class="cc-section">
+                <span class="cc-label cc-label-code">Where it lives</span>
+                <ul class="cc-list">
+                  <li>Desktop app (&lt;/&gt; Code tab)</li>
+                  <li>Terminal CLI</li>
+                  <li>claude.ai/code (web)</li>
+                  <li>IDEs (VS Code, JetBrains)</li>
+                </ul>
+              </div>
+              <div class="cc-section">
+                <span class="cc-label cc-label-code">Best for</span>
+                <ul class="cc-list">
+                  <li>Vibe coding &amp; building apps</li>
+                  <li>Multi-file edits, debugging &amp; git workflows</li>
+                  <li>Connecting to external systems (GitHub, Jira, cloud services)</li>
+                </ul>
+              </div>
+              <div class="cc-section">
+                <span class="cc-label cc-label-code">Use when</span>
+                <div class="cc-use-when code">The task involves your codebase, local files, or external systems.</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="eco-dots" id="ecoDots">
+          <button class="eco-dot-btn active chat"   onclick="goEcoTo(0)" aria-label="Claude Chat"></button>
+          <button class="eco-dot-btn cowork"         onclick="goEcoTo(1)" aria-label="Claude Cowork"></button>
+          <button class="eco-dot-btn code"           onclick="goEcoTo(2)" aria-label="Claude Code"></button>
+        </div>
+        <div class="eco-counter" id="ecoCounter">1 of 3 · Claude Chat</div>
+      </div>
+
+      <script>
+      (function(){
+        const labels=['Claude Chat','Claude Cowork','Claude Code'];
+        let cur=0;
+        const stage=document.getElementById('eco3dStage');
+        const slides=[...stage.querySelectorAll('.eco-slide')];
+        const dots=[...document.querySelectorAll('.eco-dot-btn')];
+        const counter=document.getElementById('ecoCounter');
+
+        function syncHeight(){
+          stage.style.height=slides[cur].offsetHeight+'px';
+        }
+
+        function goEcoTo(idx){
+          cur=idx;
+          slides.forEach((s,i)=>{
+            const off=i-cur;
+            s.className='eco-slide '+(
+              off===0  ?'is-active':
+              off===-1 ?'is-left'  :
+              off===1  ?'is-right' :'is-far'
+            );
+          });
+          dots.forEach((d,i)=>d.classList.toggle('active',i===cur));
+          counter.textContent=(cur+1)+' of '+labels.length+' · '+labels[cur];
+          setTimeout(syncHeight,310);
+        }
+        window.goEcoTo=goEcoTo;
+
+        slides.forEach((s,i)=>{
+          let t=null;
+          s.addEventListener('click',()=>{ if(i!==cur) goEcoTo(i); });
+          s.addEventListener('mouseenter',()=>{
+            if(i===cur) return;
+            t=setTimeout(()=>goEcoTo(i),700);
+          });
+          s.addEventListener('mouseleave',()=>clearTimeout(t));
+        });
+
+        document.getElementById('ecoCarousel').addEventListener('keydown',e=>{
+          if(e.key==='ArrowLeft') {e.preventDefault();cur>0&&goEcoTo(cur-1)}
+          if(e.key==='ArrowRight'){e.preventDefault();cur<labels.length-1&&goEcoTo(cur+1)}
+        });
+
+        goEcoTo(0);
+
+        function trySync(){
+          if(slides[cur].offsetHeight>0) syncHeight();
+        }
+
+        const ecoLesson=stage.closest('.lesson');
+        if(ecoLesson){
+          new MutationObserver(trySync)
+            .observe(ecoLesson,{attributes:true,attributeFilter:['class']});
+        }
+        document.fonts.ready.then(trySync);
+        window.addEventListener('resize',trySync);
+      })();
+      </script>
+    </div>
+
+    <div class="ls">
+      <h2 class="ls-title">What is Claude Code?</h2>
+      <p class="ls-lead">Claude Code is an agentic AI assistant that reads your files, runs commands, and edits code on your behalf, with your permission. It operates only where you point it, and when your permissions are configured correctly, waits for your approval before doing anything consequential.</p>
+
+      <div class="grid col3" style="margin-top:24px">
+        <div class="card">
+          <div class="card-label">It's accessible</div>
+          <p style="font-size:.97rem;line-height:1.6;color:var(--muted)">You can access it through the Claude desktop app (&lt;/&gt; Code tab), a terminal CLI, or directly at claude.ai/code.</p>
+        </div>
+        <div class="card">
+          <div class="card-label">It's interactive</div>
+          <p style="font-size:.97rem;line-height:1.6;color:var(--muted)">Claude Code is an agent, not just an advisor. Give it a goal and it plans a multi-step approach, makes edits, runs commands, and iterates. What it can do is shaped by the permissions and configuration you set.</p>
+        </div>
+        <div class="card">
+          <div class="card-label">It's extensible</div>
+          <p style="font-size:.97rem;line-height:1.6;color:var(--muted)">Skills, MCP servers, and plugins let you teach it your team's workflows once and reuse them across every session.</p>
+          <p style="margin-top:10px;font-size:.88rem;color:var(--muted)"><button class="learn-more-btn" data-modal="mcp-dive">What does "MCP" mean?</button></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="ls">
+      <h2 class="ls-title">What is an Agent Skill?</h2>
+      <p class="ls-lead">A <strong>skill</strong> is a reusable playbook you give Claude for a specific task. Instead of explaining what you need from scratch every session, a skill captures it once: the steps, the rules, the expected output. Claude picks it up automatically when your request matches.</p>
+
+      <p style="font-size:1rem;line-height:1.65;color:var(--muted);margin:20px 0 12px">Skills shine for any task you repeat and where the output needs to be consistent. A few examples anyone might recognize:</p>
+
+      <div class="grid col3" style="margin-bottom:28px">
+        <div class="card">
+          <div class="card-label">Summarize a thread</div>
+          <p style="font-size:.93rem;line-height:1.55;color:var(--ink);margin:0">Drop in an email chain or support ticket and get the key points, decisions, and next steps pulled out in a consistent format.</p>
+        </div>
+        <div class="card">
+          <div class="card-label">Draft a status update</div>
+          <p style="font-size:.93rem;line-height:1.55;color:var(--ink);margin:0">Describe what you worked on and get a formatted update in the same structure every time, ready to paste into Slack or a report.</p>
+        </div>
+        <div class="card">
+          <div class="card-label">Review a document</div>
+          <p style="font-size:.93rem;line-height:1.55;color:var(--ink);margin:0">Share any report, policy doc, or proposal and get a summary with the parts that need your attention flagged.</p>
+        </div>
+      </div>
+
+      <div class="callout tip">
+        <span class="callout-icon">▸</span>
+        <div class="callout-body">
+          <strong>Skills and scripts are better together</strong>
+          Skills handle judgment, context, and variation — the things that change case by case. Scripts handle what's fast and deterministic: retrieval, formatting, fixed transformations. The combination is more powerful than either alone: offload the mechanical steps to a script, pass the result to a skill for reasoning and action. It's a pattern worth reaching for whenever a step is purely mechanical.
+          <p style="margin-top:10px;margin-bottom:0"><button class="learn-more-btn" data-modal="skill-vs-script-guide">Quick guide: When a script may be helpful</button></p>
+        </div>
+      </div>
+
+      <p style="font-size:1rem;line-height:1.65;color:var(--muted);margin-top:28px;margin-bottom:14px">So what does a skill actually look like? Under the hood, it's just a folder with a few files. You don't need to memorize the structure right now, but it's worth a quick look so nothing feels mysterious later.</p>
+
+      <div class="card">
+        <span class="card-label">Anatomy of a Skill</span>
+        <div class="code-block">
+          <button class="copy-btn">📋 Copy</button>
+<pre><span class="cb-comment"># A skill is just a directory with a markdown file</span>
+~/.claude/skills/weekly-report/
+├── SKILL.md          <span class="cb-comment"># the instructions Claude reads</span>
+├── agents/
+│   └── openai.yaml   <span class="cb-comment"># makes the skill discoverable in OpenAI clients</span>
+├── scripts/          <span class="cb-comment"># optional — local Python the skill can run</span>
+│   └── report.py
+└── references/       <span class="cb-comment"># optional — extra docs the agent loads when needed</span></pre>
+        </div>
+        <p style="font-size:.95rem;line-height:1.65;color:var(--muted);margin-top:14px">The most important file is <code class="inline">SKILL.md</code>. Its top section (called <strong>frontmatter</strong>) declares the skill's name and description. The rest is plain Markdown: workflow steps, rules, examples.</p>
+      </div>
+
+      <p style="font-size:.95rem;line-height:1.65;color:var(--muted);margin-top:18px;margin-bottom:28px"><button class="learn-more-btn" data-modal="skills-learn-more">Want to learn more about Skills?</button></p>
+    </div>
+
+    <div class="ls">
+      <h2 class="ls-title">Create, Share, Improve</h2>
+      <p class="ls-lead">Most skills start as a personal fix for a repeated frustration. Then they get shared with the team. Then they get better. Here's how that arc typically looks.</p>
+
+      <div class="sj-step-track">
+        <div class="sj-step">
+          <div class="sj-step-num">1</div>
+          <div class="sj-step-label">Create</div>
+        </div>
+        <div class="sj-step-line"></div>
+        <div class="sj-step">
+          <div class="sj-step-num">2</div>
+          <div class="sj-step-label">Share</div>
+        </div>
+        <div class="sj-step-line"></div>
+        <div class="sj-step">
+          <div class="sj-step-num">3</div>
+          <div class="sj-step-label">Improve</div>
+        </div>
+      </div>
+
+      <h3 style="font-family:'Poppins',sans-serif;font-size:1.06rem;font-weight:700;color:var(--ink-strong);margin:28px 0 12px;letter-spacing:-.014em">1. Create a Skill</h3>
+      <p style="font-size:1rem;line-height:1.65;color:var(--muted);margin-bottom:14px">Anyone can create a personal skill and store it locally. It's just a folder with a <code class="inline">SKILL.md</code> file: no GitHub, no approval process, no pipeline. Write it once, drop it in your Claude Code config directory, and it's available in every session.</p>
+
+      <div class="grid col2" style="margin-top:4px;margin-bottom:28px">
+        <div class="card">
+          <div class="card-label">Good candidates for personal skills</div>
+          <ul class="check-list" style="margin-top:6px">
+            <li>Repetitive prompts you type constantly</li>
+            <li>Workflows specific to your accounts or territory</li>
+            <li>Personal formatting preferences or templates</li>
+            <li>Quick utilities that only you need</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-label">How to create one</div>
+          <p style="font-size:.93rem;line-height:1.55;color:var(--ink);margin:6px 0 8px">The recommended approach is to use Claude's built-in <span class="skill-chip">skill-creator</span> tool. Describe what you want the skill to do and it scaffolds everything for you.</p>
+          <p style="font-size:.88rem;line-height:1.5;color:var(--muted);margin:0">You can also create one manually: add a <code class="inline">SKILL.md</code> file to <code class="inline">~/.claude/skills/my-skill/</code> and Claude Code picks it up automatically.</p>
+        </div>
+      </div>
+
+      <h3 style="font-family:'Poppins',sans-serif;font-size:1.06rem;font-weight:700;color:var(--ink-strong);margin:0 0 12px;letter-spacing:-.014em">2. Share a Skill</h3>
+      <p style="font-size:1rem;line-height:1.65;color:var(--muted);margin-bottom:14px">Once a skill works well for you, ask whether it could help others too. If so, you can contribute it to a shared team repository. A shared repository lets the whole team benefit from each other's work, and lets everyone build on each other's skills over time. Many teams at UiPath keep a shared catalog for exactly this.</p>
+
+      <div class="grid col2" style="margin-top:4px;margin-bottom:28px">
+        <div class="card">
+          <div class="card-label">Good candidates for shared skills</div>
+          <ul class="check-list" style="margin-top:6px">
+            <li>Workflows more than one person on the team runs</li>
+            <li>Skills that solved a problem others have asked about</li>
+            <li>Prompts that benefit from team-wide consistency</li>
+            <li>Anything tested and stable enough to share</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-label">How to share one</div>
+          <ol style="margin:6px 0 0;padding-left:18px;display:grid;gap:8px">
+            <li style="font-size:.93rem;line-height:1.55;color:var(--ink)">Start with a working personal skill.</li>
+            <li style="font-size:.93rem;line-height:1.55;color:var(--ink)">Ask a teammate to try it and give feedback.</li>
+            <li style="font-size:.93rem;line-height:1.55;color:var(--ink)">Follow your team repository's contributing guide: fork, branch, validate, and open a pull request.</li>
+          </ol>
+        </div>
+      </div>
+
+      <h3 style="font-family:'Poppins',sans-serif;font-size:1.06rem;font-weight:700;color:var(--ink-strong);margin:28px 0 12px;letter-spacing:-.014em">3. Improve a Skill</h3>
+      <p style="font-size:1rem;line-height:1.65;color:var(--muted);margin-bottom:14px">Skills are rarely perfect after the first version. As you and your teammates use a skill, you'll spot places to tighten the instructions, sharpen the output, or cut steps that don't need Claude at all. Click each example to see what that looks like in practice.</p>
+
+      <div class="sj-acc">
+        <div class="sj-acc-item">
+          <button class="sj-acc-btn" onclick="toggleAccordion(this)">
+            <span>Refine your instructions</span>
+            <span class="sj-acc-arrow">▶</span>
+          </button>
+          <div class="sj-acc-body">
+            <div class="sj-acc-body-inner">
+              <p>You're using a shared meeting-summary skill. You and a teammate both run it on similar notes and compare results: yours comes back as a bulleted list, theirs as flowing prose. Neither of you changed anything.</p>
+              <dl style="display:grid;gap:10px;margin:12px 0 0">
+                <div>
+                  <dt style="font-family:'JetBrains Mono',monospace;font-size:.62rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:4px">The issue</dt>
+                  <dd style="margin:0;font-size:.93rem;line-height:1.6;color:var(--ink)">The skill's <code class="inline">SKILL.md</code> never defines an output format. Claude infers a structure from context each run, so results vary across the team.</dd>
+                </div>
+                <div>
+                  <dt style="font-family:'JetBrains Mono',monospace;font-size:.62rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mint);margin-bottom:4px">The improvement</dt>
+                  <dd style="margin:0;font-size:.93rem;line-height:1.6;color:var(--ink)">You fork the repo, add an explicit output format requirement to the instructions, and open a PR. The team now gets consistent structure on every run.</dd>
+                </div>
+              </dl>
+            </div>
+          </div>
+        </div>
+        <div class="sj-acc-item">
+          <button class="sj-acc-btn" onclick="toggleAccordion(this)">
+            <span>Offload deterministic steps to scripts</span>
+            <span class="sj-acc-arrow">▶</span>
+          </button>
+          <div class="sj-acc-body">
+            <div class="sj-acc-body-inner">
+              <p>You're using a shared log-analysis skill. It works, but every run feels slow and the token usage is higher than expected. You check the session transcript and see Claude spending several turns fetching and parsing the same structured data before the analysis even starts.</p>
+              <dl style="display:grid;gap:10px;margin:12px 0 0">
+                <div>
+                  <dt style="font-family:'JetBrains Mono',monospace;font-size:.62rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:4px">The issue</dt>
+                  <dd style="margin:0;font-size:.93rem;line-height:1.6;color:var(--ink)">The log-fetch step is identical every run: same API call, same format. Claude isn't adding any judgment there — it's spending tokens on retrieval that a script could handle in milliseconds.</dd>
+                </div>
+                <div>
+                  <dt style="font-family:'JetBrains Mono',monospace;font-size:.62rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mint);margin-bottom:4px">The improvement</dt>
+                  <dd style="margin:0;font-size:.93rem;line-height:1.6;color:var(--ink)">You fork the repo, ask Claude to create a helper script that pre-fetches the logs, update the skill to use the pre-fetched data, and open a PR. Subsequent runs skip the retrieval overhead and go straight to analysis.</dd>
+                </div>
+              </dl>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <style>
+        .svp{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--line);border-radius:6px;overflow:hidden;font-size:.92rem;margin-top:12px}
+        .svp-h{padding:8px 12px;font-family:'JetBrains Mono',monospace;font-size:.62rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;background:var(--surface-3);color:var(--ink-strong)}
+        .svp-h+.svp-h{border-left:1px solid var(--line)}
+        .svp-c{padding:9px 12px;line-height:1.5;color:var(--ink);border-top:1px solid var(--line)}
+        .svp-c+.svp-c{border-left:1px solid var(--line)}
+
+        /* Journey step indicator */
+        .sj-step-track{display:flex;align-items:flex-start;margin:0 0 32px}
+        .sj-step{display:flex;flex-direction:column;align-items:center;gap:7px;flex:0 0 auto;width:90px}
+        .sj-step-num{width:28px;height:28px;border-radius:50%;background:var(--surface-3);border:1.5px solid var(--indigo);color:var(--indigo);font-family:'JetBrains Mono',monospace;font-size:.7rem;font-weight:700;display:flex;align-items:center;justify-content:center}
+        .sj-step-label{font-size:.68rem;font-weight:600;color:var(--muted);text-align:center;letter-spacing:.04em;line-height:1.3}
+        .sj-step-line{flex:1;height:1px;background:var(--line-hi);margin:0 4px;align-self:flex-start;margin-top:13px}
+
+        /* Skill Improvement accordion */
+        .sj-acc{display:grid;gap:6px;margin-top:14px;margin-bottom:28px}
+        .sj-acc-item{border:1px solid var(--line-hi);border-radius:var(--r-xl);overflow:hidden}
+        .sj-acc-btn{width:100%;display:flex;align-items:center;justify-content:space-between;padding:13px 18px;background:var(--surface-3);border:none;cursor:pointer;font-family:'Inter',sans-serif;font-size:.97rem;font-weight:600;color:var(--ink-strong);text-align:left;gap:12px}
+        .sj-acc-btn:hover{background:var(--surface-2)}
+        .sj-acc-item.open .sj-acc-btn{color:var(--indigo);border-bottom:1px solid var(--line-hi)}
+        .sj-acc-arrow{font-size:.72rem;color:var(--muted);transition:transform .25s ease;flex-shrink:0}
+        .sj-acc-item.open .sj-acc-arrow{transform:rotate(90deg);color:var(--indigo)}
+        .sj-acc-body{max-height:0;overflow:hidden;transition:max-height .3s ease}
+        .sj-acc-item.open .sj-acc-body{max-height:420px}
+        .sj-acc-body-inner{padding:16px 18px 18px}
+        .sj-acc-body-inner p{font-size:.95rem;line-height:1.65;color:var(--muted);margin:0 0 10px}
+        .sj-acc-body-inner p:last-child{margin:0}
+        .sj-acc-example{font-size:.85rem;line-height:1.55;color:var(--muted-2);border-left:2px solid var(--indigo);padding-left:12px;margin-top:10px}
+      </style>
+
+    </div>
+
+    <div class="ls">
+      <div class="callout tip">
+        <span class="callout-icon">▸</span>
+        <div class="callout-body">
+          <strong>Before you move on: think about your own workflow</strong>
+          <p style="margin-top:8px;margin-bottom:4px">You just saw how Claude Chat, Claude Code, and Agent Skills fit together. Two questions to sit with before moving on:</p>
+          <ul style="margin:6px 0 0;padding-left:20px;display:grid;gap:6px;font-size:.97rem;line-height:1.6">
+            <li><strong>Which Claude would you reach for?</strong> Think about the last time you needed help drafting a message, digging through a long document, or pulling together a report. Which of the three Claude tools would have been the right fit, and why?</li>
+            <li><strong>What task in your week could become a skill?</strong> Most of us have at least one thing we do on repeat: summarizing a long thread, formatting an update, prepping for a recurring meeting. What's yours? You don't have to build it today, just name it.</li>
+          </ul>
+          <p style="margin-top:10px;font-size:.95rem;color:var(--muted)">There's no wrong answer here — the point is to start connecting the concepts to real work.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="key-takeaway">
+      <span class="kt-label">Key Takeaways</span>
+      <div class="kt-text">
+        <ul class="check-list" style="margin-top:8px">
+          <li>Claude Code is the assistant. It runs in your terminal, the Claude Desktop App, or an IDE like VS Code, and acts on your behalf based on the permissions and settings you define.</li>
+          <li>A <strong>skill</strong> gives Claude a defined playbook for a specific task: structured, repeatable, and shareable if you choose to contribute it.</li>
+          <li>Skills can be <strong>personal or shared</strong>. Keep your own in your Claude config, and contribute the ones worth reusing to a shared team repository.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     LESSON 03 — CLAUDE CODE HYGIENE
+     ═══════════════════════════════════════════════════════════ -->
+<div class="lesson" id="s2" data-screen-label="03 Best Practices and Responsible Use">
+  <div class="lesson-header-band">
+    <div class="lh-eyebrow"><span class="lh-num">03</span><h1 class="lh-title">Best Practices and Responsible Use</h1></div>
+    <p class="lh-lead">This lesson opens with the permission model, the foundation that makes the habits below matter. From there it covers how to prompt with intention, keep your workspace organized, and manage sessions cleanly. Treat these as the defaults that protect your work from day one.</p>
+    <div class="lh-meta"><span class="lt-countdown" id="lt-2">⏱ 8:00</span><span class="type-pill">Habits</span></div>
+  </div>
+  <div class="lesson-body">
+    <div class="lesson-preview">
+      <span class="lp-label">In this lesson</span>
+      <ul class="lp-list">
+        <li>The permission model</li>
+        <li>Prompt with intention (RTCFC)</li>
+        <li>One folder, one purpose</li>
+        <li>One session per task</li>
+        <li>Quick reference card</li>
+      </ul>
+    </div>
+
+    <div class="ls">
+      <p>Lost context, compacted sessions, confused outputs: these common issues can be prevented. Let's take a look at recommended best practices that are the foundation of good Claude hygiene.</p>
+    </div>
+
+    <div class="ls">
+      <h2 class="ls-title">1 — Permissions: What You Can Allow Claude to Do, or Not</h2>
+      <p class="ls-lead">The three rules that follow only make sense once you understand the permission model. Take a moment to commit these three points to memory:</p>
+
+      <ul class="obj-list" style="margin-top:18px">
+        <li class="obj-item"><span class="obj-n">1</span><span><strong>Claude Code has access to whatever folders you add to the workspace.</strong> It can read, write, and run commands there. Don't add folders you don't want it to touch.</span></li>
+        <li class="obj-item"><span class="obj-n">2</span><span><strong>MCP servers extend Claude's reach.</strong> When a tool (like Slack or GitHub) is connected via MCP, Claude can act through it. We'll cover connection methods in the next lesson.</span></li>
+        <li class="obj-item"><span class="obj-n">3</span><span><strong>You are responsible for what Claude does.</strong> Claude will prompt you for approval before taking actions, <em>but only if you have it configured to do so</em>.</span></li>
+      </ul>
+
+      <h3 style="font-family:'Poppins',sans-serif;font-size:1.06rem;font-weight:700;color:var(--ink-strong);margin:30px 0 14px;letter-spacing:-.014em">Permission Prompts: what Claude is actually asking</h3>
+      <p style="font-size:1rem;line-height:1.65;color:var(--muted);margin-bottom:14px">When Claude wants to take an action (run a script, write a file, call an external service), it pauses and asks. You'll see one of these:</p>
+
+      <style>
+        /* ── PERMISSION CAROUSEL — 3D ─────────────────────────── */
+        .perm-carousel{position:relative;margin-top:6px;outline:none;overflow:hidden;padding-bottom:32px}
+        .perm-3d-stage{
+          position:relative;perspective:1100px;overflow:visible;
+        }
+        .perm-slide{
+          position:absolute;width:72%;left:14%;top:0;
+          border-radius:var(--r-xl);overflow:hidden;
+          border:1px solid var(--line-hi);
+          box-shadow:0 2px 10px rgba(0,0,0,0.18);
+          transition:transform .3s cubic-bezier(.4,0,.2,1),
+                     opacity  .3s cubic-bezier(.4,0,.2,1),
+                     box-shadow .3s;
+          transform-origin:center center;
+          will-change:transform,opacity;
+        }
+        .perm-slide.is-active{
+          z-index:3;opacity:1;cursor:default;
+          box-shadow:0 4px 14px rgba(0,0,0,0.22);
+        }
+        .perm-slide.is-left{
+          z-index:2;opacity:0.48;cursor:pointer;
+          transform:translateX(-86%) rotateY(58deg) scale(0.84);
+        }
+        .perm-slide.is-right{
+          z-index:2;opacity:0.48;cursor:pointer;
+          transform:translateX(86%) rotateY(-58deg) scale(0.84);
+        }
+        .perm-slide.is-far{
+          z-index:1;opacity:0;pointer-events:none;
+          transform:translateX(0) translateZ(-220px);
+        }
+        .perm-slide.is-left:hover {opacity:0.72;transform:translateX(-86%) rotateY(38deg) scale(0.86)}
+        .perm-slide.is-right:hover{opacity:0.72;transform:translateX(86%)  rotateY(-38deg) scale(0.86)}
+        .perm-slide-header{padding:22px 26px 18px;display:flex;align-items:center;gap:14px}
+        .perm-slide-header.allow       {background:linear-gradient(135deg,#0BA2B3,#077a87)}
+        .perm-slide-header.always      {background:linear-gradient(135deg,#E8960C,#b37408)}
+        .perm-slide-header.approve     {background:linear-gradient(135deg,#FA4616,#c53610)}
+        .perm-slide-header.deny        {background:linear-gradient(135deg,#047f88,#06CDD9)}
+        .perm-slide-header.mode-ask    {background:linear-gradient(135deg,#6366F1,#4338CA)}
+        .perm-slide-header.mode-plan   {background:linear-gradient(135deg,#16A34A,#15803D)}
+        .perm-slide-header.mode-auto   {background:linear-gradient(135deg,#D97706,#B45309)}
+        .perm-slide-header.mode-accept {background:linear-gradient(135deg,#0284C7,#0369A1)}
+        .perm-slide-header.mode-bypass {background:linear-gradient(135deg,#DC2626,#991B1B)}
+        .perm-slide-icon{
+          width:38px;height:38px;border-radius:8px;flex-shrink:0;
+          background:rgba(255,255,255,0.18);display:grid;place-items:center;
+          font-size:1.1rem;line-height:1;
+        }
+        .perm-slide-name{
+          font-family:'Poppins',sans-serif;font-size:1.1rem;font-weight:700;
+          color:#fff;letter-spacing:-.018em;
+        }
+        .perm-slide-badge{
+          margin-left:auto;white-space:nowrap;
+          font-family:'JetBrains Mono',monospace;font-size:.6rem;font-weight:700;
+          letter-spacing:.12em;text-transform:uppercase;
+          padding:4px 10px;border-radius:4px;
+          background:rgba(255,255,255,0.18);color:rgba(255,255,255,0.92);
+        }
+        .perm-slide-body{
+          background:linear-gradient(180deg,var(--surface) 0%,var(--surface-2) 100%);
+          padding:22px 26px 24px;
+        }
+        html[data-theme='light'] .perm-slide-body{background:linear-gradient(180deg,#fff,var(--surface-2))}
+        .perm-slide-label{
+          font-family:'JetBrains Mono',monospace;font-size:.6rem;font-weight:700;
+          letter-spacing:.16em;text-transform:uppercase;color:var(--muted);
+          display:block;margin-bottom:6px;
+        }
+        .perm-slide-text{font-size:.98rem;line-height:1.65;color:var(--ink);margin:0}
+        .perm-slide-when{
+          margin-top:16px;padding:14px 16px;border-radius:8px;
+          font-size:.95rem;line-height:1.65;color:var(--ink);
+        }
+        .perm-slide-when.allow       {background:rgba(11,162,179,0.09);  border:1px solid rgba(11,162,179,0.22)}
+        .perm-slide-when.always      {background:rgba(232,150,12,0.09);  border:1px solid rgba(232,150,12,0.22)}
+        .perm-slide-when.approve     {background:rgba(250,70,22,0.09);   border:1px solid rgba(250,70,22,0.22)}
+        .perm-slide-when.deny        {background:rgba(6,205,217,0.09);   border:1px solid rgba(6,205,217,0.22)}
+        .perm-slide-when.mode-ask    {background:rgba(99,102,241,0.09);  border:1px solid rgba(99,102,241,0.22)}
+        .perm-slide-when.mode-plan   {background:rgba(22,163,74,0.09);   border:1px solid rgba(22,163,74,0.22)}
+        .perm-slide-when.mode-auto   {background:rgba(217,119,6,0.09);   border:1px solid rgba(217,119,6,0.22)}
+        .perm-slide-when.mode-accept {background:rgba(2,132,199,0.09);   border:1px solid rgba(2,132,199,0.22)}
+        .perm-slide-when.mode-bypass {background:rgba(220,38,38,0.09);   border:1px solid rgba(220,38,38,0.22)}
+        .perm-slide-alert{
+          margin-top:12px;padding:12px 14px;border-radius:7px;
+          background:rgba(232,150,12,0.11);
+          border:1px solid rgba(232,150,12,0.26);
+          border-left:3px solid #E8960C;
+          font-size:.88rem;line-height:1.58;color:var(--ink);
+        }
+        .perm-slide-alert strong{
+          display:block;margin-bottom:4px;
+          font-size:.82rem;color:#b37408;font-weight:700;
+          text-transform:uppercase;letter-spacing:.04em;
+        }
+        /* dots */
+        .perm-dots{display:flex;justify-content:center;gap:8px;margin-top:18px}
+        .perm-dot-btn{
+          height:8px;border-radius:4px;border:none;padding:0;cursor:pointer;
+          background:var(--muted-2);transition:all .25s cubic-bezier(.4,0,.2,1);width:8px;
+        }
+        .perm-dot-btn.active{width:26px}
+        .perm-dot-btn.active.allow       {background:#0BA2B3}
+        .perm-dot-btn.active.always      {background:#E8960C}
+        .perm-dot-btn.active.approve     {background:#FA4616}
+        .perm-dot-btn.active.deny        {background:#06CDD9}
+        .perm-dot-btn.active.mode-ask    {background:#6366F1}
+        .perm-dot-btn.active.mode-plan   {background:#16A34A}
+        .perm-dot-btn.active.mode-auto   {background:#D97706}
+        .perm-dot-btn.active.mode-accept {background:#0284C7}
+        .perm-dot-btn.active.mode-bypass {background:#DC2626}
+        .perm-counter{
+          text-align:center;margin-top:9px;
+          font-family:'JetBrains Mono',monospace;font-size:.68rem;
+          font-weight:600;letter-spacing:.1em;color:var(--muted);
+        }
+      </style>
+
+      <div class="perm-carousel" id="permCarousel" tabindex="0">
+        <div class="perm-3d-stage" id="perm3dStage">
+
+          <!-- 1. Allow once -->
+          <div class="perm-slide">
+            <div class="perm-slide-header allow">
+              <div class="perm-slide-icon">✓</div>
+              <div class="perm-slide-name">Allow once</div>
+              <div class="perm-slide-badge">Low risk</div>
+            </div>
+            <div class="perm-slide-body">
+              <span class="perm-slide-label">What it means</span>
+              <p class="perm-slide-text">Permit this specific action, this time only. Claude will ask again the next time it wants to do the same thing.</p>
+              <div class="perm-slide-when allow"><span class="perm-slide-label">When to use this</span>Your default choice for anything you haven't done before. Safe to use when you want to stay informed as you build familiarity with a workflow.</div>
+            </div>
+          </div>
+
+          <!-- 2. Always allow -->
+          <div class="perm-slide">
+            <div class="perm-slide-header always">
+              <div class="perm-slide-icon">⚠</div>
+              <div class="perm-slide-name">Always allow</div>
+              <div class="perm-slide-badge">Use with caution</div>
+            </div>
+            <div class="perm-slide-body">
+              <span class="perm-slide-label">What it means</span>
+              <p class="perm-slide-text">Permit this action type permanently for the current session. Claude will not ask again; it will just act each time.</p>
+              <div class="perm-slide-when always"><span class="perm-slide-label">When to use this</span>Only for low-risk, fully understood actions, like reading a file you own. Never for writes to shared systems, record updates, emails, or anything shared. When in doubt, <strong>Allow once</strong> is always safer.</div>
+              <div class="perm-slide-alert"><strong>⚠ Easy to click by accident</strong>If Claude is writing to a shared system, running scripts, or calling APIs, don't select this until you've seen the action succeed correctly at least once and you fully understand what it's doing.</div>
+            </div>
+          </div>
+
+          <!-- 3. Approve changes first -->
+          <div class="perm-slide">
+            <div class="perm-slide-header approve">
+              <div class="perm-slide-icon">👁</div>
+              <div class="perm-slide-name">Approve changes first</div>
+              <div class="perm-slide-badge">Recommended</div>
+            </div>
+            <div class="perm-slide-body">
+              <span class="perm-slide-label">What it means</span>
+              <p class="perm-slide-text">Claude shows you exactly what it plans to do, the full diff or action detail, before doing anything. You confirm or cancel.</p>
+              <div class="perm-slide-when approve"><span class="perm-slide-label">When to use this</span>Anything that writes, updates, or deletes: files, records, messages, repo commits. If you couldn't undo it manually in 30 seconds, you want to see it before it happens.</div>
+            </div>
+          </div>
+
+          <!-- 4. Deny -->
+          <div class="perm-slide">
+            <div class="perm-slide-header deny">
+              <div class="perm-slide-icon">✕</div>
+              <div class="perm-slide-name">Deny</div>
+              <div class="perm-slide-badge">Block it</div>
+            </div>
+            <div class="perm-slide-body">
+              <span class="perm-slide-label">What it means</span>
+              <p class="perm-slide-text">Block the action entirely. Claude will stop, explain what it was trying to do, and wait for new instructions from you.</p>
+              <div class="perm-slide-when deny"><span class="perm-slide-label">When to use this</span>Whenever something looks wrong or unexpected. Denying never breaks anything; it's always the safe choice. You can redirect Claude with a new instruction afterward.</div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="perm-dots" id="permDots">
+          <button class="perm-dot-btn active allow"  onclick="goPermTo(0)" aria-label="Allow once"></button>
+          <button class="perm-dot-btn always"         onclick="goPermTo(1)" aria-label="Always allow"></button>
+          <button class="perm-dot-btn approve"        onclick="goPermTo(2)" aria-label="Approve changes first"></button>
+          <button class="perm-dot-btn deny"           onclick="goPermTo(3)" aria-label="Deny"></button>
+        </div>
+        <div class="perm-counter" id="permCounter">1 of 4 · Allow once</div>
+      </div>
+
+      <h3 style="font-family:'Poppins',sans-serif;font-size:1.06rem;font-weight:700;color:var(--ink-strong);margin:32px 0 14px;letter-spacing:-.014em">Permission Modes: how Claude runs</h3>
+      <p style="font-size:1rem;line-height:1.65;color:var(--muted);margin-bottom:14px">Claude Code also has five session-level operating modes that control how much it does before asking. You can change the active mode from the toolbar or with <code>/mode</code>:</p>
+
+      <div class="perm-carousel" id="permCarousel2" tabindex="0">
+        <div class="perm-3d-stage" id="perm3dStage2">
+
+          <!-- 1. Ask permissions -->
+          <div class="perm-slide">
+            <div class="perm-slide-header mode-ask">
+              <div class="perm-slide-icon">⊙</div>
+              <div class="perm-slide-name">Ask permissions</div>
+              <div class="perm-slide-badge">Default</div>
+            </div>
+            <div class="perm-slide-body">
+              <span class="perm-slide-label">What it means</span>
+              <p class="perm-slide-text">Claude prompts you for permission before every significant action — running commands, editing files, calling APIs. Nothing happens without your explicit approval.</p>
+              <div class="perm-slide-when mode-ask"><span class="perm-slide-label">When to use this</span>Your starting point for all sessions. Use <strong>Ask permissions</strong> whenever you're exploring an unfamiliar codebase, connected to production data, or learning what Claude would do.</div>
+            </div>
+          </div>
+
+          <!-- 2. Plan mode -->
+          <div class="perm-slide">
+            <div class="perm-slide-header mode-plan">
+              <div class="perm-slide-icon">📋</div>
+              <div class="perm-slide-name">Plan mode</div>
+              <div class="perm-slide-badge">View only</div>
+            </div>
+            <div class="perm-slide-body">
+              <span class="perm-slide-label">What it means</span>
+              <p class="perm-slide-text">Claude proposes a full action plan but cannot execute anything. No files change, no tools run. You review the plan and decide whether to proceed.</p>
+              <div class="perm-slide-when mode-plan"><span class="perm-slide-label">When to use this</span>Activate with <code>/plan</code> or press <kbd>3</kbd>. Use before any high-stakes task — refactoring, bulk updates, anything you can't easily undo — to see the full scope before a single line changes.</div>
+            </div>
+          </div>
+
+          <!-- 3. Auto mode -->
+          <div class="perm-slide">
+            <div class="perm-slide-header mode-auto">
+              <div class="perm-slide-icon">⚡</div>
+              <div class="perm-slide-name">Auto mode</div>
+              <div class="perm-slide-badge">Less oversight</div>
+            </div>
+            <div class="perm-slide-body">
+              <span class="perm-slide-label">What it means</span>
+              <p class="perm-slide-text">Claude auto-approves low-risk operations (reading files, searching, running safe commands) and still asks for higher-risk actions like writes or external API calls.</p>
+              <div class="perm-slide-when mode-auto"><span class="perm-slide-label">When to use this</span>Trusted, repetitive workflows you've already verified. Never use on a first run or when connected to production systems — you won't see intermediate steps.</div>
+            </div>
+          </div>
+
+          <!-- 4. Accept edits -->
+          <div class="perm-slide">
+            <div class="perm-slide-header mode-accept">
+              <div class="perm-slide-icon">✏</div>
+              <div class="perm-slide-name">Accept edits</div>
+              <div class="perm-slide-badge">Edits auto-approved</div>
+            </div>
+            <div class="perm-slide-body">
+              <span class="perm-slide-label">What it means</span>
+              <p class="perm-slide-text">File edits are automatically accepted without a prompt. Claude still asks permission for commands, scripts, and calls to external services.</p>
+              <div class="perm-slide-when mode-accept"><span class="perm-slide-label">When to use this</span>Active development sessions with many expected file changes. Always review your git diff afterward — you won't see each edit in real time.</div>
+            </div>
+          </div>
+
+          <!-- 5. Bypass permissions -->
+          <div class="perm-slide">
+            <div class="perm-slide-header mode-bypass">
+              <div class="perm-slide-icon">⊘</div>
+              <div class="perm-slide-name">Bypass permissions</div>
+              <div class="perm-slide-badge">No guardrails</div>
+            </div>
+            <div class="perm-slide-body">
+              <span class="perm-slide-label">What it means</span>
+              <p class="perm-slide-text">All permission checks are disabled. Claude acts without asking — no prompts, no diff previews, no safety gates. Enabled via the <code>--dangerously-skip-permissions</code> CLI flag.</p>
+              <div class="perm-slide-when mode-bypass"><span class="perm-slide-label">When to use this</span><strong>Automated CI/CD pipelines and sandboxed environments only.</strong> Never in an interactive session — there is no undo and no review. If in doubt, use <strong>Ask permissions</strong>.</div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="perm-dots" id="permDots2">
+          <button class="perm-dot-btn active mode-ask"    onclick="goPermTo2(0)" aria-label="Ask permissions"></button>
+          <button class="perm-dot-btn mode-plan"          onclick="goPermTo2(1)" aria-label="Plan mode"></button>
+          <button class="perm-dot-btn mode-auto"          onclick="goPermTo2(2)" aria-label="Auto mode"></button>
+          <button class="perm-dot-btn mode-accept"        onclick="goPermTo2(3)" aria-label="Accept edits"></button>
+          <button class="perm-dot-btn mode-bypass"        onclick="goPermTo2(4)" aria-label="Bypass permissions"></button>
+        </div>
+        <div class="perm-counter" id="permCounter2">1 of 5 · Ask permissions</div>
+      </div>
+
+      <script>
+      (function(){
+        const labels=['Allow once','Always allow','Approve changes first','Deny'];
+        let cur=0;
+        let hoverLocked=false;
+        const stage=document.getElementById('perm3dStage');
+        const slides=[...stage.querySelectorAll('.perm-slide')];
+        const dots=[...document.getElementById('permDots').querySelectorAll('.perm-dot-btn')];
+        const counter=document.getElementById('permCounter');
+
+        function syncHeight(){
+          stage.style.height=slides[cur].offsetHeight+'px';
+        }
+
+        function goPermTo(idx){
+          cur=idx;
+          hoverLocked=true;
+          setTimeout(()=>{hoverLocked=false;},800);
+          slides.forEach((s,i)=>{
+            const off=i-cur;
+            s.className='perm-slide '+(
+              off===0  ?'is-active':
+              off===-1 ?'is-left'  :
+              off===1  ?'is-right' :'is-far'
+            );
+          });
+          dots.forEach((d,i)=>d.classList.toggle('active',i===cur));
+          counter.textContent=(cur+1)+' of '+labels.length+' · '+labels[cur];
+          setTimeout(syncHeight,310);
+        }
+        window.goPermTo=goPermTo;
+
+        // clicking or hovering a side card navigates to it
+        slides.forEach((s,i)=>{
+          let t=null;
+          s.addEventListener('click',()=>{ if(i!==cur) goPermTo(i); });
+          s.addEventListener('mouseenter',()=>{
+            if(i===cur||hoverLocked) return;
+            t=setTimeout(()=>goPermTo(i),700);
+          });
+          s.addEventListener('mouseleave',()=>clearTimeout(t));
+        });
+
+        document.getElementById('permCarousel').addEventListener('keydown',e=>{
+          if(e.key==='ArrowLeft') {e.preventDefault();cur>0&&goPermTo(cur-1)}
+          if(e.key==='ArrowRight'){e.preventDefault();cur<labels.length-1&&goPermTo(cur+1)}
+        });
+
+        goPermTo(0);
+
+        function trySync(){
+          // only measure when the lesson is visible (offsetHeight > 0)
+          if(slides[cur].offsetHeight > 0) syncHeight();
+        }
+
+        // re-measure whenever the containing lesson gains the 'active' class
+        const permLesson = stage.closest('.lesson');
+        if(permLesson){
+          new MutationObserver(trySync)
+            .observe(permLesson, {attributes:true, attributeFilter:['class']});
+        }
+        document.fonts.ready.then(trySync);
+        window.addEventListener('resize', trySync);
+      })();
+
+      (function(){
+        const labels2=['Ask permissions','Plan mode','Auto mode','Accept edits','Bypass permissions'];
+        let cur2=0;
+        let hoverLocked2=false;
+        const stage2=document.getElementById('perm3dStage2');
+        const slides2=[...stage2.querySelectorAll('.perm-slide')];
+        const dots2=[...document.getElementById('permDots2').querySelectorAll('.perm-dot-btn')];
+        const counter2=document.getElementById('permCounter2');
+
+        function syncHeight2(){
+          stage2.style.height=slides2[cur2].offsetHeight+'px';
+        }
+
+        function goPermTo2(idx){
+          cur2=idx;
+          hoverLocked2=true;
+          setTimeout(()=>{hoverLocked2=false;},800);
+          slides2.forEach((s,i)=>{
+            const off=i-cur2;
+            s.className='perm-slide '+(
+              off===0  ?'is-active':
+              off===-1 ?'is-left'  :
+              off===1  ?'is-right' :'is-far'
+            );
+          });
+          dots2.forEach((d,i)=>d.classList.toggle('active',i===cur2));
+          counter2.textContent=(cur2+1)+' of '+labels2.length+' · '+labels2[cur2];
+          setTimeout(syncHeight2,310);
+        }
+        window.goPermTo2=goPermTo2;
+
+        slides2.forEach((s,i)=>{
+          let t=null;
+          s.addEventListener('click',()=>{ if(i!==cur2) goPermTo2(i); });
+          s.addEventListener('mouseenter',()=>{
+            if(i===cur2||hoverLocked2) return;
+            t=setTimeout(()=>goPermTo2(i),700);
+          });
+          s.addEventListener('mouseleave',()=>clearTimeout(t));
+        });
+
+        document.getElementById('permCarousel2').addEventListener('keydown',e=>{
+          if(e.key==='ArrowLeft') {e.preventDefault();cur2>0&&goPermTo2(cur2-1)}
+          if(e.key==='ArrowRight'){e.preventDefault();cur2<labels2.length-1&&goPermTo2(cur2+1)}
+        });
+
+        goPermTo2(0);
+
+        function trySync2(){
+          if(slides2[cur2].offsetHeight > 0) syncHeight2();
+        }
+
+        const permLesson2 = stage2.closest('.lesson');
+        if(permLesson2){
+          new MutationObserver(trySync2)
+            .observe(permLesson2, {attributes:true, attributeFilter:['class']});
+        }
+        document.fonts.ready.then(trySync2);
+        window.addEventListener('resize', trySync2);
+      })();
+      </script>
+
+      <div class="callout gold" style="margin-top:14px">
+        <span class="callout-icon">★</span>
+        <div class="callout-body">
+          <strong>Golden Rules</strong>
+          <em>If Claude is about to touch something you couldn't manually undo in 30 seconds, select <span style="font-weight:700">Approve changes first</span>.</em> <br>That means records, updates, emails, messages, anything in a shared repo.<br><br>
+          <em>Only connect Claude Code to environments you'd be comfortable running a command in yourself.</em><br><br>
+          <em>For read-only actions, Allow once is normally fine.</em>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="ls">
+      <h2 class="ls-title">2 — Prompt with intention</h2>
+      <p>The output is only as good as the prompt. The acronym to remember is <strong>RTCFC</strong>.</p>
+      <div class="card" style="margin-top:14px">
+        <span class="card-label">RTCFC at a glance</span>
+        <ul class="check-list">
+          <li><strong>Role</strong> — tell Claude who it is ("Act as a technical writer...")</li>
+          <li><strong>Task</strong> — say exactly what you want done</li>
+          <li><strong>Context</strong> — give it the relevant details: IDs, product, version</li>
+          <li><strong>Format</strong> — specify the output shape ("email draft", "bullet list")</li>
+          <li><strong>Constraints</strong> — set guardrails ("under 150 words", "no pricing details")</li>
+        </ul>
+      </div>
+
+      <div class="callout tip" style="margin-top:14px">
+        <span class="callout-icon">▸</span>
+        <div class="callout-body">
+          <strong>Prompt with specifics, too</strong>
+          Inside a session, vague prompts (<em>"help me with this"</em>) force Claude to guess. Specific prompts (<em>"Use the <code class="inline">/weekly-report</code> skill on this week's commits and format it as five bullets for Slack"</em>) activate the right skill and target the right thing. Specificity is part of hygiene.
+        </div>
+      </div>
+    </div>
+
+    <div class="ls">
+      <h2 class="ls-title">3 — One folder, one purpose</h2>
+      <p>Claude Code treats each folder as a separate context, like a separate repository. If you open it from your home directory or <code class="inline">Documents</code>, it can see everything there.</p>
+      <div class="card" style="margin-top:14px">
+        <span class="card-label">Do this instead</span>
+        <ul class="check-list">
+          <li>Create a <code class="inline">projects/</code> folder and start each work session from the relevant project</li>
+          <li>Create a <code class="inline">skills/</code> folder to use when you're working with skills</li>
+          <li>Never start a session from your home directory or Desktop</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="ls">
+      <h2 class="ls-title">4 — One session per task</h2>
+      <p>One of the most common mistakes is using one long-running session for multiple tasks. Claude accumulates context and eventually gets confused: its context window compacts and it starts making assumptions from the wrong task.</p>
+      <div class="card" style="margin-top:14px">
+        <span class="card-label">Do this instead</span>
+        <ul class="check-list">
+          <li>Open a new session for each task</li>
+          <li>When you finish a task, close the session</li>
+          <li>If Claude starts referencing the wrong task: stop, clear context, start fresh</li>
+        </ul>
+      </div>
+    </div>
+
+      <div class="callout warn" style="margin-top:18px">
+        <span class="callout-icon">!</span>
+        <div class="callout-body">
+          <strong>Remember Your Responsibility</strong>
+          Claude assists, but you own the outcome. Read every output, validate the content, make updates as needed before it reaches a customer, a ticket, or a shared doc. <br><br> Don't give Claude regulated or sensitive topics (HIPAA, SOC 2, pricing, SLAs, legal commitments).
+        </div>
+      </div>
+
+    <div class="ls">
+      <div class="callout tip">
+        <span class="callout-icon">▸</span>
+        <div class="callout-body">
+          <strong>Before you move on: put the habits into practice</strong>
+          <p style="margin-top:8px;margin-bottom:4px">You just covered the habits that separate clean Claude sessions from messy ones. Two questions to sit with before the hands-on exercises:</p>
+          <ul style="margin:6px 0 0;padding-left:20px;display:grid;gap:6px;font-size:.97rem;line-height:1.6">
+            <li><strong>Apply RTCFC to something real.</strong> Think of a task you do often, like a status update, a summary, or a first-draft message. How would you structure the prompt? What's the Role, Task, Context, Format, and Constraint? Take 30 seconds and sketch one out.</li>
+            <li><strong>Which habit will be hardest to keep?</strong> One folder, one session per task, read every output before you share it: which of those is most likely to slip when things get busy? Why?</li>
+          </ul>
+          <p style="margin-top:10px;font-size:.95rem;color:var(--muted)">The goal isn't a perfect RTCFC prompt — it's starting to think in those terms before the hands-on exercises.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="key-takeaway">
+      <span class="kt-label">Key Takeaways</span>
+      <div class="kt-text">
+        <ul class="check-list" style="margin-top:8px">
+          <li><strong>Claude has access to whatever you give it.</strong> Keep workspace folders small and specific — don't add anything you don't want it to touch.</li>
+          <li><strong>Prompt with intention.</strong> Specific context produces accurate outputs. Vague prompts produce guesswork.</li>
+          <li><strong>One folder, one purpose.</strong> Mixing projects or customers in a single workspace creates confusion and risk.</li>
+          <li><strong>One session per case or task.</strong> Fresh sessions prevent context from one piece of work bleeding into another.</li>
+          <li><strong>You own the output.</strong> Read every output, validate the output, and make adjustments before sharing it. Claude assists — the result is yours.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     LESSON 04 — CONNECTION METHODS
+     ═══════════════════════════════════════════════════════════ -->
+<div class="lesson" id="s3" data-screen-label="04 Connection Methods">
+  <div class="lesson-header-band">
+    <div class="lh-eyebrow"><span class="lh-num">04</span><h1 class="lh-title">Connection Methods</h1></div>
+    <p class="lh-lead">Know how Claude connects to external services, and what that means for you.</p>
+    <div class="lh-meta"><span class="lt-countdown" id="lt-3">⏱ 10:00</span><span class="type-pill">Awareness</span></div>
+  </div>
+  <div class="lesson-body">
+    <div class="lesson-preview">
+      <span class="lp-label">In this lesson</span>
+      <ul class="lp-list">
+        <li>Three ways Claude connects to external services</li>
+        <li>Recommended connectors</li>
+        <li>Connecting in Claude Desktop</li>
+        <li>Safety reminders</li>
+      </ul>
+    </div>
+
+    <div class="ls">
+      <p>Claude can reach external services in three ways: <strong>Anthropic-hosted connectors</strong> available in Claude Desktop, <strong>team-built MCP servers</strong> configured by your org, and <strong>CLI-based authentication</strong> used directly by skills. Let's connect the dots before diving into the Connectors panel.</p>
+    </div>
+
+    <div class="ls">
+      <h2 class="ls-title">Claude Connection Types</h2>
+      <p class="ls-lead">Each method gives Claude a different level of access. The key difference is <em>who configures the connection and what it can reach</em>.</p>
+
+      <style>
+        .conn-group{margin-top:18px}
+        .conn-group+.conn-group{margin-top:14px}
+        .conn-group-eyebrow{
+          display:flex;align-items:center;gap:10px;
+          font-size:.7rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;
+          margin-bottom:10px;
+        }
+        .conn-group-eyebrow::after{content:'';flex:1;height:1px}
+        .conn-group-eyebrow.is-mcp,.conn-group-eyebrow.is-cli{color:var(--muted)}
+        .conn-group-eyebrow.is-mcp::after,.conn-group-eyebrow.is-cli::after{background:var(--line-hi)}
+        .conn-compare-inner{display:grid;gap:12px}
+        .conn-compare-inner.two-col{grid-template-columns:1fr 1fr}
+        .conn-compare-inner.one-col{grid-template-columns:minmax(0,50%)}
+        .conn-compare-card{padding:20px;border-radius:var(--r-lg);background:var(--surface);border:1px solid var(--line-hi)}
+        .cc-label{
+          font-size:.71rem;font-weight:800;letter-spacing:.07em;text-transform:uppercase;
+          margin-bottom:10px;padding:2px 8px;border-radius:3px;display:inline-block;
+        }
+        .cc-label.direct{background:var(--coral-soft);color:var(--coral);border:1px solid var(--coral-mid)}
+        .cc-label.mcp{background:var(--mint-soft);color:var(--mint);border:1px solid var(--mint-mid)}
+        .cc-label.cli{background:var(--indigo-soft);color:var(--indigo);border:1px solid var(--indigo-mid)}
+        html[data-theme='light'] .cc-label.direct{color:var(--coral-deep)}
+        html[data-theme='light'] .cc-label.mcp{color:var(--mint-deep)}
+        html[data-theme='light'] .cc-label.cli{color:var(--indigo-deep)}
+        .cc-title{font-size:1.03rem;font-weight:700;color:var(--ink-strong);margin-bottom:10px}
+        .cc-list{font-size:.94rem;line-height:1.65;color:var(--ink);padding-left:18px;margin:0}
+        .cc-list li{margin-top:6px}
+        .cc-note{margin-top:12px;font-size:.86rem;color:var(--muted);line-height:1.55;border-top:1px solid var(--line);padding-top:10px}
+        @media(max-width:660px){.conn-compare-inner.two-col,.conn-compare-inner.one-col{grid-template-columns:1fr}}
+      </style>
+
+      <div class="conn-group">
+        <div class="conn-group-eyebrow is-mcp">MCP under the hood</div>
+        <div class="conn-compare-inner two-col">
+          <div class="conn-compare-card">
+            <span class="cc-label mcp">Anthropic-hosted</span>
+            <div class="cc-title">Ready to use, Anthropic-vetted</div>
+            <ul class="cc-list">
+              <li>Available directly in Claude Desktop's Connectors panel</li>
+              <li>You authorize access once via OAuth — no config files needed</li>
+              <li>Anthropic defines and maintains the available tools</li>
+              <li>You are responsible for what Claude does with your account access</li>
+            </ul>
+          </div>
+          <div class="conn-compare-card">
+            <span class="cc-label direct">Team-built</span>
+            <div class="cc-title">Custom-configured, org-governed</div>
+            <ul class="cc-list">
+              <li>Built and maintained by your org (e.g., your platform or tools team)</li>
+              <li>Admins define exactly which actions Claude is allowed to take</li>
+              <li>Tools are scoped to your team's specific workflows and systems</li>
+              <li>You are still responsible for every action you approve in the session</li>
+            </ul>
+          </div>
+        </div>
+        <p style="margin-top:12px;font-size:.88rem;color:var(--muted)"><button class="learn-more-btn" data-modal="mcp-dive">Want to learn more about MCP?</button></p>
+      </div>
+
+      <div class="conn-group">
+        <div class="conn-group-eyebrow is-cli">CLI-based authentication</div>
+        <div class="conn-compare-inner one-col">
+          <div class="conn-compare-card">
+            <span class="cc-label cli">CLI-based</span>
+            <div class="cc-title">Authenticated locally, skill-invoked</div>
+            <ul class="cc-list">
+              <li><span>Some skills call a command-line tool (like the GitHub or Salesforce CLI) on your behalf</span></li>
+              <li>Access is scoped to your own account permissions</li>
+              <li>Runs entirely on your machine, with no Connectors panel involved</li>
+            </ul>
+            <p class="cc-note">The tool runs with whatever access your account already has.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout warn" style="margin-top:18px">
+        <span class="callout-icon">!</span>
+        <div class="callout-body">
+          <strong>You are responsible for what Claude does — regardless of how it's connected.</strong> Neither method removes your accountability. Before running anything on a live system, make sure you understand what action Claude is about to take and who it affects.
+        </div>
+      </div>
+    </div>
+
+    <div class="ls">
+      <h2 class="ls-title">Recommended Connectors</h2>
+      <p class="ls-lead">Claude Desktop includes a Connectors panel with first-party integrations for the services you use daily. These are a few popular picks.</p>
+
+      <style>
+        .conn-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px;margin-top:18px}
+        .conn-card{
+          display:flex;align-items:flex-start;gap:12px;
+          padding:14px 16px;border-radius:var(--r-lg);
+          background:var(--surface);border:1px solid var(--line-hi);
+        }
+        .conn-icon{
+          width:36px;height:36px;border-radius:6px;flex-shrink:0;
+          display:flex;align-items:center;justify-content:center;
+          font-size:1.15rem;background:var(--surface-2);
+        }
+        .conn-info{display:flex;flex-direction:column;gap:3px}
+        .conn-name{font-size:.97rem;font-weight:700;color:var(--ink-strong);letter-spacing:-.01em}
+        .conn-desc{font-size:.82rem;color:var(--muted);line-height:1.45}
+      </style>
+      <div class="conn-grid">
+        <div class="conn-card">
+          <div class="conn-icon">🔵</div>
+          <div class="conn-info"><span class="conn-name">Atlassian</span><span class="conn-desc">Jira tickets and Confluence pages</span></div>
+        </div>
+        <div class="conn-card">
+          <div class="conn-icon">📅</div>
+          <div class="conn-info"><span class="conn-name">Calendly</span><span class="conn-desc">Scheduling and availability</span></div>
+        </div>
+        <div class="conn-card">
+          <div class="conn-icon">🐙</div>
+          <div class="conn-info"><span class="conn-name">GitHub Integration</span><span class="conn-desc">Repos, PRs, and issues</span></div>
+        </div>
+        <div class="conn-card">
+          <div class="conn-icon">🔍</div>
+          <div class="conn-info"><span class="conn-name">Glean</span><span class="conn-desc">Enterprise search across your org</span></div>
+        </div>
+        <div class="conn-card">
+          <div class="conn-icon">📁</div>
+          <div class="conn-info"><span class="conn-name">Google Drive</span><span class="conn-desc">Docs, Sheets, and Drive files</span></div>
+        </div>
+        <div class="conn-card">
+          <div class="conn-icon">🟦</div>
+          <div class="conn-info"><span class="conn-name">Microsoft 365</span><span class="conn-desc">Outlook, Teams, and OneDrive</span></div>
+        </div>
+        <div class="conn-card">
+          <div class="conn-icon">💬</div>
+          <div class="conn-info"><span class="conn-name">Slack</span><span class="conn-desc">Messages and channel history</span></div>
+        </div>
+        <div class="conn-card">
+          <div class="conn-icon">🎥</div>
+          <div class="conn-info"><span class="conn-name">Zoom for Claude</span><span class="conn-desc">Meeting recordings and transcripts</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ls">
+      <h2 class="ls-title">Adding a Connector in Claude Desktop</h2>
+      <p>Each connector uses OAuth: you authorize it once, and Claude can read from and write to that service on your behalf in any future conversation.</p>
+      <div class="card" style="margin-top:14px">
+        <span class="card-label">Follow along</span>
+        <ol style="margin:8px 0 0;padding-left:22px;display:grid;gap:10px">
+          <li style="font-size:.99rem;line-height:1.6;color:var(--ink)">Open Claude Desktop and click <strong>Customize</strong> in the top left navigation.</li>
+          <li style="font-size:.99rem;line-height:1.6;color:var(--ink)">Click <strong>Connectors</strong> in the left navigation.</li>
+          <li style="font-size:.99rem;line-height:1.6;color:var(--ink)">Click the <strong>+</strong> icon at the top right of the Connectors panel to see available integrations.</li>
+          <li style="font-size:.99rem;line-height:1.6;color:var(--ink)">Select the connector you want, for example <strong>Slack</strong> or <strong>Microsoft 365</strong>.</li>
+          <li style="font-size:.99rem;line-height:1.6;color:var(--ink)">A browser window opens. Sign in and grant the requested permissions.</li>
+          <li style="font-size:.99rem;line-height:1.6;color:var(--ink)">Return to Claude Desktop. The connector is now listed as active.</li>
+          <li style="font-size:.99rem;line-height:1.6;color:var(--ink)">Open a connector that you configured and make note of the Tool permission settings for each interactive tool.</li>
+        </ol>
+      </div>
+      <p style="margin-top:14px">Repeat for each connector you want to enable. Start with the ones you use most: Atlassian, Slack, and Google Drive cover the majority of everyday workflows.</p>
+    </div>
+
+    <div class="ls">
+      <h2 class="ls-title">Safety Reminders</h2>
+      <ul class="check-list" style="margin-top:14px">
+        <li><strong>Always test before production.</strong> If a skill writes to a system or triggers a workflow, test it on a sandbox or non-production record first.</li>
+        <li><strong>You own what Claude does.</strong> If a skill updates the wrong record, that is your error, not a Claude error.</li>
+        <li><strong>When in doubt, ask.</strong> Check with your team before running anything on production you haven't tested.</li>
+        <li>
+          <strong>Secrets stay out of sessions.</strong> Never paste API keys, tokens, passwords, or credentials directly into a Claude Code chat.
+          <details class="reveal" style="margin-top:8px">
+            <summary>Best practices and storage details</summary>
+            <div class="reveal-body">
+              <ul class="check-list" style="margin-top:6px">
+                <li>Use environment variables or <code class="inline-code">.env</code> files (in a folder Claude can't see)</li>
+                <li>If a secret is inside a file that gets committed to GitHub, use <code class="inline-code">.gitignore</code> to prevent it from ever being pushed</li>
+                <li>If you accidentally paste a secret: assume it's compromised, rotate it</li>
+                <li>For project credentials, use <code class="inline-code">.claude/settings.local.json</code> — Claude Code auto-gitignores this file; never hardcode credentials in prompts or in <code class="inline-code">CLAUDE.md</code></li>
+                <li>Never put tokens in <code class="inline-code">CLAUDE.md</code> or any other committed file — they persist in version history</li>
+                <li>Claude Code does not auto-load <code class="inline-code">.env</code> files; inject env vars through <code class="inline-code">settings.local.json</code> if needed</li>
+                <li>Check your team's responsible-use policy for the full guidance</li>
+              </ul>
+              <details class="dive" style="margin-top:12px">
+                <summary><span class="dive-icon">i</span><span class="dive-label">Where does Claude Code store credentials, and which settings layer should I use?</span></summary>
+                <div class="dive-body">
+                  <p><strong>Your credentials are encrypted at rest.</strong> Claude Code stores API keys and OAuth tokens in <code class="inline">~/.claude.json</code>, encrypted, with five rotating backups. They do not sit in plaintext on disk.</p>
+                  <p style="margin-top:10px"><strong>Use the right settings layer for secrets:</strong></p>
+                  <ul style="margin:8px 0 0;padding-left:18px;display:grid;gap:6px">
+                    <li style="font-size:.95rem;color:var(--ink)"><code class="inline">.claude/settings.local.json</code> — auto-gitignored by Claude Code. Use for personal or project secrets.</li>
+                    <li style="font-size:.95rem;color:var(--ink)"><code class="inline">~/.claude/settings.json</code> — user-global secrets that apply across all your projects.</li>
+                    <li style="font-size:.95rem;color:var(--ink)"><code class="inline">.claude/settings.json</code> (checked in) — <strong>never</strong> put secrets here.</li>
+                  </ul>
+                  <p style="margin-top:12px">Claude Code also supports <strong>hooks</strong> that can block access to specific files or paths. See <a href="https://anthropic.skilljar.com/claude-code-in-action" target="_blank" rel="noreferrer">Claude Code in Action</a> for the deep dive.</p>
+                  <p>References on <code>.gitignore</code>: <a href="https://git-scm.com/docs/gitignore" target="_blank" rel="noreferrer">official git docs</a> · <a href="https://www.w3schools.com/git/git_ignore.asp" target="_blank" rel="noreferrer">W3Schools beginner guide</a></p>
+                </div>
+              </details>
+              <p style="margin-top:12px;font-size:.88rem;color:var(--muted)"><button class="learn-more-btn" data-modal="secrets-dev-flow">Working on a development flow? Full secrets reference here.</button></p>
+            </div>
+          </details>
+        </li>
+      </ul>
+    </div>
+
+    <div class="ls">
+      <div class="callout tip">
+        <span class="callout-icon">▸</span>
+        <div class="callout-body">
+          <strong>Before you move on: think about your connections</strong>
+          <p style="margin-top:8px;margin-bottom:4px">You just saw three ways Claude reaches external services — and a panel full of connectors to enable. Two questions to sit with before moving on:</p>
+          <ul style="margin:6px 0 0;padding-left:20px;display:grid;gap:6px;font-size:.97rem;line-height:1.6">
+            <li><strong>Which connector would change your week?</strong> Atlassian, Slack, Microsoft 365, Glean, Zoom transcripts — if you could only wire Claude into one system today, which would it be, and what's the first thing you'd ask it to do?</li>
+            <li><strong>Where's the line for you?</strong> You authorize a connector once and Claude can read and write on your behalf going forward. What kind of action would make you pause before approving? Think of a specific scenario — updating a case, sending a message, creating a Jira ticket.</li>
+          </ul>
+          <p style="margin-top:10px;font-size:.95rem;color:var(--muted)">The second question is especially worth sitting with — your instincts about where to pause are the foundation of responsible use.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="key-takeaway">
+      <span class="kt-label">Key Takeaway</span>
+      <div class="kt-text">Claude reaches external services three ways: <strong>Anthropic-hosted connectors</strong> in the Connectors panel (OAuth, Anthropic-vetted), <strong>team-built MCP servers</strong> (org-governed, scoped to specific tools), and <strong>CLI-based auth</strong> used directly by skills that call a command-line tool. Regardless of method, you are responsible for every action Claude takes in your session. And regardless of connection type, <strong>secrets stay out of chat</strong> — use environment variables or <code class="inline">settings.local.json</code>, never plaintext in a prompt.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     LESSON 05 — KEY TAKEAWAYS
+     ═══════════════════════════════════════════════════════════ -->
+<div class="lesson" id="s4" data-screen-label="05 Key Takeaways">
+  <div class="lesson-header-band">
+    <div class="lh-eyebrow"><span class="lh-num">05</span><h1 class="lh-title">Key Takeaways</h1></div>
+    <p class="lh-lead">Everything from this course in one copyable Markdown block. Save it to your notes, a wiki, or anywhere you'll find it.</p>
+    <div class="lh-meta"><span class="lt-countdown" id="lt-4">⏱ 3:00</span><span class="type-pill">Reference</span></div>
+  </div>
+  <div class="lesson-body">
+    <style>
+      .kt-copy-bar{display:flex;align-items:center;gap:14px;margin-bottom:28px;flex-wrap:wrap}
+      .kt-copy-label{font-size:.92rem;color:var(--muted);flex:1;min-width:160px}
+      .md-render{border:1px solid var(--line-hi);border-radius:var(--r-xl);padding:36px 44px;background:var(--surface)}
+      html[data-theme='light'] .md-render{background:#fff;box-shadow:0 2px 10px rgba(0,0,0,.06)}
+      .md-render h1{font-family:'Poppins',sans-serif;font-size:1.45rem;font-weight:800;color:var(--ink-strong);margin:0 0 20px;padding-bottom:14px;border-bottom:2px solid var(--line-hi);letter-spacing:-.02em}
+      .md-render h2{font-family:'Poppins',sans-serif;font-size:1.08rem;font-weight:700;color:var(--ink-strong);margin:32px 0 10px;letter-spacing:-.014em}
+      .md-render h3{font-family:'Inter',sans-serif;font-size:.95rem;font-weight:700;color:var(--ink);margin:16px 0 8px}
+      .md-render p{font-size:.96rem;line-height:1.65;color:var(--ink);margin:0 0 10px}
+      .md-render ul,.md-render ol{padding-left:22px;margin:0 0 12px;display:grid;gap:5px}
+      .md-render li{font-size:.96rem;line-height:1.6;color:var(--ink)}
+      .md-render em{color:var(--muted-2);font-style:italic}
+      .md-render code{font-family:'JetBrains Mono',monospace;font-size:.83rem;background:var(--surface-3);border:1px solid var(--line);border-radius:4px;padding:1px 5px;color:var(--ink)}
+      .md-render table{width:100%;border-collapse:collapse;margin:10px 0 14px;font-size:.93rem}
+      .md-render th{background:var(--surface-3);font-family:'JetBrains Mono',monospace;font-size:.64rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:8px 12px;text-align:left;border:1px solid var(--line-hi);color:var(--ink-strong)}
+      .md-render td{padding:9px 12px;border:1px solid var(--line);color:var(--ink);vertical-align:top;line-height:1.5}
+      .md-render a{color:var(--indigo);text-decoration:none}
+      .md-render a:hover{text-decoration:underline}
+      html[data-theme='light'] .md-render a{color:var(--indigo-deep)}
+      .md-render hr{border:none;border-top:1px solid var(--line);margin:24px 0}
+      @media(max-width:680px){.md-render{padding:24px 20px}}
+    </style>
+
+    <div class="ls">
+      <p class="ls-lead">A rendered view of the key points. Use the button to copy raw Markdown and paste it into your notes, a wiki, or anywhere you keep references.</p>
+
+      <div class="kt-copy-bar">
+        <span class="kt-copy-label">Copy as Markdown to save anywhere:</span>
+        <button class="copy-btn">📋 Copy Markdown</button>
+        <pre style="display:none"># Claude Code: Key Takeaways
+
+## What is Claude Code?
+Claude Code is an AI assistant that runs in your terminal, the Claude Desktop App, or VS Code.
+It reads files, writes code, and runs commands in the folders you explicitly add to your workspace.
+
+## Agent Skills
+A **skill** is a folder that gives Claude a defined playbook: what the task is, how to run it,
+and any scripts it needs. Claude loads the right skill when your request matches its trigger.
+
+### Skills and Python Scripts
+| Use a skill when...                      | Use a script when...                      |
+|------------------------------------------|-------------------------------------------|
+| Task needs natural-language judgment     | Task is deterministic and repeatable      |
+| Output varies by case                    | Output is always the same structure       |
+| You want Claude to reason about context  | Speed &amp; reliability beat flexibility      |
+
+*Example: fetching logs → script. Drafting a summary → skill.*
+
+## Connection Methods
+Claude reaches external services three ways:
+- Anthropic-hosted connectors in Claude Desktop (OAuth, Anthropic-vetted)
+- Team-built MCP servers (org-governed, scoped to specific tools)
+- CLI-based auth used directly by skills
+
+You are responsible for every action Claude takes, regardless of how it is connected.
+Keep secrets out of chat: use environment variables or settings.local.json, never plaintext.
+
+## Best Practices
+
+Do:
+- Prompt with intention: give Claude specific context, not vague requests
+- One folder per project
+- New session per task
+- Test changes before production
+- Use environment variables for credentials
+- Read every diff before you ship
+
+Don't:
+- Start sessions from ~/Documents or Desktop
+- Keep one session open all day for everything
+- Run untested skills on production data
+- Paste API keys or passwords into chat
+- Approve writes out of momentum
+
+## Resources
+- Claude Code Documentation: https://docs.claude.com/en/docs/claude-code/
+- Claude Code in Action: https://anthropic.skilljar.com/claude-code-in-action
+- MCP in Claude Code: https://docs.claude.com/en/docs/claude-code/mcp</pre>
+      </div>
+
+      <div class="md-render">
+        <h1>Claude Code: Key Takeaways</h1>
+
+        <h2>What is Claude Code?</h2>
+        <p>Claude Code is an AI assistant that runs in your terminal, the Claude Desktop App, or VS Code. It reads files, writes code, and runs commands in the folders you explicitly add to your workspace.</p>
+
+        <h2>Agent Skills</h2>
+        <p>A <strong>skill</strong> is a folder that gives Claude a defined playbook: what the task is, how to run it, and any scripts it needs. Claude loads the right skill when your request matches its trigger.</p>
+
+        <h3>Skill vs. Python Script</h3>
+        <table>
+          <thead><tr><th>Use a skill when…</th><th>Use a script when…</th></tr></thead>
+          <tbody>
+            <tr><td>Task needs natural-language judgment</td><td>Task is deterministic and repeatable</td></tr>
+            <tr><td>Output varies by case</td><td>Output is always the same structure</td></tr>
+            <tr><td>You want Claude to reason about context</td><td>Speed &amp; reliability beat flexibility</td></tr>
+          </tbody>
+        </table>
+        <p><em>Example: fetching logs → script. Drafting a summary → skill.</em></p>
+
+        <h2>Connection Methods</h2>
+        <p>Claude reaches external services three ways:</p>
+        <ul>
+          <li>Anthropic-hosted connectors in Claude Desktop (OAuth, Anthropic-vetted)</li>
+          <li>Team-built MCP servers (org-governed, scoped to specific tools)</li>
+          <li>CLI-based auth used directly by skills</li>
+        </ul>
+        <p>You are responsible for every action Claude takes, regardless of how it's connected. Keep secrets out of chat: use environment variables or <code>settings.local.json</code>, never plaintext.</p>
+
+        <h2>Best Practices</h2>
+        <h3>Do</h3>
+        <ul>
+          <li>Prompt with intention: give Claude specific context, not vague requests</li>
+          <li>One folder per project</li>
+          <li>New session per task</li>
+          <li>Test changes before production</li>
+          <li>Use environment variables for credentials</li>
+          <li>Read every diff before you ship</li>
+        </ul>
+        <h3>Don't</h3>
+        <ul>
+          <li>Start sessions from <code>~/Documents</code> or Desktop</li>
+          <li>Keep one session open all day for everything</li>
+          <li>Run untested skills on production data</li>
+          <li>Paste API keys or passwords into chat</li>
+          <li>Approve writes out of momentum</li>
+        </ul>
+
+        <h2>Resources</h2>
+        <ul>
+          <li><a href="https://docs.claude.com/en/docs/claude-code/" target="_blank" rel="noreferrer">Claude Code Documentation</a></li>
+          <li><a href="https://anthropic.skilljar.com/claude-code-in-action" target="_blank" rel="noreferrer">Claude Code in Action</a> (Anthropic's hands-on course)</li>
+          <li><a href="https://docs.claude.com/en/docs/claude-code/mcp" target="_blank" rel="noreferrer">MCP in Claude Code</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     LESSON 06 — WHAT'S NEXT
+     ═══════════════════════════════════════════════════════════ -->
+<div class="lesson" id="s5" data-screen-label="06 What's Next">
+  <div class="lesson-header-band">
+    <div class="lh-eyebrow"><span class="lh-num">06</span><h1 class="lh-title">What's Next</h1></div>
+    <p class="lh-lead">You now know what Claude Code is, how to get started, and the habits that keep your sessions safe. Here's a quick recap and where to go from here.</p>
+    <div class="lh-meta"><span class="lt-countdown" id="lt-5">⏱ 4:00</span><span class="type-pill">Recap</span></div>
+  </div>
+  <div class="lesson-body">
+
+    <div class="ls">
+      <h2 class="ls-title">Five Habits to Carry Forward</h2>
+      <ul class="obj-list" style="margin-top:18px">
+        <li class="obj-item"><span class="obj-n">1</span><span><strong>One folder with purpose.</strong> Never start Claude Code from your home directory for real work.</span></li>
+        <li class="obj-item"><span class="obj-n">2</span><span><strong>One session per task.</strong> Context bleed is the #1 source of Claude mistakes.</span></li>
+        <li class="obj-item"><span class="obj-n">3</span><span><strong>Approve changes first.</strong> For anything you couldn't undo in 30 seconds, review it before it runs.</span></li>
+        <li class="obj-item"><span class="obj-n">4</span><span><strong>Keep secrets out of chat.</strong> Use environment variables or <code class="inline">settings.local.json</code>, never plaintext in a prompt.</span></li>
+        <li class="obj-item"><span class="obj-n">5</span><span><strong>Read the output before you act on it.</strong> Claude assists; you own the result.</span></li>
+      </ul>
+    </div>
+
+    <div class="ls">
+      <h2 class="ls-title">What You Covered</h2>
+      <div class="grid col2" style="margin-top:18px">
+        <div class="card">
+          <div class="card-label">Getting started</div>
+          <p style="font-size:.97rem;line-height:1.62">How to install Claude Code from the Claude desktop app, set up a workspace folder, and run your first session.</p>
+        </div>
+        <div class="card">
+          <div class="card-label">Claude Code overview</div>
+          <p style="font-size:.97rem;line-height:1.62">Where Claude Code fits among the Claude tools, what it can do, and what an Agent Skill is.</p>
+        </div>
+        <div class="card">
+          <div class="card-label">Best practices</div>
+          <p style="font-size:.97rem;line-height:1.62">The permission model, prompting with intention (RTCFC), and the habits that keep sessions clean.</p>
+        </div>
+        <div class="card">
+          <div class="card-label">Connection methods</div>
+          <p style="font-size:.97rem;line-height:1.62">The three ways Claude reaches external services, and what each one means for you.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="ls">
+      <h2 class="ls-title">Reflection</h2>
+      <div class="callout tip">
+        <span class="callout-icon">▸</span>
+        <div class="callout-body">
+          <strong>One habit, one change</strong>
+          <p style="margin-top:6px">Pick one habit you'll start or adjust this week based on what you covered. Write it down somewhere you'll see it. The more specific, the more likely it sticks.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="ls">
+      <h2 class="ls-title">Keep Going</h2>
+      <p>A few small steps to turn this overview into real practice:</p>
+      <ul class="check-list" style="margin-top:12px">
+        <li>Open Claude Code and run a small task end to end in your <code class="inline">claude-practice</code> folder</li>
+        <li>Enable one connector from Lesson 04 and ask Claude to read something with it (read-only first)</li>
+        <li>Pick one repeat task from your week and describe it to Claude as a skill</li>
+      </ul>
+    </div>
+
+    <div class="ls">
+      <h2 class="ls-title">Resources</h2>
+      <div class="card">
+        <div class="card-label">Bookmark these</div>
+        <ul class="check-list" style="margin-top:6px">
+          <li><a href="https://docs.claude.com/en/docs/claude-code/" target="_blank" rel="noreferrer">Claude Code Documentation</a> — the source of truth</li>
+          <li><a href="https://anthropic.skilljar.com/claude-code-in-action" target="_blank" rel="noreferrer">Claude Code in Action</a> — Anthropic's hands-on course</li>
+          <li><a href="https://docs.claude.com/en/docs/claude-code/mcp" target="_blank" rel="noreferrer">MCP in Claude Code</a> — for when you're ready to connect external systems</li>
+          <li><a href="https://cloud.uipath.com/gpstools/apps_/default/run/production/fee0bce6-9eb7-4ffd-aa92-72fe9e2766e7/6e573f8c-e041-4d31-916d-2c26c91fb5fc/ID0c0d6df7b11e4d1c9fea3f32a0fcd457?el=VB&amp;uts=true" target="_blank" rel="noreferrer">AI Learning Hub</a> — foundational AI and Claude courses</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="key-takeaway">
+      <span class="kt-label">Final Takeaway</span>
+      <div class="kt-text">We hope you leave with a clear sense of <strong>what Claude Code is, how to get started with it, and the habits that make it a dependable part of your work at UiPath.</strong></div>
+    </div>
+
+    <p style="margin-top:40px;text-align:center;font-family:'Poppins',sans-serif;font-style:italic;font-size:1.1rem;color:var(--muted);letter-spacing:-.012em">Thanks for taking the time to get started with Claude Code.</p>
+  </div>
+</div>
+
+    </div>
+    <footer class="bottombar">
+      <span class="sec-name" id="secName">Intro</span>
+      <div class="tb-nav-btns">
+        <button class="tb-btn" id="prevBtn" disabled>← Prev</button>
+        <button class="tb-btn primary" id="nextBtn">Next →</button>
+      </div>
+    </footer>
+  </div>
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="handleModalClick(event)">
+  <div class="modal-box" id="modalBox"></div>
+</div>
+<div id="imgLightbox" class="img-lightbox" onclick="closeLightbox()">
+  <img id="imgLightboxImg" src="" alt="">
+</div>
+<div id="modal-defs" style="display:none">
+  <div id="modal-skill-vs-script-guide">
+    <div class="modal-title">Skill vs. Script: Quick Reference</div>
+    <div class="modal-body">
+      <p>Use the table below as a quick guide when deciding which approach fits a new workflow:</p>
+      <div class="svp">
+        <div class="svp-h">Use a skill when…</div><div class="svp-h">Use a script when…</div>
+        <div class="svp-c">Task needs natural-language judgment</div><div class="svp-c">Task is deterministic and repeatable</div>
+        <div class="svp-c">Output varies by case</div><div class="svp-c">Output is always the same structure</div>
+        <div class="svp-c">You want Claude to reason about context</div><div class="svp-c">Speed &amp; reliability beat flexibility</div>
+      </div>
+      <p style="font-size:.88rem;line-height:1.55;color:var(--muted-2);margin-top:12px"><em>Example:</em> fetching logs → script. Drafting a summary → skill.</p>
+    </div>
+  </div>
+
+  <div id="modal-skills-learn-more">
+    <div class="modal-title">Want to learn more about Skills?</div>
+    <div class="modal-body">
+      <p>The AI Learning Hub has a dedicated Claude Code section under <strong>Power User &rsaquo; Claude</strong>. Head there to find the <em>Introduction to Agent Skills</em> course plus two additional resources on skill authorship and usage.</p>
+    </div>
+    <div class="modal-resources">
+      <span class="modal-res-label">AI Learning Hub</span>
+      <a href="https://cloud.uipath.com/gpstools/apps_/default/run/production/42b07c24-91bf-48e8-9a10-b4adccfa6f24/16117726-903a-45bc-b424-b39e6aad7ff7/IDa6a86e1189f34fd7878a7e696c7470b2?el=VB" target="_blank" rel="noreferrer" class="modal-res-link">Introduction to Agent Skills (Power User &rsaquo; Claude) →</a>
+    </div>
+  </div>
+
+  <div id="modal-secrets-dev-flow">
+    <div class="modal-title">Secure Secret Management: Full Reference</div>
+    <div class="modal-body">
+      <p>This reference is for engineers doing development work with Claude Code: connecting external systems, setting up MCP servers, writing hooks, or building integrations. Standard everyday workflows do not need this depth.</p>
+    </div>
+    <div class="modal-resources">
+      <span class="modal-res-label">Reference</span>
+      <a href="https://uipath.atlassian.net/wiki/spaces/SUPPORTKB/pages/90725580999/Secure+Secret+Management+in+Claude+Code" target="_blank" rel="noreferrer" class="modal-res-link">Secure Secret Management in Claude Code (Confluence) →</a>
+    </div>
+  </div>
+
+  <div id="modal-mcp-dive">
+    <div class="modal-title">What does "MCP" mean?</div>
+    <div class="modal-body">
+      <p><strong>MCP</strong> stands for <strong>Model Context Protocol</strong>. It's an open standard that lets AI tools (like Claude Code) talk to external systems (like Salesforce, Glean, Jira) through a small set of well-defined commands called <em>tools</em>.</p>
+      <p>You don't need to know the protocol details to use it. But you'll see "MCP server" referenced often. Think of it as a preconfigured bridge with defined parameters that lets Claude Code call into an external system on your behalf.</p>
+    </div>
+    <div class="modal-resources">
+      <span class="modal-res-label">Learn more</span>
+      <a href="https://docs.claude.com/en/docs/claude-code/mcp" target="_blank" rel="noreferrer" class="modal-res-link">MCP in Claude Code (Anthropic docs) →</a>
+    </div>
+  </div>
+</div>
+
+<!-- LESSON CONTENT — placeholders for now; populated next -->
+<template id="lesson-content">
+  <!-- Lesson sections will be injected here -->
+</template>
+
+<script>
+const SECTIONS=[
+  {title:"Intro",min:8},
+  {title:"Claude Code Overview",min:15},
+  {title:"Best Practices and Responsible Use",min:8},
+  {title:"Connection Methods",min:10},
+  {title:"Key Takeaways",min:3},
+  {title:"What's Next",min:4},
+];
+const WORKSHOP_TOTAL_LABEL='~48 min';
+let cur=0,secs=SECTIONS[0].min*60,running=false,tInterval=null,sessionElapsed=0;
+const visited=new Set([0]);
+function lsGet(k){try{return localStorage.getItem(k)}catch(e){return null}}
+function lsSet(k,v){try{localStorage.setItem(k,v)}catch(e){}}
+document.addEventListener('DOMContentLoaded',()=>renderTimer());
+
+function goTo(idx){
+  if(idx<0||idx>=SECTIONS.length)return;
+  const next=document.getElementById('s'+idx);
+  if(!next)return;
+  document.querySelectorAll('.lesson').forEach(l=>l.classList.remove('active'));
+  cur=idx;visited.add(idx);next.classList.add('active');
+  document.getElementById('viewport').scrollTo({top:0,behavior:'smooth'});
+  resetTimer(true);
+  syncUI();
+  if(window.innerWidth<900)closeSidebar();
+}
+function go(d){goTo(cur+d)}
+window.goTo=goTo;window.go=go;
+
+function syncUI(){
+  const n=SECTIONS.length;
+  document.getElementById('pBar').style.width=((cur+1)/n*100)+'%';
+  document.getElementById('pCount').textContent=(cur+1)+' / '+n;
+  document.getElementById('secName').textContent=SECTIONS[cur].title;
+  document.getElementById('prevBtn').disabled=cur===0;
+  const nb=document.getElementById('nextBtn');
+  nb.disabled=cur===n-1;nb.textContent=cur===n-1?'Done ✓':'Next →';
+  document.querySelectorAll('.sb-item').forEach((it,i)=>{
+    it.classList.toggle('active',i===cur);
+    if(i<=cur||visited.has(i))it.classList.add('visited');
+  });
+}
+function updatePlayIcon(){
+  const ic=document.getElementById('playIcon');
+  ic.innerHTML=running
+    ? '<rect x="3" y="2" width="4" height="12"/><rect x="9" y="2" width="4" height="12"/>'
+    : '<path d="M5 3.5l8 4.5-8 4.5V3.5z"/>';
+}
+function stopTimer(){running=false;clearInterval(tInterval);tInterval=null;updatePlayIcon()}
+function startTimer(){
+  if(running)return;running=true;updatePlayIcon();
+  clearInterval(tInterval);
+  tInterval=setInterval(()=>{
+    if(secs>0){secs--;sessionElapsed++;renderTimer();renderSession()}
+    if(secs<=0)stopTimer();
+  },1000);
+}
+function resetTimer(autoStart=running){
+  stopTimer();secs=SECTIONS[cur].min*60;renderTimer();
+  if(autoStart)startTimer();
+}
+function toggleTimer(){running?stopTimer():startTimer()}
+function renderTimer(){
+  const m=Math.floor(secs/60),s=secs%60;
+  const t=m+':'+String(s).padStart(2,'0');
+  const cls=secs<=60?' danger':secs<=180?' warn':'';
+  const el=document.getElementById('timerEl');
+  el.textContent=t;
+  el.className='timer-time'+cls;
+}
+function renderSession(){
+  const m=Math.floor(sessionElapsed/60),s=sessionElapsed%60;
+  document.getElementById('sessionEl').textContent=m+':'+String(s).padStart(2,'0')+' / '+WORKSHOP_TOTAL_LABEL;
+}
+function toggleSidebar(){
+  const next=document.documentElement.getAttribute('data-sidebar')==='open'?'closed':'open';
+  document.documentElement.setAttribute('data-sidebar',next);
+  lsSet('cc-sidebar',next);
+}
+function closeSidebar(){document.documentElement.setAttribute('data-sidebar','closed');lsSet('cc-sidebar','closed')}
+function toggleTheme(){
+  const t=document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark';
+  document.documentElement.setAttribute('data-theme',t);
+  lsSet('cc-theme',t);
+}
+window.toggleSidebar=toggleSidebar;window.closeSidebar=closeSidebar;window.toggleTheme=toggleTheme;
+window.toggleTimer=toggleTimer;window.resetTimer=resetTimer;
+
+/* HOWTO TABS — global sync via localStorage */
+const HOWTO_KEY='cc-howto';
+function activateHowto(which){
+  document.querySelectorAll('.howto').forEach(h=>{
+    h.querySelectorAll('.howto-tab').forEach(t=>{
+      t.setAttribute('aria-selected',t.dataset.tab===which?'true':'false');
+    });
+    h.querySelectorAll('.howto-panel').forEach(p=>{
+      p.setAttribute('data-active',p.dataset.tab===which?'true':'false');
+    });
+  });
+  lsSet(HOWTO_KEY,which);
+}
+function initHowto(){
+  const saved=lsGet(HOWTO_KEY)||'gui';
+  activateHowto(saved);
+  document.addEventListener('click',e=>{
+    const t=e.target.closest('.howto-tab');
+    if(!t)return;
+    activateHowto(t.dataset.tab);
+  });
+}
+initHowto();
+
+/* COPY BUTTONS */
+function execCopy(text){
+  try{
+    var ta=document.createElement('textarea');
+    ta.value=text;
+    ta.style.cssText='position:fixed;opacity:0;pointer-events:none';
+    document.body.appendChild(ta);
+    ta.focus();ta.select();
+    var ok=document.execCommand('copy');
+    document.body.removeChild(ta);
+    return ok?Promise.resolve():Promise.reject(new Error('execCommand failed'));
+  }catch(e){return Promise.reject(e);}
+}
+function copyText(text){
+  if(navigator.clipboard){
+    return navigator.clipboard.writeText(text).catch(function(){return execCopy(text);});
+  }
+  return execCopy(text);
+}
+document.addEventListener('click',e=>{
+  const btn=e.target.closest('.copy-btn');
+  if(!btn)return;
+  let text=btn.dataset.copy;
+  if(!text){
+    const pre=btn.parentElement.querySelector('pre');
+    if(pre){
+      const clone=pre.cloneNode(true);
+      clone.querySelectorAll('.cb-prompt').forEach(el=>el.remove());
+      text=clone.textContent.trim();
+    }
+    text=text||'';
+  }
+  copyText(text).then(()=>{
+    btn.classList.add('ok');
+    const orig=btn.innerHTML;
+    btn.innerHTML='✓ Copied';
+    setTimeout(()=>{btn.classList.remove('ok');btn.innerHTML=orig},1800);
+  }).catch(()=>{});
+});
+
+/* MODAL */
+const modalOverlay=document.getElementById('modalOverlay');
+const modalBox=document.getElementById('modalBox');
+function openModal(id){
+  const def=document.getElementById('modal-'+id);
+  if(!def)return;
+  modalBox.className='modal-box'+(id.startsWith('starter-')?' brief':'');
+  modalBox.innerHTML='<button class="modal-close" onclick="closeModal()">✕</button>'+def.innerHTML;
+  modalOverlay.classList.add('open');
+}
+function closeModal(){modalOverlay.classList.remove('open')}
+function handleModalClick(e){if(e.target===modalOverlay)closeModal()}
+window.openModal=openModal;window.closeModal=closeModal;window.handleModalClick=handleModalClick;
+document.addEventListener('click',e=>{
+  const btn=e.target.closest('.learn-more-btn');
+  if(btn){openModal(btn.dataset.modal);return}
+  const starter=e.target.closest('.starter[data-modal]');
+  if(starter){openModal(starter.dataset.modal);return}
+});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal();closeLightbox()}});
+
+/* IMAGE LIGHTBOX */
+const imgLightbox=document.getElementById('imgLightbox');
+const imgLightboxImg=document.getElementById('imgLightboxImg');
+function openLightbox(src,alt){imgLightboxImg.src=src;imgLightboxImg.alt=alt||'';imgLightbox.classList.add('open')}
+function closeLightbox(){imgLightbox.classList.remove('open')}
+window.closeLightbox=closeLightbox;
+document.addEventListener('click',e=>{
+  const fig=e.target.closest('.howto-fig');
+  if(!fig)return;
+  const img=fig.querySelector('img');
+  if(img)openLightbox(img.src,img.alt);
+});
+
+/* SIDEBAR / TOPBAR / NAV */
+function bindControls(){
+  document.querySelectorAll('.sb-item').forEach(it=>{
+    it.addEventListener('click',()=>{const i=Number(it.dataset.idx);if(Number.isFinite(i))goTo(i)});
+  });
+  document.getElementById('sbCloseBtn')?.addEventListener('click',toggleSidebar);
+  document.getElementById('sbBackdrop')?.addEventListener('click',closeSidebar);
+  document.getElementById('tbToggleBtn')?.addEventListener('click',toggleSidebar);
+  document.getElementById('playBtn')?.addEventListener('click',toggleTimer);
+  document.getElementById('resetTimerBtn')?.addEventListener('click',()=>resetTimer());
+  document.getElementById('themeToggleBtn')?.addEventListener('click',toggleTheme);
+  document.getElementById('prevBtn')?.addEventListener('click',()=>go(-1));
+  document.getElementById('nextBtn')?.addEventListener('click',()=>go(1));
+}
+bindControls();
+syncUI();
+renderSession();
+
+/* SKILL IMPROVEMENT ACCORDION */
+function toggleAccordion(btn){
+  const item=btn.closest('.sj-acc-item');
+  const isOpen=item.classList.contains('open');
+  btn.closest('.sj-acc').querySelectorAll('.sj-acc-item').forEach(el=>el.classList.remove('open'));
+  if(!isOpen)item.classList.add('open');
+}
+</script>
+</body>
+</html>
