@@ -1,0 +1,81 @@
+<!-- CREATING A SKILL -->
+<section class="segment" id="p-create">
+        <div class="band band-hero">
+          <canvas class="hero-canvas" aria-hidden="true"></canvas>
+          <div class="band-top">
+            <span class="band-num">09</span>
+            <span class="pill type">Hands-On</span>
+            <span class="pill time">9 min</span>
+          </div>
+          <div class="band-eyebrow">Make it your own</div>
+          <h2>Creating a Skill for Personal Use</h2>
+        </div>
+        <div class="panel">
+          <p class="lead">If you find yourself typing the same long instructions over and over, that is a skill waiting to happen. You can build one on your own machine, just for you, with no approval process and no sharing required. It is just a folder with a text file.</p>
+          <div class="callout checkpoint">
+            <div class="co-head"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2z"/><path d="M12 8v4l3 3"/></svg> Lesson Objective</div>
+            <p>Create a simple personal skill, run it, and refine it, all locally.</p>
+          </div>
+
+          <div class="lesson-section section-teal">
+          <div class="section-eyebrow">When to make one</div>
+          <h3>Good Candidates for a Skill</h3>
+          <p>A personal skill earns its keep when a task is repetitive and a little fiddly. If you keep re-explaining the same steps, capture them once.</p>
+          <ul class="clean">
+            <li>A prompt you type constantly, with the same structure each time</li>
+            <li>A multi-step routine you would rather not re-describe</li>
+            <li>A formatting or summary job you want done the same way every time</li>
+          </ul>
+          </div>
+
+          <div class="lesson-section section-orange">
+          <div class="section-eyebrow">Two ways to build it</div>
+          <h3>Let Claude Draft It, or Write It Yourself</h3>
+          <p>The easiest way is to ask Claude to build the skill for you. There is a skill-creator that scaffolds the folder and the <code>SKILL.md</code> for you, so you describe what you want and review the result.</p>
+          <div class="code">
+            <div class="code-bar">
+              <span class="code-label">Ask Claude to build a skill</span>
+              <button class="code-copy" data-copy><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy</button>
+            </div>
+            <pre><code>Create a personal skill called "weekly-update" that takes my rough notes
+and turns them into a five-bullet status update for my manager.
+Keep it local. Ask me anything you need before you write it.</code></pre>
+          </div>
+          <p>If you would rather write it by hand, you do not need much. A skill is a folder with a <code>SKILL.md</code> file. The frontmatter at the top names the skill and describes when to use it; the rest is plain Markdown.</p>
+          <div class="code">
+            <div class="code-bar">
+              <span class="code-label">SKILL.md</span>
+              <button class="code-copy" data-copy><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy</button>
+            </div>
+            <pre><code>---
+name: weekly-update
+description: Turn rough notes into a five-bullet status update for a manager.
+---
+
+# Weekly update
+
+When the user provides rough notes, produce a status update:
+
+1. Read the notes and group them by theme.
+2. Write at most five bullets, each one sentence.
+3. Lead with what changed; end with any open risks.
+4. Flag anything you inferred so the user can verify it.</code></pre>
+          </div>
+          </div>
+
+          <div class="lesson-section section-purple">
+          <div class="section-eyebrow">Make it good</div>
+          <h3>Run, Check, Refine</h3>
+          <p>Building a skill is iterative. Your first version rarely handles every case, and that is fine.</p>
+          <ul class="steps">
+            <li><span class="step-t">Run it on a real example</span><span class="step-d">Give it actual notes and see what it produces.</span></li>
+            <li><span class="step-t">Notice what is off</span><span class="step-d">Too long? Missing the risks? An edge case it mishandled? Note it.</span></li>
+            <li><span class="step-t">Adjust the SKILL.md</span><span class="step-d">Tighten the instructions, or ask Claude to update the skill, then run it again.</span></li>
+          </ul>
+          <div class="callout key">
+            <div class="co-head"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1V18h6v-1.2c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2z"/></svg> Key Takeaway</div>
+            <p>A personal skill is a folder with a <code>SKILL.md</code>. Let Claude draft it or write it yourself, keep it local, and refine it by running it on real work. No pipeline required.</p>
+          </div>
+          </div>
+        </div>
+      </section>

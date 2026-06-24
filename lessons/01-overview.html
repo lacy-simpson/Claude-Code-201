@@ -1,0 +1,163 @@
+<!-- CLAUDE CODE OVERVIEW -->
+<section class="segment" id="p-overview">
+        <div class="band band-hero">
+          <canvas class="hero-canvas" aria-hidden="true"></canvas>
+          <div class="band-top">
+            <span class="band-num">01</span>
+            <span class="pill type">Concept</span>
+            <span class="pill time">8 min</span>
+          </div>
+          <div class="band-eyebrow">Orient to Claude Code</div>
+          <h2>Claude Code Overview</h2>
+        </div>
+        <div class="panel">
+          <p class="lead">Claude shows up in a few different places, and each one fits a different kind of work. Before we open the app, it helps to see where Claude Code sits in that lineup and what makes it the most capable of the group.</p>
+          <div class="callout checkpoint">
+            <div class="co-head"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2z"/><path d="M12 8v4l3 3"/></svg> Lesson Objective</div>
+            <p>Place Claude Code among the other Claude surfaces, describe what it can do that the others cannot, and explain what an Agent Skill is.</p>
+          </div>
+
+          <div class="lesson-section section-orange">
+          <h3>The Claude Ecosystem</h3>
+          <p>The same Claude is available through several interfaces. They get progressively more capable, and more powerful, as you move from a steered conversation toward a tool that can act on your machine.</p>
+          <p>This course focuses on <b>Claude Code</b>, the most capable surface. Browse the others so you know when something lighter is the better choice.</p>
+          <div class="tool-carousel" id="toolCarousel" tabindex="0">
+            <div class="tool-3d-stage" id="tool3dStage">
+
+              <div class="tool-slide">
+                <div class="tc-header tc-header-chat">
+                  <div class="tc-icon"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 8.5 8.5 0 0 1-3.9-.9L3 21l1.9-5a8.4 8.4 0 0 1-.9-3.9 8.5 8.5 0 1 1 17 .4z"/></svg></div>
+                  <div class="tc-name">Claude Chat</div>
+                  <div class="tc-badge">Conversation</div>
+                </div>
+                <div class="tc-body">
+                  <div class="tc-section">
+                    <span class="tc-lbl tc-lbl-chat">What it is</span>
+                    <p class="tc-text">A conversation you steer turn by turn. It can reason, draft, and generate visualizations, but it does not touch your files or systems.</p>
+                  </div>
+                  <div class="tc-section">
+                    <span class="tc-lbl tc-lbl-chat">Where it lives</span>
+                    <ul class="tc-list"><li>claude.ai web, desktop app, and mobile</li></ul>
+                  </div>
+                  <div class="tc-section">
+                    <span class="tc-lbl tc-lbl-chat">Use when</span>
+                    <div class="tc-use-when chat">You want to think, write, or summarize and you are happy to copy the result yourself.</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="tool-slide">
+                <div class="tc-header tc-header-plugins">
+                  <div class="tc-icon"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M12 2v6"/><path d="M12 16v6"/><path d="M4.9 4.9l4.2 4.2"/><path d="M14.9 14.9l4.2 4.2"/><path d="M2 12h6"/><path d="M16 12h6"/><path d="M4.9 19.1l4.2-4.2"/><path d="M14.9 9.1l4.2-4.2"/></svg></div>
+                  <div class="tc-name">Claude Plugins</div>
+                  <div class="tc-badge">Inside your apps</div>
+                </div>
+                <div class="tc-body">
+                  <div class="tc-section">
+                    <span class="tc-lbl tc-lbl-plugins">What it is</span>
+                    <p class="tc-text">Claude available inside approved work tools, using the surrounding app context you allow: a thread, a spreadsheet, a document, or a deck.</p>
+                  </div>
+                  <div class="tc-section">
+                    <span class="tc-lbl tc-lbl-plugins">Use when</span>
+                    <div class="tc-use-when plugins">You want Claude's help without leaving the app where the work already lives, and you review changes before they are saved or sent.</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="tool-slide">
+                <div class="tc-header tc-header-cowork">
+                  <div class="tc-icon"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M3 7h18M3 12h18M3 17h12"/><rect x="2" y="3" width="20" height="18" rx="2"/></svg></div>
+                  <div class="tc-name">Claude Cowork</div>
+                  <div class="tc-badge">Desktop app</div>
+                </div>
+                <div class="tc-body">
+                  <div class="tc-section">
+                    <span class="tc-lbl tc-lbl-cowork">What it is</span>
+                    <p class="tc-text">A delegated-work mode that can read and write files on your machine, use connected apps, and run skills. Stronger than Chat, with live artifacts for visualization.</p>
+                  </div>
+                  <div class="tc-section">
+                    <span class="tc-lbl tc-lbl-cowork">Use when</span>
+                    <div class="tc-use-when cowork">You want to hand off a bounded job across your files and review the result.</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="tool-slide">
+                <div class="tc-header tc-header-code">
+                  <div class="tc-icon"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M8 9l-4 3 4 3M16 9l4 3-4 3M13 6l-2 12"/></svg></div>
+                  <div class="tc-name">Claude Code</div>
+                  <div class="tc-badge">This course</div>
+                </div>
+                <div class="tc-body">
+                  <div class="tc-section">
+                    <span class="tc-lbl tc-lbl-code">What it is</span>
+                    <p class="tc-text">The most capable surface. It reads your files, runs commands, and reaches other systems through tools and command-line programs, all with your permission.</p>
+                  </div>
+                  <div class="tc-section">
+                    <span class="tc-lbl tc-lbl-code">Where it lives</span>
+                    <ul class="tc-list">
+                      <li>Desktop app (Code tab) and terminal CLI</li>
+                      <li>VS Code, JetBrains IDEs, and other supported surfaces</li>
+                    </ul>
+                  </div>
+                  <div class="tc-section">
+                    <span class="tc-lbl tc-lbl-code">Use when</span>
+                    <div class="tc-use-when code">The work needs file access, tools, commands, permissions, and reviewable changes.</div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <div class="tool-dots" id="toolDots">
+              <button class="tool-dot chat"    aria-label="Claude Chat"></button>
+              <button class="tool-dot plugins" aria-label="Claude Plugins"></button>
+              <button class="tool-dot cowork"  aria-label="Claude Cowork"></button>
+              <button class="tool-dot code active" aria-label="Claude Code"></button>
+            </div>
+            <div class="tool-counter" id="toolCounter">4 of 4 · Claude Code</div>
+          </div>
+          </div>
+
+          <div class="lesson-section section-teal">
+          <h3>What is Claude Code?</h3>
+          <p>Claude Code is an agentic AI assistant that reads your files, runs commands, and edits work on your behalf, with your permission. It acts only where you point it, and when your permissions are set up well it waits for your approval before doing anything consequential.</p>
+          <div class="split approved-tools">
+            <div class="split-card good">
+              <div class="split-tag">It's accessible</div>
+              <p>Use it in the desktop app on the Code tab, in the terminal, or in your editor. The desktop app is the easiest place to start.</p>
+            </div>
+            <div class="split-card">
+              <div class="split-tag" style="color:var(--teal-50)">It's interactive</div>
+              <p>It is an agent, not just an advisor. It plans multi-step work and is shaped by the permissions and context you give it.</p>
+            </div>
+            <div class="split-card">
+              <div class="split-tag" style="color:var(--purple-50)">It's extensible</div>
+              <p>Skills, connectors, and command-line tools teach it a workflow once so you can reuse it across sessions.</p>
+            </div>
+          </div>
+          </div>
+
+          <div class="lesson-section section-purple">
+          <h3>What is an Agent Skill?</h3>
+          <p>A skill is a reusable playbook you give Claude for a specific task. Instead of explaining what you need from scratch every session, a skill captures it once: the steps, the rules, and the expected output. Claude picks it up automatically when your request matches.</p>
+          <p>A skill is mostly just a folder with a text file. The most important file is <code>SKILL.md</code>. Its top section, called frontmatter, declares the skill's name and description. The rest is plain Markdown: the workflow, the rules, and examples.</p>
+          <div class="code">
+            <div class="code-bar">
+              <span class="code-label">A skill on disk</span>
+              <button class="code-copy" data-copy><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy</button>
+            </div>
+            <pre><code>meeting-notes-summarizer/
+  SKILL.md          # the instructions Claude reads
+  scripts/          # optional: code the skill can run for repeatable steps
+    format.py
+  references/       # optional: extra docs Claude loads only when needed</code></pre>
+          </div>
+          <div class="callout tip">
+            <div class="co-head"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1V18h6v-1.2c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2z"/></svg> Skills and scripts together</div>
+            <p>Skills handle judgment, context, and variation: the things that change case by case. Scripts handle what is fast and fixed: retrieval, formatting, and predictable transformations. Together they are more reliable than either alone, because Claude does not have to reinvent the routine steps every time.</p>
+          </div>
+          </div>
+
+          <p class="learn-more"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1"/><path d="M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg> <span>We run a real skill in lesson 08 and build one in lesson 09.</span></p>
+        </div>
+      </section>

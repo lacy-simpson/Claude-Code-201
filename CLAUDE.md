@@ -1,25 +1,22 @@
-# Claude 101: Orient, Access, and Activate — Project Instructions
+# Claude 201: Working with Claude Code — Project Instructions
 
 Follows all conventions in the parent guidelines:
 /Users/lsimpson/ID_Projects/CLAUDE.md
 
 ## Course Details
 
-- **Title:** Claude 101: Orient, Access, and Activate
-- **Series / session:** Standalone — AI UpSkilling Program
-- **Architecture:** Single-file HTML
-- **Audience:** All UiPath employees (Support/GPS, Sales, Engineering, HR/People, Finance/Ops)
-- **Delivery format:** Facilitator-led webinar (50 min) — doubles as a lightweight participant reference after the session
-- **Total duration:** 50 min session + 10 min buffer/Q&A
-- **Prerequisites:** Anthropic introductory Claude courses (recommended, not required)
+- **Title:** Claude 201: Working with Claude Code
+- **Series / session:** Session 2 of the AI UpSkilling Program (follows Claude 101)
+- **Architecture:** Modular (per-lesson HTML + shared CSS/JS), built into a single `index.html`
+- **Audience:** All UiPath teams. Team-neutral throughout: no Support/GPS specifics (no Salesforce, cases, PSE framing, UAT/prod, or the GPS Agent Skill Catalog)
+- **Delivery format:** Self-paced reference, paged lesson model, no facilitator timers
+- **Prerequisites:** Claude 101 recommended (not required)
 
 ## Deliverable
 
-A single `index.html` file that serves two purposes:
-1. Facilitator guide for the live webinar presenter
-2. Lightweight reference resource for participants after the session
+A single self-contained `index.html`, regenerated from the modular source by the build script. The legacy single-file `cc-index.html` is preserved as the previous build and is not edited.
 
-Content should be scannable and self-contained. No quiz engine or interactive lesson nav needed — use callout variants, steppers, and collapsible sections instead.
+Content is scannable and paged (one lesson per screen). Use callout variants, steppers, carousels, collapsible sections, and the interactive widgets carried over from Claude 101 (settings simulator, RTCFC builder, prompt-flip).
 
 ## Course Voice and Lesson Style
 
@@ -30,7 +27,7 @@ Write lessons in a direct, practical facilitator voice. The course should sound 
 - Avoid AI-ish contrast patterns such as "not because..., but because..." or "this lesson isn't about X, it's about Y." Use straightforward positive framing instead.
 - Use second person for participant-facing guidance: "Pick the right space," "give Claude context," "steer the draft," "check the parts that matter."
 - Keep examples concrete and work-relevant. Show what to do, why it helps, and where to pause for judgment.
-- For lesson openings, follow the lesson 03 pattern when possible: start with a short intro paragraph, then add a `callout checkpoint` block labeled "Lesson Objective."
+- For lesson openings, start with a short `lead` paragraph, then add a `callout checkpoint` block labeled "Lesson Objective."
 
 ## Lesson Editing Workflow
 
@@ -44,7 +41,7 @@ This regenerates the standalone `index.html` deliverable so the browser-ready si
 
 ## Project Status
 
-- [x] RESEARCH_SUMMARY.txt complete
-- [x] learning_objectives.md complete
-- [x] workshop_outline.md complete
-- [x] Development started — index.html v1 complete
+- [x] Modular build established (index_v2.html shell, assets/css, assets/js, lessons/, scripts/build-single-index.js)
+- [x] 13 lessons authored and team-neutral
+- [x] index.html regenerated from modular source
+- [ ] Capstone (lesson 12) is a placeholder, to be designed

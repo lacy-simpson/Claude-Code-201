@@ -1,0 +1,7 @@
+{
+  "scripts": {
+    "build:index": "node scripts/build-single-index.js",
+    "build": "node scripts/build-single-index.js && node scripts/build-site.js"
+  },
+  "devDependencies": {}
+}
