@@ -1,0 +1,60 @@
+<!-- CONNECTION METHODS -->
+<section class="segment" id="p-connect">
+        <div class="band band-hero">
+          <canvas class="hero-canvas" aria-hidden="true"></canvas>
+          <div class="band-top">
+            <span class="band-num">07</span>
+            <span class="pill type">Awareness</span>
+            <span class="pill time">9 min</span>
+          </div>
+          <div class="band-eyebrow">Give Claude reach</div>
+          <h2>Connection Methods</h2>
+        </div>
+        <div class="panel">
+          <p class="lead">Claude Code is capable on its own, and more capable once it can reach the systems you already use. Those connections come in two flavors. Knowing which is which helps you set them up and reason about what Claude can touch.</p>
+          <div class="callout checkpoint">
+            <div class="co-head"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2z"/><path d="M12 8v4l3 3"/></svg> Lesson Objective</div>
+            <p>Tell the difference between connector-based and command-line connections, manage per-tool approvals, and apply a safety habit before letting Claude write to a system.</p>
+          </div>
+
+          <div class="lesson-section section-teal">
+          <div class="section-eyebrow">Two ways to connect</div>
+          <h3>Connectors and Command-Line Tools</h3>
+          <div class="split">
+            <div class="split-card good">
+              <div class="split-tag">Connectors (MCP)</div>
+              <p>Ready-made connections that speak the Model Context Protocol, a shared standard for letting Claude use a system through well-defined tools. Some are hosted by Anthropic; some are built by teams. You add them from <b>Customize &rarr; Connectors</b>.</p>
+            </div>
+            <div class="split-card">
+              <div class="split-tag" style="color:var(--teal-50)">Command-line tools (CLI)</div>
+              <p>For systems without a connector, Claude can drive a command-line program you install, such as a cloud or database CLI. You install and authenticate it once, and Claude uses it to reach that system.</p>
+            </div>
+          </div>
+          </div>
+
+          <div class="lesson-section section-orange">
+          <div class="section-eyebrow">Adding a connector</div>
+          <h3>What's Available, and How to Add It</h3>
+          <p>Open <b>Customize &rarr; Connectors</b> to see what you can connect: common ones include Atlassian, GitHub, Glean, Google Drive, Microsoft 365 and Teams, Slack, Zoom, and Calendly. Connecting usually signs you in through single sign-on.</p>
+          <ul class="steps">
+            <li><span class="step-t">Add it</span><span class="step-d">Find the connector and add it. If something you want is not listed, you may be able to request it. Availability is set by your org admins.</span></li>
+            <li><span class="step-t">Sign in</span><span class="step-d">Most connectors authenticate through single sign-on with your UiPath account.</span></li>
+            <li><span class="step-t">Set approvals per tool</span><span class="step-d">For read-only tools, you can set "always allow" so Claude does not stop to ask each time. Leave write or delete tools requiring approval.</span></li>
+          </ul>
+          <div class="callout tip">
+            <div class="co-head"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1V18h6v-1.2c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2z"/></svg> A lock means your admin decided</div>
+            <p>Some tools show a lock icon and cannot be set to "always allow." That means an org admin has required approval for them, usually the actions that write or delete. You will approve those one at a time, by design.</p>
+          </div>
+          </div>
+
+          <div class="lesson-section section-purple">
+          <div class="section-eyebrow">Use the reach carefully</div>
+          <h3>More Reach, More Care</h3>
+          <p>Connections make Claude more useful, and they extend what it can change beyond your own laptop. That is worth a moment of caution. Read the actions you approve, especially anything that writes to a shared system, and confirm it is doing what you expect.</p>
+          <div class="callout warn">
+            <div class="co-head"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/></svg> Test against a sandbox first</div>
+            <p>When a connection can write to a real system, try it against a sandbox or non-production environment first. A change that looks harmless can trigger downstream automations you did not expect. Prove it is safe where mistakes do not matter, then point it at the real thing.</p>
+          </div>
+          </div>
+        </div>
+      </section>

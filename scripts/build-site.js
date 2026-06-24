@@ -6,12 +6,12 @@ const dist = path.join(root, "dist");
 const clientDir = path.join(dist, "client");
 const serverDir = path.join(dist, "server");
 
-const htmlPath = path.join(root, "cc-index.html");
+const htmlPath = path.join(root, "index.html");
 const hostingPath = path.join(root, ".openai", "hosting.json");
 const publicDir = path.join(root, "public");
 
 if (!fs.existsSync(htmlPath)) {
-  throw new Error("Expected cc-index.html at the project root.");
+  throw new Error("Expected index.html at the project root. Run `node scripts/build-single-index.js` first.");
 }
 
 fs.rmSync(dist, { recursive: true, force: true });

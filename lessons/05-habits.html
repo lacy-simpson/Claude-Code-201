@@ -1,0 +1,225 @@
+<!-- BEST PRACTICES & RESPONSIBLE USE -->
+<section class="segment" id="p-habits">
+        <div class="band band-hero">
+          <canvas class="hero-canvas" aria-hidden="true"></canvas>
+          <div class="band-top">
+            <span class="band-num">05</span>
+            <span class="pill type">Habits</span>
+            <span class="pill time">12 min</span>
+          </div>
+          <div class="band-eyebrow">Use Claude Code well</div>
+          <h2>Best Practices &amp; Responsible Use</h2>
+        </div>
+        <div class="panel">
+          <p class="lead">Claude Code is powerful because it can act. These habits keep that power pointed in the right direction: control what it is allowed to do, give it the context it needs, let it remember the stable facts about you, and keep ownership of the result.</p>
+          <div class="callout checkpoint">
+            <div class="co-head"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2z"/><path d="M12 8v4l3 3"/></svg> Lesson Objective</div>
+            <p>Pick the right permission mode, prompt with intention, set durable context with memory and folders, and keep responsibility for what Claude produces.</p>
+          </div>
+
+          <div class="lesson-section section-teal">
+          <div class="section-eyebrow">Stay in charge</div>
+          <h3>Permissions: What Claude May Do</h3>
+          <p>You are always in charge of what Claude is doing. The permission mode sets how often it checks with you before it acts. Browse the three modes, then see the choices you get in the moment.</p>
+          <div class="tool-carousel" id="permCarousel" tabindex="0">
+            <div class="tool-3d-stage">
+
+              <div class="tool-slide">
+                <div class="tc-header tc-header-chat">
+                  <div class="tc-icon"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2z"/><path d="M12 8v4M12 16h.01"/></svg></div>
+                  <div class="tc-name">Ask</div>
+                  <div class="tc-badge">Most cautious</div>
+                </div>
+                <div class="tc-body">
+                  <div class="tc-section">
+                    <span class="tc-lbl tc-lbl-chat">What it means</span>
+                    <p class="tc-text">Claude asks for permission before it does anything. Nothing happens without your say-so.</p>
+                  </div>
+                  <div class="tc-section">
+                    <span class="tc-lbl tc-lbl-chat">Use when</span>
+                    <div class="tc-use-when chat">You are new, the work is sensitive, or you want to watch every step.</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="tool-slide">
+                <div class="tc-header tc-header-cowork">
+                  <div class="tc-icon"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg></div>
+                  <div class="tc-name">Accept edits</div>
+                  <div class="tc-badge">Smoother flow</div>
+                </div>
+                <div class="tc-body">
+                  <div class="tc-section">
+                    <span class="tc-lbl tc-lbl-cowork">What it means</span>
+                    <p class="tc-text">Claude proceeds with reads and edits on its own, and only stops to ask for actions that are not already allowed.</p>
+                  </div>
+                  <div class="tc-section">
+                    <span class="tc-lbl tc-lbl-cowork">Use when</span>
+                    <div class="tc-use-when cowork">You trust the task and want fewer interruptions, but still want a stop on anything unusual.</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="tool-slide">
+                <div class="tc-header tc-header-code">
+                  <div class="tc-icon"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
+                  <div class="tc-name">Plan</div>
+                  <div class="tc-badge">Review first</div>
+                </div>
+                <div class="tc-body">
+                  <div class="tc-section">
+                    <span class="tc-lbl tc-lbl-code">What it means</span>
+                    <p class="tc-text">Claude writes a plan first and asks for the permissions it expects up front. You can revise the plan before it runs. It may still pause mid-run if it needs something new.</p>
+                  </div>
+                  <div class="tc-section">
+                    <span class="tc-lbl tc-lbl-code">Use when</span>
+                    <div class="tc-use-when code">The work is multi-step and you want to approve the approach before anything happens.</div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <div class="tool-dots">
+              <button class="tool-dot chat active" aria-label="Ask"></button>
+              <button class="tool-dot cowork" aria-label="Accept edits"></button>
+              <button class="tool-dot code" aria-label="Plan"></button>
+            </div>
+            <div class="tool-counter">1 of 3 · Ask</div>
+          </div>
+          <p>When Claude does ask, you have a few choices in the moment:</p>
+          <ul class="steps">
+            <li><span class="step-t">Allow once</span><span class="step-d">Permit this single action and ask again next time. A safe default for anything new.</span></li>
+            <li><span class="step-t">Always allow</span><span class="step-d">Permit this kind of action for the session. Good for harmless, repeated reads like a web search.</span></li>
+            <li><span class="step-t">Approve, revise, or deny a plan</span><span class="step-d">When Claude proposes a plan, you can accept it, leave a comment to adjust it, or deny it outright.</span></li>
+          </ul>
+          <div class="callout tip">
+            <div class="co-head"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1V18h6v-1.2c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2z"/></svg> Always allow the reads, approve the writes</div>
+            <p>A common setup is to always allow read-only actions like web search, while still approving anything that writes or changes a system. You get speed where it is safe and a checkpoint where it counts.</p>
+          </div>
+          </div>
+
+          <div class="lesson-section section-orange">
+          <div class="section-eyebrow">Prompting with intention</div>
+          <h3>Prompt with Intention</h3>
+          <p>You do not need perfect prompts. Specific context produces accurate output; vague prompts produce guesswork. When you want a stronger response, <strong>RTCFC</strong> helps you decide what to include.</p>
+          <div class="rtcfc-builder" id="rtcfcBuilder">
+            <div class="seg-toggle" role="tablist" aria-label="RTCFC view">
+              <button type="button" class="seg-btn active" role="tab" aria-selected="true" data-view="build">Build a prompt</button>
+              <button type="button" class="seg-btn" role="tab" aria-selected="false" data-view="ref">Reference table</button>
+            </div>
+            <div class="rb-view" data-view="build">
+              <p class="rb-hint">Toggle the elements you want. Your prompt assembles below in order, ready to copy. Each element shows what it adds and why.</p>
+              <div class="rb-chips" role="group" aria-label="Prompt elements">
+                <button type="button" class="rb-chip" data-key="role" aria-pressed="false"><span class="rb-chip-k">R</span> Role &amp; audience</button>
+                <button type="button" class="rb-chip" data-key="task" aria-pressed="false"><span class="rb-chip-k">T</span> Task &amp; goal</button>
+                <button type="button" class="rb-chip" data-key="context" aria-pressed="false"><span class="rb-chip-k">C</span> Context</button>
+                <button type="button" class="rb-chip" data-key="format" aria-pressed="false"><span class="rb-chip-k">F</span> Format</button>
+                <button type="button" class="rb-chip" data-key="constraints" aria-pressed="false"><span class="rb-chip-k">C</span> Constraints</button>
+              </div>
+              <div class="rb-active" id="rbActive" hidden></div>
+              <div class="code rb-preview">
+                <div class="code-bar">
+                  <span class="code-label">Your prompt</span>
+                  <button class="code-copy" id="rbCopy" type="button" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy</button>
+                </div>
+                <pre><code id="rbOut" data-empty="Toggle elements above to start building your prompt."></code></pre>
+              </div>
+            </div>
+            <div class="rb-view" data-view="ref" hidden>
+              <div class="decision-table setting-table" role="table" aria-label="RTCFC prompt checklist">
+                <div class="dt-header" role="row">
+                  <div class="dt-q-head" role="columnheader">Prompt element</div>
+                  <div class="dt-q-head" role="columnheader">What to include</div>
+                  <div class="dt-q-head" role="columnheader">Example</div>
+                </div>
+                <div class="dt-row" role="row">
+                  <div class="dt-cell dt-choice" role="cell">Role and audience</div>
+                  <div class="dt-cell dt-use" role="cell">Tell Claude the perspective to use and who the output is for.</div>
+                  <div class="dt-cell dt-impact" role="cell">Act as a release manager writing for the wider team.</div>
+                </div>
+                <div class="dt-row" role="row">
+                  <div class="dt-cell dt-choice" role="cell">Task and goal</div>
+                  <div class="dt-cell dt-use" role="cell">Say exactly what to produce and what success looks like.</div>
+                  <div class="dt-cell dt-impact" role="cell">Summarize what changed and draft the announcement.</div>
+                </div>
+                <div class="dt-row" role="row">
+                  <div class="dt-cell dt-choice" role="cell">Context</div>
+                  <div class="dt-cell dt-use" role="cell">Give the details Claude needs so it does not guess.</div>
+                  <div class="dt-cell dt-impact" role="cell">Use the changelog in this folder and last release's note as a model.</div>
+                </div>
+                <div class="dt-row" role="row">
+                  <div class="dt-cell dt-choice" role="cell">Format</div>
+                  <div class="dt-cell dt-use" role="cell">Specify the shape of the answer.</div>
+                  <div class="dt-cell dt-impact" role="cell">A short email, then a bullet list of highlights.</div>
+                </div>
+                <div class="dt-row" role="row">
+                  <div class="dt-cell dt-choice" role="cell">Constraints</div>
+                  <div class="dt-cell dt-use" role="cell">Set guardrails for length, tone, and what to avoid.</div>
+                  <div class="dt-cell dt-impact" role="cell">Under 150 words, plainspoken, and flag anything I should verify.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="callout activity">
+            <div class="co-head"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg> Try this: let Claude improve your prompt</div>
+            <p>Not sure your prompt is strong enough? Paste it and ask Claude to make it better. Claude is patient, and asking it how to prompt is one of the fastest ways to learn.</p>
+            <div class="code">
+              <div class="code-bar">
+                <span class="code-label">Copy/paste prompt</span>
+                <button class="code-copy" data-copy><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy</button>
+              </div>
+              <pre><code>Here is a prompt I want to use: "[paste your rough prompt]".
+Tell me what is vague or missing, then rewrite it so it gives you clearer direction.</code></pre>
+            </div>
+          </div>
+          </div>
+
+          <div class="lesson-section section-purple">
+          <div class="section-eyebrow">Set it once</div>
+          <h3>Vague vs. Specific, Side by Side</h3>
+          <p>The same request, two ways. Flip between them to see what specifics add.</p>
+          <div class="promptflip" data-state="vague">
+            <div class="pf-toggle" role="group" aria-label="Prompt version: weak or strong">
+              <span class="pf-thumb" aria-hidden="true"></span>
+              <button type="button" class="pf-opt" data-v="vague" aria-pressed="true">Weak</button>
+              <button type="button" class="pf-opt" data-v="precise" aria-pressed="false">Strong</button>
+            </div>
+            <p class="pf-text" data-v="vague">Summarize this folder for me.</p>
+            <p class="pf-note" data-v="vague">Claude has to guess what matters, who it is for, and how long it should be.</p>
+            <p class="pf-text" data-v="precise" hidden>Read the files in this folder and write a <mark class="pf-hl">one-page status update for my manager</mark>. <mark class="pf-hl">Lead with what changed this week</mark>, <mark class="pf-hl">list open risks with owners</mark>, and <mark class="pf-hl">flag anything you inferred</mark> so I can check it.</p>
+            <p class="pf-note" data-v="precise" hidden>The role, the focus, the format, and the review cue give Claude a clear target instead of a guess.</p>
+          </div>
+          </div>
+
+          <div class="lesson-section section-teal">
+          <div class="section-eyebrow">Durable context</div>
+          <h3>Personal Memory</h3>
+          <p>You can let Claude remember stable facts about you so you stop re-typing them. Turn it on under <b>Settings &rarr; Capabilities &rarr; Memory</b>. It is off by default.</p>
+          <p>Once it is on, Claude builds up a picture of your role, your location, and the kind of work you do. After a while you can drop the standing context from your prompts because Claude already knows it. If you want a head start, you can import a description of yourself rather than waiting for it to build up.</p>
+          <div class="callout tip">
+            <div class="co-head"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1V18h6v-1.2c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2z"/></svg> Keep it accurate, keep it sanitized</div>
+            <p>Memory is only as good as what it holds. Add what is stable and useful, and avoid putting anything sensitive in it that you would not want reused across sessions.</p>
+          </div>
+          </div>
+
+          <div class="lesson-section section-orange">
+          <div class="section-eyebrow">Stay organized</div>
+          <h3>One Folder, One Purpose</h3>
+          <p>Claude Code treats each folder as its own context, and it stores what it learns about your work per folder. Keep folders focused: a folder for a project, a folder for general conversations, a folder for a particular repository. Working from a focused folder means Claude builds useful memory about that work and does not see everything else on your machine.</p>
+          <ul class="steps">
+            <li><span class="step-t">A folder per kind of work</span><span class="step-d">Start sessions from the folder that matches the task, so the memory and files stay relevant.</span></li>
+            <li><span class="step-t">Avoid starting from home or Desktop</span><span class="step-d">Opening a session at your home directory hands Claude visibility into far more than the task needs.</span></li>
+          </ul>
+          </div>
+
+          <div class="lesson-section section-purple">
+          <div class="section-eyebrow">Responsibility</div>
+          <h3>You Own the Outcome</h3>
+          <p>Claude assists you. It does not replace you, and it does not own the result. You do. Do not have Claude generate something and pass it on unread. Claude is also not deterministic: the same prompt can produce different answers, which is one more reason to read what it gives you.</p>
+          <div class="callout key">
+            <div class="co-head"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1V18h6v-1.2c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2z"/></svg> Key Takeaway</div>
+            <p>Control what Claude may do, brief it with intention, let it remember the stable context, and read the result before you use it. Those four habits cover almost everything that goes wrong.</p>
+          </div>
+          </div>
+        </div>
+      </section>

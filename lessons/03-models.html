@@ -1,0 +1,143 @@
+<!-- MODELS, EFFORT & USAGE -->
+<section class="segment" id="p-models">
+        <div class="band band-hero">
+          <canvas class="hero-canvas" aria-hidden="true"></canvas>
+          <div class="band-top">
+            <span class="band-num">03</span>
+            <span class="pill type">Concept</span>
+            <span class="pill time">8 min</span>
+          </div>
+          <div class="band-eyebrow">Capability and cost</div>
+          <h2>Models, Effort &amp; Usage</h2>
+        </div>
+        <div class="panel">
+          <p class="lead">Two controls decide how much horsepower Claude brings to a task: the model and the effort level. They also decide how fast you move through your usage. The habit to build is simple: start with the lightest combination that can do the job, and move up only when the work needs it.</p>
+          <div class="callout checkpoint">
+            <div class="co-head"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2z"/><path d="M12 8v4l3 3"/></svg> Lesson Objective</div>
+            <p>Choose a model and effort level that fit a task, and read your usage so you know how much headroom you have.</p>
+          </div>
+
+          <div class="lesson-section section-orange">
+          <div class="section-eyebrow">Model and effort</div>
+          <h3>Choosing Models and Effort</h3>
+          <p>The model sets the level of capability Claude brings. Effort controls how much reasoning it spends before answering. Heavier choices can improve hard work, but they use more tokens and move you through your limits faster.</p>
+          <div class="callout tip">
+            <div class="co-head"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 2"/><path d="M16 3.7 18 2v5h-5l1.8-1.5"/></svg> Models change often</div>
+            <p>Model names, defaults, and available settings change over time. Check the current Claude menu and UiPath guidance before choosing.</p>
+          </div>
+
+          <div class="settings-sim" id="settingsSim">
+            <div class="seg-toggle" role="tablist" aria-label="Settings view">
+              <button type="button" class="seg-btn active" role="tab" aria-selected="true" data-view="explore">Try the settings</button>
+              <button type="button" class="seg-btn" role="tab" aria-selected="false" data-view="ref">Reference tables</button>
+            </div>
+
+            <div class="ss-view" data-view="explore">
+              <p class="rb-hint">Pick a model and an effort level. The readout shows what each choice changes. Start light, and move up only when the task needs it.</p>
+              <div class="ss-controls">
+                <div class="ss-group">
+                  <span class="ss-glabel">Model</span>
+                  <div class="ss-seg" data-control="model" role="group" aria-label="Model">
+                    <button type="button" data-val="Haiku">Haiku</button>
+                    <button type="button" data-val="Sonnet" class="on">Sonnet</button>
+                    <button type="button" data-val="Opus">Opus</button>
+                  </div>
+                </div>
+                <div class="ss-group">
+                  <span class="ss-glabel">Effort</span>
+                  <div class="ss-seg" data-control="effort" role="group" aria-label="Effort">
+                    <button type="button" data-val="Low" class="on">Low</button>
+                    <button type="button" data-val="Medium or High">Medium / High</button>
+                    <button type="button" data-val="Max">Max</button>
+                  </div>
+                </div>
+                <div class="ss-group">
+                  <span class="ss-glabel">Thinking</span>
+                  <div class="ss-seg" data-control="thinking" role="group" aria-label="Thinking">
+                    <button type="button" data-val="off" class="on">Off</button>
+                    <button type="button" data-val="on">On</button>
+                  </div>
+                </div>
+              </div>
+              <div class="ss-readout" id="ssReadout" aria-live="polite"></div>
+            </div>
+
+            <div class="ss-view" data-view="ref" hidden>
+              <p><strong>Choose the model based on the kind of work.</strong></p>
+              <div class="decision-table setting-table" role="table" aria-label="Claude model selection guide">
+                <div class="dt-header" role="row">
+                  <div class="dt-q-head" role="columnheader">Model</div>
+                  <div class="dt-q-head" role="columnheader">Use it when</div>
+                  <div class="dt-q-head" role="columnheader">What changes</div>
+                </div>
+                <div class="dt-row" role="row">
+                  <div class="dt-cell dt-choice" role="cell">Haiku</div>
+                  <div class="dt-cell dt-use" role="cell">The task is simple and low-stakes, like a quick check or lookup.</div>
+                  <div class="dt-cell dt-impact" role="cell">Fastest and lightest, with less depth for nuance or complex reasoning.</div>
+                </div>
+                <div class="dt-row" role="row">
+                  <div class="dt-cell dt-choice" role="cell">Sonnet</div>
+                  <div class="dt-cell dt-use" role="cell">You are doing normal day-to-day work: writing, analysis, drafting, or general tasks.</div>
+                  <div class="dt-cell dt-impact" role="cell">The best starting point for most work. It balances quality, speed, and token use.</div>
+                </div>
+                <div class="dt-row" role="row">
+                  <div class="dt-cell dt-choice" role="cell">Opus</div>
+                  <div class="dt-cell dt-use" role="cell">The task is genuinely hard, such as writing code or building something substantial.</div>
+                  <div class="dt-cell dt-impact" role="cell">The most depth, but it can use tokens five to fifteen times faster, so reach for it on purpose.</div>
+                </div>
+              </div>
+
+              <p><strong>Choose the effort based on how much thinking the task needs.</strong></p>
+              <div class="decision-table setting-table" role="table" aria-label="Claude effort selection guide">
+                <div class="dt-header" role="row">
+                  <div class="dt-q-head" role="columnheader">Effort</div>
+                  <div class="dt-q-head" role="columnheader">Use it when</div>
+                  <div class="dt-q-head" role="columnheader">What changes</div>
+                </div>
+                <div class="dt-row" role="row">
+                  <div class="dt-cell dt-choice" role="cell">Low</div>
+                  <div class="dt-cell dt-use" role="cell">The request is straightforward and you want a quick result.</div>
+                  <div class="dt-cell dt-impact" role="cell">Fastest response and lowest token use, with less exploration of tradeoffs.</div>
+                </div>
+                <div class="dt-row" role="row">
+                  <div class="dt-cell dt-choice" role="cell">Medium or High</div>
+                  <div class="dt-cell dt-use" role="cell">Claude needs to compare options, work from multiple inputs, or be more careful. A good everyday default.</div>
+                  <div class="dt-cell dt-impact" role="cell">More thoughtful output, with more tokens and a longer response time.</div>
+                </div>
+                <div class="dt-row" role="row">
+                  <div class="dt-cell dt-choice" role="cell">Max</div>
+                  <div class="dt-cell dt-use" role="cell">The task is hard and the extra thinking is worth the tradeoff.</div>
+                  <div class="dt-cell dt-impact" role="cell">The most intensive setting. Use it sparingly because it consumes tokens quickly.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="callout warn">
+            <div class="co-head"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/></svg> Move up on purpose</div>
+            <p>If the first answer is too shallow, raise the model, the effort, or both. For most work, start with Sonnet at medium effort and reserve Opus for code and heavy building.</p>
+          </div>
+          </div>
+
+          <div class="lesson-section section-teal">
+          <div class="section-eyebrow">Context size</div>
+          <h3>200K vs 1M Context</h3>
+          <p>Some models offer a one-million-token context, five times the default of two hundred thousand. Context is Claude's working memory for the task at hand. The larger window costs extra and uses your limits faster, so the default is the right choice unless you are genuinely working across a very large amount of material. Keeping each task in its own session, which the next lesson covers, usually matters more than a bigger window.</p>
+          </div>
+
+          <div class="lesson-section section-orange">
+          <div class="section-eyebrow">Know your headroom</div>
+          <h3>Reading Your Usage</h3>
+          <p>Claude Code shows your usage in the window. There are a few limits worth understanding so a heavy task does not surprise you.</p>
+          <ul class="steps">
+            <li><span class="step-t">5-hour limit</span><span class="step-d">A rolling limit that starts counting from your first message in a session. How much you get can vary with overall demand, so it may feel tighter during busy hours.</span></li>
+            <li><span class="step-t">Weekly limit</span><span class="step-d">A separate allowance that resets every seven days.</span></li>
+            <li><span class="step-t">Extra usage</span><span class="step-d">UiPath provides additional headroom beyond those limits. If you hit a limit, you can keep working against that extra usage, and you can request more if you need it.</span></li>
+          </ul>
+          <div class="callout tip">
+            <div class="co-head"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1V18h6v-1.2c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2z"/></svg> Don't ration yourself into worse work</div>
+            <p>The limits exist to be used. Pick the model and effort the task deserves rather than always defaulting to the lightest option to save tokens. If you run out, extra usage is there and more can be requested.</p>
+          </div>
+          </div>
+        </div>
+      </section>

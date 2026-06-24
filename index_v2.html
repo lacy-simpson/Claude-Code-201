@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude 201: Working with Claude Code</title>
+<link rel="icon" type="image/png" href="https://inside.uipath.com/favicon.png">
+<link rel="shortcut icon" type="image/png" href="https://inside.uipath.com/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/styles.css?v=1">
+</head>
+<body class="uip-root">
+<div class="progress-rail"><div class="progress-fill" id="progressFill"></div></div>
+
+<div class="layout">
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <div class="brand-mark">
+        <span class="brand-logo"><img src="https://inside.uipath.com/favicon.png" alt="" aria-hidden="true"></span>
+        <span class="brand-name">UiPath &middot; AI UpSkilling</span>
+      </div>
+      <div class="brand-eyebrow">Claude 201</div>
+      <div class="brand-title">Working with Claude Code</div>
+    </div>
+    <ul class="nav-list" id="navList"></ul>
+    <div class="sidebar-foot">
+      <strong>Self-paced reference</strong><br>
+      Use &larr; &rarr; or the buttons to move between lessons.
+    </div>
+  </aside>
+  <div class="overlay" id="overlay"></div>
+
+  <!-- MAIN -->
+  <div class="main">
+    <header class="topbar">
+      <button class="nav-toggle" id="navToggle" aria-label="Open menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <div class="internal-badge" aria-label="UiPath Internal Only">UiPath Internal Only</div>
+      <div class="controls">
+        <button class="icon-btn" id="themeToggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+          <svg id="themeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.4 1.4M17.6 17.6L19 19M19 5l-1.4 1.4M6.4 17.6L5 19"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <div class="content">
+      <div class="pages" id="pages">
+
+              <div class="lesson-loading" id="lessonLoading">Loading lessons...</div>
+
+
+      </div><!-- /.pages -->
+
+      <!-- BOTTOM NAV -->
+      <nav class="bottom-nav">
+        <button class="bn-btn prev" id="prevBtn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+          <span><span class="bn-dir">Previous</span><span class="bn-label" id="prevLabel">Start</span></span>
+        </button>
+        <div class="bn-count"><span class="pc-now" id="pcNow">1 / 13</span><span class="pc-of">Lesson</span></div>
+        <button class="bn-btn next" id="nextBtn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+          <span><span class="bn-dir">Next</span><span class="bn-label" id="nextLabel">Claude Code Overview</span></span>
+        </button>
+      </nav>
+
+      <div class="foot">
+        <strong>UiPath Internal Only</strong> &middot; AI UpSkilling Program &middot; UiPath Global &middot; Session 2 of series &middot; Last updated June 2026
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="assets/js/app.js?v=1" defer></script>
+</body>
+</html>
