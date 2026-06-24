@@ -1,0 +1,254 @@
+<!-- PERMISSIONS, MEMORY & OWNERSHIP -->
+<section class="segment" id="p-working">
+        <div class="band band-hero">
+          <canvas class="hero-canvas" aria-hidden="true"></canvas>
+          <div class="band-top">
+            <span class="band-num">03</span>
+            <span class="pill type">Habits</span>
+            <span class="pill time">12 min</span>
+          </div>
+          <div class="band-eyebrow">Use Claude Code well</div>
+          <h2>Permissions, Memory &amp; Ownership</h2>
+        </div>
+        <div class="panel">
+          <p class="lead">Claude Code is powerful because it can act. These habits keep that power pointed in the right direction: control what it is allowed to do, let it remember the stable facts about you, keep your work in focused folders, and keep ownership of the result.</p>
+          <div class="callout checkpoint">
+            <div class="co-head"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2z"/><path d="M12 8v4l3 3"/></svg> Lesson Objective</div>
+            <p>Pick the right permission mode, recognize what each in-the-moment prompt is asking, set durable context with memory and folders, and keep responsibility for what Claude produces.</p>
+          </div>
+
+          <div class="lesson-section section-teal">
+          <div class="section-eyebrow">Stay in charge</div>
+          <h3>Permissions: What Claude May Do</h3>
+          <p>You are always in charge of what Claude is doing. A permission <b>mode</b> sets how much it does before checking with you, and a permission <b>prompt</b> is the choice you make in the moment when it does stop to ask. Start with the modes, then see the prompts.</p>
+
+          <h4 class="sub-h">Permission modes: how Claude runs</h4>
+          <p>Claude Code has session-level operating modes that control how much it does before asking. You can change the active mode from the toolbar.</p>
+          <div class="tool-carousel" id="permModeCarousel" tabindex="0">
+            <div class="tool-3d-stage">
+
+              <div class="tool-slide">
+                <div class="tc-header tc-header-ask">
+                  <div class="tc-icon"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2z"/><path d="M12 8v4M12 16h.01"/></svg></div>
+                  <div class="tc-name">Ask</div>
+                  <div class="tc-badge">Default</div>
+                </div>
+                <div class="tc-body">
+                  <div class="tc-section">
+                    <span class="tc-lbl tc-lbl-ask">What it means</span>
+                    <p class="tc-text">Claude asks for permission before every significant action: running commands, editing files, calling external services. Nothing happens without your say-so.</p>
+                  </div>
+                  <div class="tc-section">
+                    <span class="tc-lbl tc-lbl-ask">Use when</span>
+                    <div class="tc-use-when ask">You are new, the work is sensitive, or you want to watch every step. This is your starting point for any unfamiliar session.</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="tool-slide">
+                <div class="tc-header tc-header-plan">
+                  <div class="tc-icon"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
+                  <div class="tc-name">Plan</div>
+                  <div class="tc-badge">Review first</div>
+                </div>
+                <div class="tc-body">
+                  <div class="tc-section">
+                    <span class="tc-lbl tc-lbl-plan">What it means</span>
+                    <p class="tc-text">Claude writes a plan first and asks for the permissions it expects up front. You can revise the plan before it runs. It may still pause mid-run if it needs something new.</p>
+                  </div>
+                  <div class="tc-section">
+                    <span class="tc-lbl tc-lbl-plan">Use when</span>
+                    <div class="tc-use-when plan">The work is multi-step and you want to approve the approach before anything happens, such as a refactor or a bulk update you cannot easily undo.</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="tool-slide">
+                <div class="tc-header tc-header-auto">
+                  <div class="tc-icon"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg></div>
+                  <div class="tc-name">Auto</div>
+                  <div class="tc-badge">Less oversight</div>
+                </div>
+                <div class="tc-body">
+                  <div class="tc-section">
+                    <span class="tc-lbl tc-lbl-auto">What it means</span>
+                    <p class="tc-text">Claude auto-approves low-risk operations like reading files, searching, and safe commands, and still asks for higher-risk actions like writes or external calls.</p>
+                  </div>
+                  <div class="tc-section">
+                    <span class="tc-lbl tc-lbl-auto">Use when</span>
+                    <div class="tc-use-when auto">A trusted, repetitive workflow you have already verified. Avoid it on a first run or when connected to production systems, since you will not see every intermediate step.</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="tool-slide">
+                <div class="tc-header tc-header-accept">
+                  <div class="tc-icon"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></div>
+                  <div class="tc-name">Accept edits</div>
+                  <div class="tc-badge">Edits auto-approved</div>
+                </div>
+                <div class="tc-body">
+                  <div class="tc-section">
+                    <span class="tc-lbl tc-lbl-accept">What it means</span>
+                    <p class="tc-text">Claude proceeds with reads and file edits on its own, and only stops to ask for actions that are not already allowed, such as commands or external calls.</p>
+                  </div>
+                  <div class="tc-section">
+                    <span class="tc-lbl tc-lbl-accept">Use when</span>
+                    <div class="tc-use-when accept">An active session with many expected file changes and you want fewer interruptions. Review your changes afterward, since you will not see each edit in real time.</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="tool-slide">
+                <div class="tc-header tc-header-bypass">
+                  <div class="tc-icon"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2z"/><path d="M4.9 4.9l14.2 14.2"/></svg></div>
+                  <div class="tc-name">Bypass permissions</div>
+                  <div class="tc-badge">No guardrails</div>
+                </div>
+                <div class="tc-body">
+                  <div class="tc-section">
+                    <span class="tc-lbl tc-lbl-bypass">What it means</span>
+                    <p class="tc-text">All permission checks are disabled. Claude acts without asking: no prompts, no diff previews, no safety gates.</p>
+                  </div>
+                  <div class="tc-section">
+                    <span class="tc-lbl tc-lbl-bypass">Use when</span>
+                    <div class="tc-use-when bypass">Automated pipelines and sandboxed environments only. Never in an interactive session, where there is no undo and no review. When in doubt, use <b>Ask</b>.</div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <div class="tool-dots">
+              <button class="tool-dot ask active" aria-label="Ask"></button>
+              <button class="tool-dot plan" aria-label="Plan"></button>
+              <button class="tool-dot auto" aria-label="Auto"></button>
+              <button class="tool-dot accept" aria-label="Accept edits"></button>
+              <button class="tool-dot bypass" aria-label="Bypass permissions"></button>
+            </div>
+            <div class="tool-counter">1 of 5 · Ask</div>
+          </div>
+
+          <h4 class="sub-h">Permission prompts: what Claude is actually asking</h4>
+          <p>When Claude wants to take an action it pauses and asks. You will see one of these choices in the moment:</p>
+          <div class="tool-carousel" id="permPromptCarousel" tabindex="0">
+            <div class="tool-3d-stage">
+
+              <div class="tool-slide">
+                <div class="tc-header tc-header-allow">
+                  <div class="tc-icon"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg></div>
+                  <div class="tc-name">Allow once</div>
+                  <div class="tc-badge">Low risk</div>
+                </div>
+                <div class="tc-body">
+                  <div class="tc-section">
+                    <span class="tc-lbl tc-lbl-allow">What it means</span>
+                    <p class="tc-text">Permit this single action, this time only. Claude will ask again the next time it wants to do the same thing.</p>
+                  </div>
+                  <div class="tc-section">
+                    <span class="tc-lbl tc-lbl-allow">Use when</span>
+                    <div class="tc-use-when allow">Your default for anything you have not done before. Safe when you want to stay informed as you build familiarity with a workflow.</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="tool-slide">
+                <div class="tc-header tc-header-always">
+                  <div class="tc-icon"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/></svg></div>
+                  <div class="tc-name">Always allow</div>
+                  <div class="tc-badge">Use with care</div>
+                </div>
+                <div class="tc-body">
+                  <div class="tc-section">
+                    <span class="tc-lbl tc-lbl-always">What it means</span>
+                    <p class="tc-text">Permit this kind of action for the rest of the session. Claude will not ask again; it just acts each time.</p>
+                  </div>
+                  <div class="tc-section">
+                    <span class="tc-lbl tc-lbl-always">Use when</span>
+                    <div class="tc-use-when always">Only for low-risk, fully understood actions like a web search or reading a file you own. Never for writes to shared systems. When in doubt, <b>Allow once</b> is safer.</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="tool-slide">
+                <div class="tc-header tc-header-approve">
+                  <div class="tc-icon"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg></div>
+                  <div class="tc-name">Approve a plan</div>
+                  <div class="tc-badge">Review the detail</div>
+                </div>
+                <div class="tc-body">
+                  <div class="tc-section">
+                    <span class="tc-lbl tc-lbl-approve">What it means</span>
+                    <p class="tc-text">When Claude proposes a plan or a change, it shows you what it intends to do before doing it. You can accept it, leave a comment to revise it, or deny it.</p>
+                  </div>
+                  <div class="tc-section">
+                    <span class="tc-lbl tc-lbl-approve">Use when</span>
+                    <div class="tc-use-when approve">Anything that writes, updates, or deletes: files, records, messages, commits. If you could not undo it by hand in thirty seconds, see it before it happens.</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="tool-slide">
+                <div class="tc-header tc-header-deny">
+                  <div class="tc-icon"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></div>
+                  <div class="tc-name">Deny</div>
+                  <div class="tc-badge">Block it</div>
+                </div>
+                <div class="tc-body">
+                  <div class="tc-section">
+                    <span class="tc-lbl tc-lbl-deny">What it means</span>
+                    <p class="tc-text">Block the action entirely. Claude stops, explains what it was trying to do, and waits for new instructions from you.</p>
+                  </div>
+                  <div class="tc-section">
+                    <span class="tc-lbl tc-lbl-deny">Use when</span>
+                    <div class="tc-use-when deny">Whenever something looks wrong or unexpected. Denying never breaks anything; it is always the safe choice. You can redirect Claude afterward.</div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <div class="tool-dots">
+              <button class="tool-dot allow active" aria-label="Allow once"></button>
+              <button class="tool-dot always" aria-label="Always allow"></button>
+              <button class="tool-dot approve" aria-label="Approve a plan"></button>
+              <button class="tool-dot deny" aria-label="Deny"></button>
+            </div>
+            <div class="tool-counter">1 of 4 · Allow once</div>
+          </div>
+          <div class="callout tip">
+            <div class="co-head"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1V18h6v-1.2c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2z"/></svg> Always allow the reads, approve the writes</div>
+            <p>A common setup is to always allow read-only actions like web search, while still approving anything that writes or changes a system. You get speed where it is safe and a checkpoint where it counts.</p>
+          </div>
+          </div>
+
+          <div class="lesson-section section-teal">
+          <div class="section-eyebrow">Durable context</div>
+          <h3>Personal Memory</h3>
+          <p>You can let Claude remember stable facts about you so you stop re-typing them. Turn it on under <b>Settings &rarr; Capabilities &rarr; Memory</b>. It is off by default.</p>
+          <p>Once it is on, Claude builds up a picture of your role, your location, and the kind of work you do. After a while you can drop the standing context from your prompts because Claude already knows it. If you want a head start, you can import a description of yourself rather than waiting for it to build up.</p>
+          <div class="callout tip">
+            <div class="co-head"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1V18h6v-1.2c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2z"/></svg> Keep it accurate, keep it sanitized</div>
+            <p>Memory is only as good as what it holds. Add what is stable and useful, and avoid putting anything sensitive in it that you would not want reused across sessions.</p>
+          </div>
+          </div>
+
+          <div class="lesson-section section-orange">
+          <div class="section-eyebrow">Stay organized</div>
+          <h3>One Folder, One Purpose</h3>
+          <p>Claude Code treats each folder as its own context, and it stores what it learns about your work per folder. Keep folders focused: a folder for a project, a folder for general conversations, a folder for a particular repository. Working from a focused folder means Claude builds useful memory about that work and does not see everything else on your machine.</p>
+          <ul class="steps">
+            <li><span class="step-t">A folder per kind of work</span><span class="step-d">Start sessions from the folder that matches the task, so the memory and files stay relevant.</span></li>
+            <li><span class="step-t">Avoid starting from home or Desktop</span><span class="step-d">Opening a session at your home directory hands Claude visibility into far more than the task needs.</span></li>
+          </ul>
+          </div>
+
+          <div class="lesson-section section-purple">
+          <div class="section-eyebrow">Responsibility</div>
+          <h3>You Own the Outcome</h3>
+          <p>Claude assists you. It does not replace you, and it does not own the result. You do. Do not have Claude generate something and pass it on unread. Claude is also not deterministic: the same prompt can produce different answers, which is one more reason to read what it gives you.</p>
+          <div class="callout key">
+            <div class="co-head"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1V18h6v-1.2c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2z"/></svg> Key Takeaway</div>
+            <p>Control what Claude may do, let it remember the stable context, keep your work in focused folders, and read the result before you use it. Those habits cover almost everything that goes wrong.</p>
+          </div>
+          </div>
+        </div>
+      </section>

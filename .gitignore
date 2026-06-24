@@ -22,6 +22,9 @@ Thumbs.db
 tmp/
 .cache/
 
+# ── Source recordings / transcripts (kept local) ────
+*_Recording.txt
+
 # ── Env / secrets ───────────────────────────────────
 .env
 .env.*
