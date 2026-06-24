@@ -2,19 +2,14 @@
   "use strict";
 
   var PAGES = [
-    {id:"p-welcome",   num:"·",  name:"Welcome & Setup",            file:"lessons/00-welcome.html"},
-    {id:"p-overview",  num:"01", name:"Claude Code Overview",       file:"lessons/01-overview.html"},
-    {id:"p-desktop",   num:"02", name:"The Desktop Interface",      file:"lessons/02-desktop.html"},
-    {id:"p-models",    num:"03", name:"Models, Effort & Usage",     file:"lessons/03-models.html"},
-    {id:"p-context",   num:"04", name:"Context & Sessions",         file:"lessons/04-context.html"},
-    {id:"p-habits",    num:"05", name:"Best Practices",             file:"lessons/05-habits.html"},
-    {id:"p-routines",  num:"06", name:"Routines & Automation",      file:"lessons/06-routines.html"},
-    {id:"p-connect",   num:"07", name:"Connection Methods",         file:"lessons/07-connect.html"},
-    {id:"p-run",       num:"08", name:"Running a Skill",            file:"lessons/08-run.html"},
-    {id:"p-create",    num:"09", name:"Creating a Skill",           file:"lessons/09-create.html"},
-    {id:"p-market",    num:"10", name:"The AI Marketplace",         file:"lessons/10-marketplace.html"},
-    {id:"p-takeaways", num:"11", name:"Key Takeaways",              file:"lessons/11-takeaways.html"},
-    {id:"p-close",     num:"12", name:"What's Next",                file:"lessons/12-close.html"}
+    {id:"p-welcome",   num:"·",  name:"Welcome & Setup",              file:"lessons/00-welcome.html"},
+    {id:"p-overview",  num:"01", name:"Claude Code & the Desktop App", file:"lessons/01-overview.html"},
+    {id:"p-models",    num:"02", name:"Models, Usage & Context",      file:"lessons/02-models-context.html"},
+    {id:"p-working",   num:"03", name:"Permissions, Memory & Ownership", file:"lessons/03-working-well.html"},
+    {id:"p-connect",   num:"04", name:"Connecting & Automating",      file:"lessons/04-connect-automate.html"},
+    {id:"p-skills",    num:"05", name:"Skills",                       file:"lessons/05-skills.html"},
+    {id:"p-takeaways", num:"06", name:"Key Takeaways",                file:"lessons/06-takeaways.html"},
+    {id:"p-close",     num:"07", name:"What's Next",                  file:"lessons/07-close.html"}
   ];
   var N = PAGES.length;
 

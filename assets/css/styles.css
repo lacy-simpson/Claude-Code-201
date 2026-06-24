@@ -190,6 +190,7 @@ a:hover{text-decoration:underline;}
 .panel h3{font-size:1.12rem; font-weight:600; margin:26px 0 10px; color:var(--content-primary);}
 .panel h3:first-child{margin-top:0;}
 .panel h4{font-size:.96rem; font-weight:700; font-family:var(--font-body); margin:20px 0 8px; color:var(--content-primary);}
+.panel h4.sub-h{margin-top:30px;font-family:var(--font-display);font-size:1rem;letter-spacing:-.01em;}
 .lead{font-size:1.04rem; color:var(--content-secondary);}
 .lesson-section{position:relative;margin-top:38px;}
 .lesson-section:first-of-type{margin-top:26px;}
@@ -375,6 +376,42 @@ ul.clean li b, ul.clean li strong{color:var(--content-primary);}
 .tool-dot.active.skills    {background:var(--teal-50);}
 .tool-dot.active.connectors{background:var(--purple-50);}
 .tool-dot.active.plugins   {background:#721472;}
+/* permission carousel color variants (lesson 03) */
+.tc-header-ask    {background:linear-gradient(135deg,#0ba2b3,#077a87);}
+.tc-header-plan   {background:linear-gradient(135deg,var(--code-midnight),var(--code-midnight-2) 62%,var(--code-midnight-3));border-bottom:2px solid #0ba2b3;}
+.tc-header-auto   {background:linear-gradient(135deg,#d97706,#b45309);}
+.tc-header-accept {background:linear-gradient(135deg,#0284c7,#0369a1);}
+.tc-header-bypass {background:linear-gradient(135deg,#dc2626,#991b1b);}
+.tc-header-allow  {background:linear-gradient(135deg,#0ba2b3,#077a87);}
+.tc-header-always {background:linear-gradient(135deg,#d97706,#b45309);}
+.tc-header-approve{background:linear-gradient(135deg,#fa4616,#c53610);}
+.tc-header-deny   {background:linear-gradient(135deg,#475569,#334155);}
+.tc-lbl-ask    {color:var(--teal-50);}
+.tc-lbl-plan   {color:var(--teal-50);}
+.tc-lbl-auto   {color:#b45309;}
+.tc-lbl-accept {color:#0284c7;}
+.tc-lbl-bypass {color:#dc2626;}
+.tc-lbl-allow  {color:var(--teal-50);}
+.tc-lbl-always {color:#b45309;}
+.tc-lbl-approve{color:var(--orange-50);}
+.tc-lbl-deny   {color:var(--content-secondary);}
+[data-theme="dark"] .tc-lbl-auto,[data-theme="dark"] .tc-lbl-always{color:#f0a83d;}
+[data-theme="dark"] .tc-lbl-accept{color:#38a3e0;}
+[data-theme="dark"] .tc-lbl-bypass{color:#f06464;}
+.tc-use-when.ask,.tc-use-when.allow   {background:rgba(11,162,179,.08);border:1px solid rgba(11,162,179,.20);}
+.tc-use-when.plan   {background:rgba(11,162,179,.08);border:1px solid rgba(11,162,179,.20);}
+.tc-use-when.auto,.tc-use-when.always {background:rgba(217,119,6,.09);border:1px solid rgba(217,119,6,.24);}
+.tc-use-when.accept {background:rgba(2,132,199,.09);border:1px solid rgba(2,132,199,.22);}
+.tc-use-when.bypass {background:rgba(220,38,38,.09);border:1px solid rgba(220,38,38,.24);}
+.tc-use-when.approve{background:rgba(250,70,22,.08);border:1px solid rgba(250,70,22,.20);}
+.tc-use-when.deny   {background:rgba(71,85,105,.10);border:1px solid rgba(71,85,105,.26);}
+.tool-dot.active.ask,.tool-dot.active.allow   {background:var(--teal-50);}
+.tool-dot.active.plan   {background:var(--code-midnight-2);}
+.tool-dot.active.auto,.tool-dot.active.always {background:#d97706;}
+.tool-dot.active.accept {background:#0284c7;}
+.tool-dot.active.bypass {background:#dc2626;}
+.tool-dot.active.approve{background:var(--orange-50);}
+.tool-dot.active.deny   {background:#64748b;}
 
 /* common controls (lesson 02) */
 .common-controls{margin:24px 0 6px;}

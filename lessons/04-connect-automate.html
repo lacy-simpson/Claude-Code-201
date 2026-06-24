@@ -1,20 +1,20 @@
-<!-- CONNECTION METHODS -->
+<!-- CONNECTING & AUTOMATING -->
 <section class="segment" id="p-connect">
         <div class="band band-hero">
           <canvas class="hero-canvas" aria-hidden="true"></canvas>
           <div class="band-top">
-            <span class="band-num">07</span>
+            <span class="band-num">04</span>
             <span class="pill type">Awareness</span>
-            <span class="pill time">9 min</span>
+            <span class="pill time">12 min</span>
           </div>
           <div class="band-eyebrow">Give Claude reach</div>
-          <h2>Connection Methods</h2>
+          <h2>Connecting &amp; Automating</h2>
         </div>
         <div class="panel">
-          <p class="lead">Claude Code is capable on its own, and more capable once it can reach the systems you already use. Those connections come in two flavors. Knowing which is which helps you set them up and reason about what Claude can touch.</p>
+          <p class="lead">Claude Code is capable on its own, and more capable once it can reach the systems you already use. Connections extend what it can touch; routines let a task run on a schedule without you kicking it off. Both add reach, and both deserve the same care you bring to permissions.</p>
           <div class="callout checkpoint">
             <div class="co-head"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2z"/><path d="M12 8v4l3 3"/></svg> Lesson Objective</div>
-            <p>Tell the difference between connector-based and command-line connections, manage per-tool approvals, and apply a safety habit before letting Claude write to a system.</p>
+            <p>Tell connector-based and command-line connections apart, manage per-tool approvals, set up a routine, and apply a safety habit before letting Claude write to a system or run unattended.</p>
           </div>
 
           <div class="lesson-section section-teal">
@@ -54,6 +54,28 @@
           <div class="callout warn">
             <div class="co-head"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/></svg> Test against a sandbox first</div>
             <p>When a connection can write to a real system, try it against a sandbox or non-production environment first. A change that looks harmless can trigger downstream automations you did not expect. Prove it is safe where mistakes do not matter, then point it at the real thing.</p>
+          </div>
+          </div>
+
+          <div class="lesson-section section-teal">
+          <div class="section-eyebrow">Work on a schedule</div>
+          <h3>Routines: A Task on a Timer</h3>
+          <p>A routine is a task you ask Claude to run on a schedule instead of kicking off by hand each time. You find routines near the top of the Claude Code window. A routine pairs a prompt with a schedule: every hour, every morning, or whatever cadence fits. When it runs, Claude does the task and can notify you, for example by sending a message in Slack or Teams, so the result comes to you instead of you going to look for it.</p>
+          </div>
+
+          <div class="lesson-section section-orange">
+          <div class="section-eyebrow">A concrete example</div>
+          <h3>A Daily Folder Summary</h3>
+          <p>Say a shared folder collects reports through the day and you want a quick read each morning. Instead of opening it and skimming, you set a routine.</p>
+          <ul class="steps">
+            <li><span class="step-t">Write the task</span><span class="step-d">"Each weekday at 8am, summarize any new files in this folder into five bullets, and call out anything that looks urgent."</span></li>
+            <li><span class="step-t">Set the schedule</span><span class="step-d">Choose the cadence in the routine settings, such as every weekday morning.</span></li>
+            <li><span class="step-t">Choose how you hear about it</span><span class="step-d">Ask Claude to send the summary to you on Slack or Teams so it lands where you already work.</span></li>
+          </ul>
+          <p>The same shape works for many jobs: a recurring digest, a periodic check on a status page, or a reminder built from whatever Claude can see.</p>
+          <div class="callout key">
+            <div class="co-head"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1V18h6v-1.2c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2z"/></svg> The same care applies</div>
+            <p>A connection or a routine acts on your behalf, sometimes while you are not watching. Scope it tightly, prefer read-and-report tasks over ones that change systems, and everything from the permissions lesson still holds when the work runs on a timer.</p>
           </div>
           </div>
         </div>

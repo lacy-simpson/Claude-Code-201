@@ -206,6 +206,7 @@ a:hover{text-decoration:underline;}
 .panel h3{font-size:1.12rem; font-weight:600; margin:26px 0 10px; color:var(--content-primary);}
 .panel h3:first-child{margin-top:0;}
 .panel h4{font-size:.96rem; font-weight:700; font-family:var(--font-body); margin:20px 0 8px; color:var(--content-primary);}
+.panel h4.sub-h{margin-top:30px;font-family:var(--font-display);font-size:1rem;letter-spacing:-.01em;}
 .lead{font-size:1.04rem; color:var(--content-secondary);}
 .lesson-section{position:relative;margin-top:38px;}
 .lesson-section:first-of-type{margin-top:26px;}
@@ -391,6 +392,42 @@ ul.clean li b, ul.clean li strong{color:var(--content-primary);}
 .tool-dot.active.skills    {background:var(--teal-50);}
 .tool-dot.active.connectors{background:var(--purple-50);}
 .tool-dot.active.plugins   {background:#721472;}
+/* permission carousel color variants (lesson 03) */
+.tc-header-ask    {background:linear-gradient(135deg,#0ba2b3,#077a87);}
+.tc-header-plan   {background:linear-gradient(135deg,var(--code-midnight),var(--code-midnight-2) 62%,var(--code-midnight-3));border-bottom:2px solid #0ba2b3;}
+.tc-header-auto   {background:linear-gradient(135deg,#d97706,#b45309);}
+.tc-header-accept {background:linear-gradient(135deg,#0284c7,#0369a1);}
+.tc-header-bypass {background:linear-gradient(135deg,#dc2626,#991b1b);}
+.tc-header-allow  {background:linear-gradient(135deg,#0ba2b3,#077a87);}
+.tc-header-always {background:linear-gradient(135deg,#d97706,#b45309);}
+.tc-header-approve{background:linear-gradient(135deg,#fa4616,#c53610);}
+.tc-header-deny   {background:linear-gradient(135deg,#475569,#334155);}
+.tc-lbl-ask    {color:var(--teal-50);}
+.tc-lbl-plan   {color:var(--teal-50);}
+.tc-lbl-auto   {color:#b45309;}
+.tc-lbl-accept {color:#0284c7;}
+.tc-lbl-bypass {color:#dc2626;}
+.tc-lbl-allow  {color:var(--teal-50);}
+.tc-lbl-always {color:#b45309;}
+.tc-lbl-approve{color:var(--orange-50);}
+.tc-lbl-deny   {color:var(--content-secondary);}
+[data-theme="dark"] .tc-lbl-auto,[data-theme="dark"] .tc-lbl-always{color:#f0a83d;}
+[data-theme="dark"] .tc-lbl-accept{color:#38a3e0;}
+[data-theme="dark"] .tc-lbl-bypass{color:#f06464;}
+.tc-use-when.ask,.tc-use-when.allow   {background:rgba(11,162,179,.08);border:1px solid rgba(11,162,179,.20);}
+.tc-use-when.plan   {background:rgba(11,162,179,.08);border:1px solid rgba(11,162,179,.20);}
+.tc-use-when.auto,.tc-use-when.always {background:rgba(217,119,6,.09);border:1px solid rgba(217,119,6,.24);}
+.tc-use-when.accept {background:rgba(2,132,199,.09);border:1px solid rgba(2,132,199,.22);}
+.tc-use-when.bypass {background:rgba(220,38,38,.09);border:1px solid rgba(220,38,38,.24);}
+.tc-use-when.approve{background:rgba(250,70,22,.08);border:1px solid rgba(250,70,22,.20);}
+.tc-use-when.deny   {background:rgba(71,85,105,.10);border:1px solid rgba(71,85,105,.26);}
+.tool-dot.active.ask,.tool-dot.active.allow   {background:var(--teal-50);}
+.tool-dot.active.plan   {background:var(--code-midnight-2);}
+.tool-dot.active.auto,.tool-dot.active.always {background:#d97706;}
+.tool-dot.active.accept {background:#0284c7;}
+.tool-dot.active.bypass {background:#dc2626;}
+.tool-dot.active.approve{background:var(--orange-50);}
+.tool-dot.active.deny   {background:#64748b;}
 
 /* common controls (lesson 02) */
 .common-controls{margin:24px 0 6px;}
@@ -868,11 +905,10 @@ ul.clean li b, ul.clean li strong{color:var(--content-primary);}
 
           <h3>What this course covers</h3>
           <ul class="clean">
-            <li>Where Claude Code fits among Chat, Plugins, and Cowork</li>
-            <li>A tour of the Claude Code desktop app, control by control</li>
-            <li>Choosing models and effort, and reading your usage</li>
-            <li>Keeping sessions focused so Claude stays accurate</li>
-            <li>Permissions, prompting, memory, and other day-to-day habits</li>
+            <li>Where Claude Code fits among Chat, Plugins, and Cowork, and a tour of the desktop app control by control</li>
+            <li>Choosing models and effort, reading your usage, and keeping sessions focused so Claude stays accurate</li>
+            <li>Permissions, prompting, memory, and other day-to-day habits that keep you in control</li>
+            <li>Connecting Claude to the tools you already use, and running tasks on a schedule</li>
             <li>Running, building, and finding skills that do real work</li>
           </ul>
 
@@ -884,11 +920,11 @@ ul.clean li b, ul.clean li strong{color:var(--content-primary);}
           <div class="lesson-section section-teal">
           <div class="section-eyebrow">Pick your surface</div>
           <h3>Desktop App or Command Line</h3>
-          <p>Claude Code runs two ways: as a desktop app with a full graphical interface, or as a command-line tool (CLI) in your terminal. They share the same engine.</p>
-          <p>This course uses the <b>desktop app</b>. It is easier to set up, you can paste images straight into it, and the controls we walk through are visible on screen rather than memorized as commands. The CLI is excellent once you are comfortable in a terminal, and most of what you learn here carries over to it.</p>
+          <p>Claude Code runs a few ways: as a desktop app with a full graphical interface, as a command-line tool (CLI) in your terminal, or inside an IDE like Visual Studio Code. They share the same engine.</p>
+          <p>This course uses the <b>desktop app</b>. It is easier to set up, you can paste images straight into it, and the controls we walk through are visible on screen rather than memorized as commands.</p>
           <div class="callout tip">
             <div class="co-head"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1V18h6v-1.2c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2z"/></svg> New to the terminal?</div>
-            <p>That is completely fine. Stay on the desktop app for now. You can explore the CLI later once the core ideas feel familiar.</p>
+            <p>That is completely fine. Stay on the desktop app for now. The CLI is excellent once you are comfortable in a terminal, and most of what you learn here carries straight over to it.</p>
           </div>
           </div>
 
@@ -922,124 +958,36 @@ ul.clean li b, ul.clean li strong{color:var(--content-primary);}
         </div>
       </section>
 
-<!-- CLAUDE CODE OVERVIEW -->
+<!-- CLAUDE CODE OVERVIEW & THE DESKTOP APP -->
 <section class="segment" id="p-overview">
         <div class="band band-hero">
           <canvas class="hero-canvas" aria-hidden="true"></canvas>
           <div class="band-top">
             <span class="band-num">01</span>
-            <span class="pill type">Concept</span>
-            <span class="pill time">8 min</span>
+            <span class="pill type">Orientation</span>
+            <span class="pill time">12 min</span>
           </div>
           <div class="band-eyebrow">Orient to Claude Code</div>
-          <h2>Claude Code Overview</h2>
+          <h2>Claude Code &amp; the Desktop App</h2>
         </div>
         <div class="panel">
-          <p class="lead">Claude shows up in a few different places, and each one fits a different kind of work. Before we open the app, it helps to see where Claude Code sits in that lineup and what makes it the most capable of the group.</p>
+          <p class="lead">Claude shows up in a few different places, and each one fits a different kind of work. Before we open the app, it helps to see where Claude Code sits in that lineup. Then we tour the desktop window so the controls stop feeling mysterious.</p>
           <div class="callout checkpoint">
             <div class="co-head"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2z"/><path d="M12 8v4l3 3"/></svg> Lesson Objective</div>
-            <p>Place Claude Code among the other Claude surfaces, describe what it can do that the others cannot, and explain what an Agent Skill is.</p>
+            <p>Place Claude Code among the other Claude surfaces, describe what it can do that the others cannot, and find and name the main controls in the desktop app.</p>
           </div>
 
           <div class="lesson-section section-orange">
-          <h3>The Claude Ecosystem</h3>
-          <p>The same Claude is available through several interfaces. They get progressively more capable, and more powerful, as you move from a steered conversation toward a tool that can act on your machine.</p>
-          <p>This course focuses on <b>Claude Code</b>, the most capable surface. Browse the others so you know when something lighter is the better choice.</p>
-          <div class="tool-carousel" id="toolCarousel" tabindex="0">
-            <div class="tool-3d-stage" id="tool3dStage">
-
-              <div class="tool-slide">
-                <div class="tc-header tc-header-chat">
-                  <div class="tc-icon"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 8.5 8.5 0 0 1-3.9-.9L3 21l1.9-5a8.4 8.4 0 0 1-.9-3.9 8.5 8.5 0 1 1 17 .4z"/></svg></div>
-                  <div class="tc-name">Claude Chat</div>
-                  <div class="tc-badge">Conversation</div>
-                </div>
-                <div class="tc-body">
-                  <div class="tc-section">
-                    <span class="tc-lbl tc-lbl-chat">What it is</span>
-                    <p class="tc-text">A conversation you steer turn by turn. It can reason, draft, and generate visualizations, but it does not touch your files or systems.</p>
-                  </div>
-                  <div class="tc-section">
-                    <span class="tc-lbl tc-lbl-chat">Where it lives</span>
-                    <ul class="tc-list"><li>claude.ai web, desktop app, and mobile</li></ul>
-                  </div>
-                  <div class="tc-section">
-                    <span class="tc-lbl tc-lbl-chat">Use when</span>
-                    <div class="tc-use-when chat">You want to think, write, or summarize and you are happy to copy the result yourself.</div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="tool-slide">
-                <div class="tc-header tc-header-plugins">
-                  <div class="tc-icon"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M12 2v6"/><path d="M12 16v6"/><path d="M4.9 4.9l4.2 4.2"/><path d="M14.9 14.9l4.2 4.2"/><path d="M2 12h6"/><path d="M16 12h6"/><path d="M4.9 19.1l4.2-4.2"/><path d="M14.9 9.1l4.2-4.2"/></svg></div>
-                  <div class="tc-name">Claude Plugins</div>
-                  <div class="tc-badge">Inside your apps</div>
-                </div>
-                <div class="tc-body">
-                  <div class="tc-section">
-                    <span class="tc-lbl tc-lbl-plugins">What it is</span>
-                    <p class="tc-text">Claude available inside approved work tools, using the surrounding app context you allow: a thread, a spreadsheet, a document, or a deck.</p>
-                  </div>
-                  <div class="tc-section">
-                    <span class="tc-lbl tc-lbl-plugins">Use when</span>
-                    <div class="tc-use-when plugins">You want Claude's help without leaving the app where the work already lives, and you review changes before they are saved or sent.</div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="tool-slide">
-                <div class="tc-header tc-header-cowork">
-                  <div class="tc-icon"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M3 7h18M3 12h18M3 17h12"/><rect x="2" y="3" width="20" height="18" rx="2"/></svg></div>
-                  <div class="tc-name">Claude Cowork</div>
-                  <div class="tc-badge">Desktop app</div>
-                </div>
-                <div class="tc-body">
-                  <div class="tc-section">
-                    <span class="tc-lbl tc-lbl-cowork">What it is</span>
-                    <p class="tc-text">A delegated-work mode that can read and write files on your machine, use connected apps, and run skills. Stronger than Chat, with live artifacts for visualization.</p>
-                  </div>
-                  <div class="tc-section">
-                    <span class="tc-lbl tc-lbl-cowork">Use when</span>
-                    <div class="tc-use-when cowork">You want to hand off a bounded job across your files and review the result.</div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="tool-slide">
-                <div class="tc-header tc-header-code">
-                  <div class="tc-icon"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M8 9l-4 3 4 3M16 9l4 3-4 3M13 6l-2 12"/></svg></div>
-                  <div class="tc-name">Claude Code</div>
-                  <div class="tc-badge">This course</div>
-                </div>
-                <div class="tc-body">
-                  <div class="tc-section">
-                    <span class="tc-lbl tc-lbl-code">What it is</span>
-                    <p class="tc-text">The most capable surface. It reads your files, runs commands, and reaches other systems through tools and command-line programs, all with your permission.</p>
-                  </div>
-                  <div class="tc-section">
-                    <span class="tc-lbl tc-lbl-code">Where it lives</span>
-                    <ul class="tc-list">
-                      <li>Desktop app (Code tab) and terminal CLI</li>
-                      <li>VS Code, JetBrains IDEs, and other supported surfaces</li>
-                    </ul>
-                  </div>
-                  <div class="tc-section">
-                    <span class="tc-lbl tc-lbl-code">Use when</span>
-                    <div class="tc-use-when code">The work needs file access, tools, commands, permissions, and reviewable changes.</div>
-                  </div>
-                </div>
-              </div>
-
-            </div>
-            <div class="tool-dots" id="toolDots">
-              <button class="tool-dot chat"    aria-label="Claude Chat"></button>
-              <button class="tool-dot plugins" aria-label="Claude Plugins"></button>
-              <button class="tool-dot cowork"  aria-label="Claude Cowork"></button>
-              <button class="tool-dot code active" aria-label="Claude Code"></button>
-            </div>
-            <div class="tool-counter" id="toolCounter">4 of 4 · Claude Code</div>
-          </div>
+          <div class="section-eyebrow">Where it fits</div>
+          <h3>The Most Capable Surface</h3>
+          <p>The same Claude is available through several interfaces. They get progressively more capable as you move from a steered conversation toward a tool that can act on your machine.</p>
+          <ul class="clean">
+            <li><b>Claude Chat</b> — a conversation you steer turn by turn. It reasons, drafts, and summarizes, but it does not touch your files or systems.</li>
+            <li><b>Claude Plugins</b> — Claude inside approved work tools, using the surrounding app context you allow: a thread, a spreadsheet, a doc, a deck.</li>
+            <li><b>Claude Cowork</b> — a delegated-work mode that can read and write files and run skills. You hand off a bounded job and review the result.</li>
+            <li><b>Claude Code</b> — the most capable surface, and the focus of this course. It reads your files, runs commands, and reaches other systems through tools, all with your permission.</li>
+          </ul>
+          <p class="learn-more"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1"/><path d="M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg> <span><b>Claude 101</b> compares all four surfaces in depth, with a practice exercise for choosing between them. Start there if "which surface when" is still fuzzy.</span></p>
           </div>
 
           <div class="lesson-section section-teal">
@@ -1061,50 +1009,10 @@ ul.clean li b, ul.clean li strong{color:var(--content-primary);}
           </div>
           </div>
 
-          <div class="lesson-section section-purple">
-          <h3>What is an Agent Skill?</h3>
-          <p>A skill is a reusable playbook you give Claude for a specific task. Instead of explaining what you need from scratch every session, a skill captures it once: the steps, the rules, and the expected output. Claude picks it up automatically when your request matches.</p>
-          <p>A skill is mostly just a folder with a text file. The most important file is <code>SKILL.md</code>. Its top section, called frontmatter, declares the skill's name and description. The rest is plain Markdown: the workflow, the rules, and examples.</p>
-          <div class="code">
-            <div class="code-bar">
-              <span class="code-label">A skill on disk</span>
-              <button class="code-copy" data-copy><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy</button>
-            </div>
-            <pre><code>meeting-notes-summarizer/
-  SKILL.md          # the instructions Claude reads
-  scripts/          # optional: code the skill can run for repeatable steps
-    format.py
-  references/       # optional: extra docs Claude loads only when needed</code></pre>
-          </div>
-          <div class="callout tip">
-            <div class="co-head"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1V18h6v-1.2c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2z"/></svg> Skills and scripts together</div>
-            <p>Skills handle judgment, context, and variation: the things that change case by case. Scripts handle what is fast and fixed: retrieval, formatting, and predictable transformations. Together they are more reliable than either alone, because Claude does not have to reinvent the routine steps every time.</p>
-          </div>
-          </div>
-
-          <p class="learn-more"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1"/><path d="M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg> <span>We run a real skill in lesson 08 and build one in lesson 09.</span></p>
-        </div>
-      </section>
-
-<!-- THE DESKTOP INTERFACE -->
-<section class="segment" id="p-desktop">
-        <div class="band band-hero">
-          <canvas class="hero-canvas" aria-hidden="true"></canvas>
-          <div class="band-top">
-            <span class="band-num">02</span>
-            <span class="pill type">Walkthrough</span>
-            <span class="pill time">10 min</span>
-          </div>
-          <div class="band-eyebrow">Know your workspace</div>
-          <h2>The Claude Code Desktop Interface</h2>
-        </div>
-        <div class="panel">
-          <p class="lead">The Claude Code window has a handful of controls, and once you can name each one the app stops feeling mysterious. This is a guided tour. We point at every control, say what it does, and note which lesson goes deeper.</p>
-          <div class="callout checkpoint">
-            <div class="co-head"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2z"/><path d="M12 8v4l3 3"/></svg> Lesson Objective</div>
-            <p>Find and name the working-folder picker, permission-mode selector, attachments, model and effort controls, the usage meter, and the session list in the Claude Code desktop app.</p>
-          </div>
-
+          <div class="lesson-section section-orange">
+          <div class="section-eyebrow">Know your workspace</div>
+          <h3>A Tour of the Desktop Window</h3>
+          <p>The Claude Code window has a handful of controls. Once you can name each one, the app stops feeling mysterious. This is a guided tour: we point at every control, say what it does, and note which lesson goes deeper.</p>
           <figure class="shot">
             <div class="shot-ph">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
@@ -1113,10 +1021,10 @@ ul.clean li b, ul.clean li strong{color:var(--content-primary);}
             </div>
             <figcaption>The Claude Code desktop app on the Code tab. The controls below are arranged roughly left to right along the input area.</figcaption>
           </figure>
-
           <div class="callout tip">
             <div class="co-head"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1V18h6v-1.2c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2z"/></svg> Start on the Code tab</div>
             <p>The desktop app has more than one mode. Make sure you are on the <b>Code</b> tab before you follow along. The Cowork tab looks similar but behaves differently.</p>
+          </div>
           </div>
 
           <div class="lesson-section section-teal">
@@ -1124,7 +1032,7 @@ ul.clean li b, ul.clean li strong{color:var(--content-primary);}
           <h3>Local, and a Working Folder</h3>
           <ul class="steps">
             <li><span class="step-t">Local vs remote</span><span class="step-d">Leave this on <b>Local</b>. Claude Code can control another machine remotely, but for everyday work you want it acting on your own computer.</span></li>
-            <li><span class="step-t">Working folder</span><span class="step-d">This is the folder Claude can see and act in. Choose a different folder for each kind of work. Lesson 04 explains why one folder per purpose keeps Claude organized.</span></li>
+            <li><span class="step-t">Working folder</span><span class="step-d">This is the folder Claude can see and act in. Choose a different folder for each kind of work. Lesson 03 explains why one folder per purpose keeps Claude organized.</span></li>
             <li><span class="step-t">Additional folders</span><span class="step-d">Need Claude to also read files that live somewhere else, such as your Documents? Add them here so they are in reach without changing your main folder.</span></li>
           </ul>
           </div>
@@ -1133,7 +1041,7 @@ ul.clean li b, ul.clean li strong{color:var(--content-primary);}
           <div class="section-eyebrow">Staying in control</div>
           <h3>Permission Mode and Attachments</h3>
           <ul class="steps">
-            <li><span class="step-t">Permission-mode selector</span><span class="step-d">Sets how often Claude checks with you before acting: <b>Ask</b>, <b>Accept edits</b>, or <b>Plan</b>. This is your main safety control. Lesson 05 covers each mode in detail.</span></li>
+            <li><span class="step-t">Permission-mode selector</span><span class="step-d">Sets how often Claude checks with you before acting. This is your main safety control. Lesson 03 covers each mode in detail.</span></li>
             <li><span class="step-t">Attachments</span><span class="step-d">Add files to a message here: log files, a spreadsheet, an image. On the desktop app you can also paste an image straight into the input, which the CLI cannot do as easily.</span></li>
           </ul>
           </div>
@@ -1142,9 +1050,9 @@ ul.clean li b, ul.clean li strong{color:var(--content-primary);}
           <div class="section-eyebrow">Capability and cost</div>
           <h3>Model, Effort, and Usage</h3>
           <ul class="steps">
-            <li><span class="step-t">Model selector</span><span class="step-d">Choose which model handles the task. Heavier models think more and cost more. Lesson 03 walks through Haiku, Sonnet, and Opus.</span></li>
+            <li><span class="step-t">Model selector</span><span class="step-d">Choose which model handles the task. Heavier models think more and cost more. Lesson 02 walks through Haiku, Sonnet, and Opus.</span></li>
             <li><span class="step-t">Effort</span><span class="step-d">A slider for how much reasoning Claude spends before answering. Medium to high is a sensible default.</span></li>
-            <li><span class="step-t">Usage meter</span><span class="step-d">Shows how much of your rolling and weekly limits you have used. Worth glancing at, especially on heavier models. Lesson 03 explains the limits.</span></li>
+            <li><span class="step-t">Usage meter</span><span class="step-d">Shows how much of your rolling and weekly limits you have used. Worth glancing at, especially on heavier models. Lesson 02 explains the limits.</span></li>
           </ul>
           </div>
 
@@ -1152,144 +1060,88 @@ ul.clean li b, ul.clean li strong{color:var(--content-primary);}
           <div class="section-eyebrow">Working in parallel</div>
           <h3>Sessions and Routines</h3>
           <ul class="steps">
-            <li><span class="step-t">New session</span><span class="step-d">Start a fresh session for each task with <b>Ctrl/Cmd&nbsp;+&nbsp;N</b>. Lesson 04 explains why one task per session matters.</span></li>
+            <li><span class="step-t">New session</span><span class="step-d">Start a fresh session for each task with <b>Ctrl/Cmd&nbsp;+&nbsp;N</b>. Lesson 02 explains why one task per session matters.</span></li>
             <li><span class="step-t">Session list</span><span class="step-d">Your running sessions appear together. A session that needs your attention shows a small dot, so you can let work run in the background and check back. Open one to read its transcript or mark it complete.</span></li>
-            <li><span class="step-t">Routines</span><span class="step-d">Found near the top of the window, routines let Claude run a task on a schedule and notify you. Lesson 06 sets one up.</span></li>
+            <li><span class="step-t">Routines</span><span class="step-d">Found near the top of the window, routines let Claude run a task on a schedule and notify you. Lesson 04 sets one up.</span></li>
           </ul>
           </div>
 
           <div class="callout key">
             <div class="co-head"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1V18h6v-1.2c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2z"/></svg> Key Takeaway</div>
-            <p>Two controls matter most as you start: the <b>working folder</b> (what Claude can see) and the <b>permission mode</b> (what Claude can do without asking). Get comfortable with those two and the rest of the window falls into place.</p>
+            <p>Claude Code is the most capable Claude surface because it can act on your files and systems. Two controls matter most as you start: the <b>working folder</b> (what Claude can see) and the <b>permission mode</b> (what Claude can do without asking).</p>
           </div>
         </div>
       </section>
 
-<!-- MODELS, EFFORT & USAGE -->
+<!-- MODELS, USAGE & CONTEXT -->
 <section class="segment" id="p-models">
         <div class="band band-hero">
           <canvas class="hero-canvas" aria-hidden="true"></canvas>
           <div class="band-top">
-            <span class="band-num">03</span>
+            <span class="band-num">02</span>
             <span class="pill type">Concept</span>
-            <span class="pill time">8 min</span>
+            <span class="pill time">12 min</span>
           </div>
-          <div class="band-eyebrow">Capability and cost</div>
-          <h2>Models, Effort &amp; Usage</h2>
+          <div class="band-eyebrow">Capability, cost, and working memory</div>
+          <h2>Models, Usage &amp; Context</h2>
         </div>
         <div class="panel">
-          <p class="lead">Two controls decide how much horsepower Claude brings to a task: the model and the effort level. They also decide how fast you move through your usage. The habit to build is simple: start with the lightest combination that can do the job, and move up only when the work needs it.</p>
+          <p class="lead">Two controls decide how much horsepower Claude brings to a task: the model and the effort level. They also decide how fast you move through your usage. And everything you do happens inside a context window, Claude's working memory for the session. A little intention with all three keeps Claude both capable and accurate.</p>
           <div class="callout checkpoint">
             <div class="co-head"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2z"/><path d="M12 8v4l3 3"/></svg> Lesson Objective</div>
-            <p>Choose a model and effort level that fit a task, and read your usage so you know how much headroom you have.</p>
+            <p>Set the model and effort in Claude Code, read your usage so you know your headroom, and keep one task per session so the context window stays clean.</p>
           </div>
 
           <div class="lesson-section section-orange">
           <div class="section-eyebrow">Model and effort</div>
-          <h3>Choosing Models and Effort</h3>
-          <p>The model sets the level of capability Claude brings. Effort controls how much reasoning it spends before answering. Heavier choices can improve hard work, but they use more tokens and move you through your limits faster.</p>
+          <h3>The Controls in Claude Code</h3>
+          <p>The model sets the level of capability Claude brings. Effort controls how much reasoning it spends before answering. Heavier choices can improve hard work, but they use more tokens and move you through your limits faster. The habit to build is simple: start with the lightest combination that can do the job, and move up only when the work needs it.</p>
           <div class="callout tip">
             <div class="co-head"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 2"/><path d="M16 3.7 18 2v5h-5l1.8-1.5"/></svg> Models change often</div>
             <p>Model names, defaults, and available settings change over time. Check the current Claude menu and UiPath guidance before choosing.</p>
           </div>
 
           <div class="settings-sim" id="settingsSim">
-            <div class="seg-toggle" role="tablist" aria-label="Settings view">
-              <button type="button" class="seg-btn active" role="tab" aria-selected="true" data-view="explore">Try the settings</button>
-              <button type="button" class="seg-btn" role="tab" aria-selected="false" data-view="ref">Reference tables</button>
-            </div>
-
-            <div class="ss-view" data-view="explore">
-              <p class="rb-hint">Pick a model and an effort level. The readout shows what each choice changes. Start light, and move up only when the task needs it.</p>
-              <div class="ss-controls">
-                <div class="ss-group">
-                  <span class="ss-glabel">Model</span>
-                  <div class="ss-seg" data-control="model" role="group" aria-label="Model">
-                    <button type="button" data-val="Haiku">Haiku</button>
-                    <button type="button" data-val="Sonnet" class="on">Sonnet</button>
-                    <button type="button" data-val="Opus">Opus</button>
-                  </div>
-                </div>
-                <div class="ss-group">
-                  <span class="ss-glabel">Effort</span>
-                  <div class="ss-seg" data-control="effort" role="group" aria-label="Effort">
-                    <button type="button" data-val="Low" class="on">Low</button>
-                    <button type="button" data-val="Medium or High">Medium / High</button>
-                    <button type="button" data-val="Max">Max</button>
-                  </div>
-                </div>
-                <div class="ss-group">
-                  <span class="ss-glabel">Thinking</span>
-                  <div class="ss-seg" data-control="thinking" role="group" aria-label="Thinking">
-                    <button type="button" data-val="off" class="on">Off</button>
-                    <button type="button" data-val="on">On</button>
-                  </div>
+            <p class="rb-hint">Pick a model and an effort level. The readout shows what each choice changes in Claude Code. Start light, and move up only when the task needs it.</p>
+            <div class="ss-controls">
+              <div class="ss-group">
+                <span class="ss-glabel">Model</span>
+                <div class="ss-seg" data-control="model" role="group" aria-label="Model">
+                  <button type="button" data-val="Haiku">Haiku</button>
+                  <button type="button" data-val="Sonnet" class="on">Sonnet</button>
+                  <button type="button" data-val="Opus">Opus</button>
                 </div>
               </div>
-              <div class="ss-readout" id="ssReadout" aria-live="polite"></div>
-            </div>
-
-            <div class="ss-view" data-view="ref" hidden>
-              <p><strong>Choose the model based on the kind of work.</strong></p>
-              <div class="decision-table setting-table" role="table" aria-label="Claude model selection guide">
-                <div class="dt-header" role="row">
-                  <div class="dt-q-head" role="columnheader">Model</div>
-                  <div class="dt-q-head" role="columnheader">Use it when</div>
-                  <div class="dt-q-head" role="columnheader">What changes</div>
-                </div>
-                <div class="dt-row" role="row">
-                  <div class="dt-cell dt-choice" role="cell">Haiku</div>
-                  <div class="dt-cell dt-use" role="cell">The task is simple and low-stakes, like a quick check or lookup.</div>
-                  <div class="dt-cell dt-impact" role="cell">Fastest and lightest, with less depth for nuance or complex reasoning.</div>
-                </div>
-                <div class="dt-row" role="row">
-                  <div class="dt-cell dt-choice" role="cell">Sonnet</div>
-                  <div class="dt-cell dt-use" role="cell">You are doing normal day-to-day work: writing, analysis, drafting, or general tasks.</div>
-                  <div class="dt-cell dt-impact" role="cell">The best starting point for most work. It balances quality, speed, and token use.</div>
-                </div>
-                <div class="dt-row" role="row">
-                  <div class="dt-cell dt-choice" role="cell">Opus</div>
-                  <div class="dt-cell dt-use" role="cell">The task is genuinely hard, such as writing code or building something substantial.</div>
-                  <div class="dt-cell dt-impact" role="cell">The most depth, but it can use tokens five to fifteen times faster, so reach for it on purpose.</div>
+              <div class="ss-group">
+                <span class="ss-glabel">Effort</span>
+                <div class="ss-seg" data-control="effort" role="group" aria-label="Effort">
+                  <button type="button" data-val="Low" class="on">Low</button>
+                  <button type="button" data-val="Medium or High">Medium / High</button>
+                  <button type="button" data-val="Max">Max</button>
                 </div>
               </div>
-
-              <p><strong>Choose the effort based on how much thinking the task needs.</strong></p>
-              <div class="decision-table setting-table" role="table" aria-label="Claude effort selection guide">
-                <div class="dt-header" role="row">
-                  <div class="dt-q-head" role="columnheader">Effort</div>
-                  <div class="dt-q-head" role="columnheader">Use it when</div>
-                  <div class="dt-q-head" role="columnheader">What changes</div>
-                </div>
-                <div class="dt-row" role="row">
-                  <div class="dt-cell dt-choice" role="cell">Low</div>
-                  <div class="dt-cell dt-use" role="cell">The request is straightforward and you want a quick result.</div>
-                  <div class="dt-cell dt-impact" role="cell">Fastest response and lowest token use, with less exploration of tradeoffs.</div>
-                </div>
-                <div class="dt-row" role="row">
-                  <div class="dt-cell dt-choice" role="cell">Medium or High</div>
-                  <div class="dt-cell dt-use" role="cell">Claude needs to compare options, work from multiple inputs, or be more careful. A good everyday default.</div>
-                  <div class="dt-cell dt-impact" role="cell">More thoughtful output, with more tokens and a longer response time.</div>
-                </div>
-                <div class="dt-row" role="row">
-                  <div class="dt-cell dt-choice" role="cell">Max</div>
-                  <div class="dt-cell dt-use" role="cell">The task is hard and the extra thinking is worth the tradeoff.</div>
-                  <div class="dt-cell dt-impact" role="cell">The most intensive setting. Use it sparingly because it consumes tokens quickly.</div>
+              <div class="ss-group">
+                <span class="ss-glabel">Thinking</span>
+                <div class="ss-seg" data-control="thinking" role="group" aria-label="Thinking">
+                  <button type="button" data-val="off" class="on">Off</button>
+                  <button type="button" data-val="on">On</button>
                 </div>
               </div>
             </div>
+            <div class="ss-readout" id="ssReadout" aria-live="polite"></div>
           </div>
 
           <div class="callout warn">
             <div class="co-head"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/></svg> Move up on purpose</div>
             <p>If the first answer is too shallow, raise the model, the effort, or both. For most work, start with Sonnet at medium effort and reserve Opus for code and heavy building.</p>
           </div>
+          <p class="learn-more"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1"/><path d="M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg> <span><b>Claude 101</b> has the full model-choice reference, Haiku vs. Sonnet vs. Opus, if you want the rationale behind each.</span></p>
           </div>
 
           <div class="lesson-section section-teal">
           <div class="section-eyebrow">Context size</div>
           <h3>200K vs 1M Context</h3>
-          <p>Some models offer a one-million-token context, five times the default of two hundred thousand. Context is Claude's working memory for the task at hand. The larger window costs extra and uses your limits faster, so the default is the right choice unless you are genuinely working across a very large amount of material. Keeping each task in its own session, which the next lesson covers, usually matters more than a bigger window.</p>
+          <p>Some models offer a one-million-token context, five times the default of two hundred thousand. Context is Claude's working memory for the task at hand. The larger window costs extra and uses your limits faster, so the default is the right choice unless you are genuinely working across a very large amount of material. Keeping each task in its own session, covered below, usually matters more than a bigger window.</p>
           </div>
 
           <div class="lesson-section section-orange">
@@ -1305,27 +1157,6 @@ ul.clean li b, ul.clean li strong{color:var(--content-primary);}
             <div class="co-head"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1V18h6v-1.2c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2z"/></svg> Don't ration yourself into worse work</div>
             <p>The limits exist to be used. Pick the model and effort the task deserves rather than always defaulting to the lightest option to save tokens. If you run out, extra usage is there and more can be requested.</p>
           </div>
-          </div>
-        </div>
-      </section>
-
-<!-- CONTEXT & SESSIONS -->
-<section class="segment" id="p-context">
-        <div class="band band-hero">
-          <canvas class="hero-canvas" aria-hidden="true"></canvas>
-          <div class="band-top">
-            <span class="band-num">04</span>
-            <span class="pill type">Concept</span>
-            <span class="pill time">7 min</span>
-          </div>
-          <div class="band-eyebrow">Keep Claude sharp</div>
-          <h2>Context &amp; Sessions</h2>
-        </div>
-        <div class="panel">
-          <p class="lead">Claude works inside a context window: its working memory for the current session. When that memory fills up, quality drops in ways that are easy to mistake for the model getting worse. A little discipline about sessions keeps Claude accurate.</p>
-          <div class="callout checkpoint">
-            <div class="co-head"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2z"/><path d="M12 8v4l3 3"/></svg> Lesson Objective</div>
-            <p>Explain what compaction is, recognize when it has happened, and use one session per task to avoid it.</p>
           </div>
 
           <div class="lesson-section section-teal">
@@ -1353,201 +1184,230 @@ ul.clean li b, ul.clean li strong{color:var(--content-primary);}
 
           <div class="callout key">
             <div class="co-head"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1V18h6v-1.2c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2z"/></svg> Key Takeaway</div>
-            <p>One task, one session. It keeps each task in clean working memory, avoids cross-contamination, and delays compaction. It is the cheapest reliability habit you have.</p>
+            <p>Start light on model and effort and move up on purpose, glance at your usage so nothing surprises you, and give each task its own session. One task, one session is the cheapest reliability habit you have.</p>
           </div>
         </div>
       </section>
 
-<!-- BEST PRACTICES & RESPONSIBLE USE -->
-<section class="segment" id="p-habits">
+<!-- PERMISSIONS, MEMORY & OWNERSHIP -->
+<section class="segment" id="p-working">
         <div class="band band-hero">
           <canvas class="hero-canvas" aria-hidden="true"></canvas>
           <div class="band-top">
-            <span class="band-num">05</span>
+            <span class="band-num">03</span>
             <span class="pill type">Habits</span>
             <span class="pill time">12 min</span>
           </div>
           <div class="band-eyebrow">Use Claude Code well</div>
-          <h2>Best Practices &amp; Responsible Use</h2>
+          <h2>Permissions, Memory &amp; Ownership</h2>
         </div>
         <div class="panel">
-          <p class="lead">Claude Code is powerful because it can act. These habits keep that power pointed in the right direction: control what it is allowed to do, give it the context it needs, let it remember the stable facts about you, and keep ownership of the result.</p>
+          <p class="lead">Claude Code is powerful because it can act. These habits keep that power pointed in the right direction: control what it is allowed to do, let it remember the stable facts about you, keep your work in focused folders, and keep ownership of the result.</p>
           <div class="callout checkpoint">
             <div class="co-head"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2z"/><path d="M12 8v4l3 3"/></svg> Lesson Objective</div>
-            <p>Pick the right permission mode, prompt with intention, set durable context with memory and folders, and keep responsibility for what Claude produces.</p>
+            <p>Pick the right permission mode, recognize what each in-the-moment prompt is asking, set durable context with memory and folders, and keep responsibility for what Claude produces.</p>
           </div>
 
           <div class="lesson-section section-teal">
           <div class="section-eyebrow">Stay in charge</div>
           <h3>Permissions: What Claude May Do</h3>
-          <p>You are always in charge of what Claude is doing. The permission mode sets how often it checks with you before it acts. Browse the three modes, then see the choices you get in the moment.</p>
-          <div class="tool-carousel" id="permCarousel" tabindex="0">
+          <p>You are always in charge of what Claude is doing. A permission <b>mode</b> sets how much it does before checking with you, and a permission <b>prompt</b> is the choice you make in the moment when it does stop to ask. Start with the modes, then see the prompts.</p>
+
+          <h4 class="sub-h">Permission modes: how Claude runs</h4>
+          <p>Claude Code has session-level operating modes that control how much it does before asking. You can change the active mode from the toolbar.</p>
+          <div class="tool-carousel" id="permModeCarousel" tabindex="0">
             <div class="tool-3d-stage">
 
               <div class="tool-slide">
-                <div class="tc-header tc-header-chat">
+                <div class="tc-header tc-header-ask">
                   <div class="tc-icon"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2z"/><path d="M12 8v4M12 16h.01"/></svg></div>
                   <div class="tc-name">Ask</div>
-                  <div class="tc-badge">Most cautious</div>
+                  <div class="tc-badge">Default</div>
                 </div>
                 <div class="tc-body">
                   <div class="tc-section">
-                    <span class="tc-lbl tc-lbl-chat">What it means</span>
-                    <p class="tc-text">Claude asks for permission before it does anything. Nothing happens without your say-so.</p>
+                    <span class="tc-lbl tc-lbl-ask">What it means</span>
+                    <p class="tc-text">Claude asks for permission before every significant action: running commands, editing files, calling external services. Nothing happens without your say-so.</p>
                   </div>
                   <div class="tc-section">
-                    <span class="tc-lbl tc-lbl-chat">Use when</span>
-                    <div class="tc-use-when chat">You are new, the work is sensitive, or you want to watch every step.</div>
+                    <span class="tc-lbl tc-lbl-ask">Use when</span>
+                    <div class="tc-use-when ask">You are new, the work is sensitive, or you want to watch every step. This is your starting point for any unfamiliar session.</div>
                   </div>
                 </div>
               </div>
 
               <div class="tool-slide">
-                <div class="tc-header tc-header-cowork">
-                  <div class="tc-icon"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg></div>
-                  <div class="tc-name">Accept edits</div>
-                  <div class="tc-badge">Smoother flow</div>
-                </div>
-                <div class="tc-body">
-                  <div class="tc-section">
-                    <span class="tc-lbl tc-lbl-cowork">What it means</span>
-                    <p class="tc-text">Claude proceeds with reads and edits on its own, and only stops to ask for actions that are not already allowed.</p>
-                  </div>
-                  <div class="tc-section">
-                    <span class="tc-lbl tc-lbl-cowork">Use when</span>
-                    <div class="tc-use-when cowork">You trust the task and want fewer interruptions, but still want a stop on anything unusual.</div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="tool-slide">
-                <div class="tc-header tc-header-code">
+                <div class="tc-header tc-header-plan">
                   <div class="tc-icon"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
                   <div class="tc-name">Plan</div>
                   <div class="tc-badge">Review first</div>
                 </div>
                 <div class="tc-body">
                   <div class="tc-section">
-                    <span class="tc-lbl tc-lbl-code">What it means</span>
+                    <span class="tc-lbl tc-lbl-plan">What it means</span>
                     <p class="tc-text">Claude writes a plan first and asks for the permissions it expects up front. You can revise the plan before it runs. It may still pause mid-run if it needs something new.</p>
                   </div>
                   <div class="tc-section">
-                    <span class="tc-lbl tc-lbl-code">Use when</span>
-                    <div class="tc-use-when code">The work is multi-step and you want to approve the approach before anything happens.</div>
+                    <span class="tc-lbl tc-lbl-plan">Use when</span>
+                    <div class="tc-use-when plan">The work is multi-step and you want to approve the approach before anything happens, such as a refactor or a bulk update you cannot easily undo.</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="tool-slide">
+                <div class="tc-header tc-header-auto">
+                  <div class="tc-icon"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg></div>
+                  <div class="tc-name">Auto</div>
+                  <div class="tc-badge">Less oversight</div>
+                </div>
+                <div class="tc-body">
+                  <div class="tc-section">
+                    <span class="tc-lbl tc-lbl-auto">What it means</span>
+                    <p class="tc-text">Claude auto-approves low-risk operations like reading files, searching, and safe commands, and still asks for higher-risk actions like writes or external calls.</p>
+                  </div>
+                  <div class="tc-section">
+                    <span class="tc-lbl tc-lbl-auto">Use when</span>
+                    <div class="tc-use-when auto">A trusted, repetitive workflow you have already verified. Avoid it on a first run or when connected to production systems, since you will not see every intermediate step.</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="tool-slide">
+                <div class="tc-header tc-header-accept">
+                  <div class="tc-icon"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></div>
+                  <div class="tc-name">Accept edits</div>
+                  <div class="tc-badge">Edits auto-approved</div>
+                </div>
+                <div class="tc-body">
+                  <div class="tc-section">
+                    <span class="tc-lbl tc-lbl-accept">What it means</span>
+                    <p class="tc-text">Claude proceeds with reads and file edits on its own, and only stops to ask for actions that are not already allowed, such as commands or external calls.</p>
+                  </div>
+                  <div class="tc-section">
+                    <span class="tc-lbl tc-lbl-accept">Use when</span>
+                    <div class="tc-use-when accept">An active session with many expected file changes and you want fewer interruptions. Review your changes afterward, since you will not see each edit in real time.</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="tool-slide">
+                <div class="tc-header tc-header-bypass">
+                  <div class="tc-icon"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2z"/><path d="M4.9 4.9l14.2 14.2"/></svg></div>
+                  <div class="tc-name">Bypass permissions</div>
+                  <div class="tc-badge">No guardrails</div>
+                </div>
+                <div class="tc-body">
+                  <div class="tc-section">
+                    <span class="tc-lbl tc-lbl-bypass">What it means</span>
+                    <p class="tc-text">All permission checks are disabled. Claude acts without asking: no prompts, no diff previews, no safety gates.</p>
+                  </div>
+                  <div class="tc-section">
+                    <span class="tc-lbl tc-lbl-bypass">Use when</span>
+                    <div class="tc-use-when bypass">Automated pipelines and sandboxed environments only. Never in an interactive session, where there is no undo and no review. When in doubt, use <b>Ask</b>.</div>
                   </div>
                 </div>
               </div>
 
             </div>
             <div class="tool-dots">
-              <button class="tool-dot chat active" aria-label="Ask"></button>
-              <button class="tool-dot cowork" aria-label="Accept edits"></button>
-              <button class="tool-dot code" aria-label="Plan"></button>
+              <button class="tool-dot ask active" aria-label="Ask"></button>
+              <button class="tool-dot plan" aria-label="Plan"></button>
+              <button class="tool-dot auto" aria-label="Auto"></button>
+              <button class="tool-dot accept" aria-label="Accept edits"></button>
+              <button class="tool-dot bypass" aria-label="Bypass permissions"></button>
             </div>
-            <div class="tool-counter">1 of 3 · Ask</div>
+            <div class="tool-counter">1 of 5 · Ask</div>
           </div>
-          <p>When Claude does ask, you have a few choices in the moment:</p>
-          <ul class="steps">
-            <li><span class="step-t">Allow once</span><span class="step-d">Permit this single action and ask again next time. A safe default for anything new.</span></li>
-            <li><span class="step-t">Always allow</span><span class="step-d">Permit this kind of action for the session. Good for harmless, repeated reads like a web search.</span></li>
-            <li><span class="step-t">Approve, revise, or deny a plan</span><span class="step-d">When Claude proposes a plan, you can accept it, leave a comment to adjust it, or deny it outright.</span></li>
-          </ul>
+
+          <h4 class="sub-h">Permission prompts: what Claude is actually asking</h4>
+          <p>When Claude wants to take an action it pauses and asks. You will see one of these choices in the moment:</p>
+          <div class="tool-carousel" id="permPromptCarousel" tabindex="0">
+            <div class="tool-3d-stage">
+
+              <div class="tool-slide">
+                <div class="tc-header tc-header-allow">
+                  <div class="tc-icon"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg></div>
+                  <div class="tc-name">Allow once</div>
+                  <div class="tc-badge">Low risk</div>
+                </div>
+                <div class="tc-body">
+                  <div class="tc-section">
+                    <span class="tc-lbl tc-lbl-allow">What it means</span>
+                    <p class="tc-text">Permit this single action, this time only. Claude will ask again the next time it wants to do the same thing.</p>
+                  </div>
+                  <div class="tc-section">
+                    <span class="tc-lbl tc-lbl-allow">Use when</span>
+                    <div class="tc-use-when allow">Your default for anything you have not done before. Safe when you want to stay informed as you build familiarity with a workflow.</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="tool-slide">
+                <div class="tc-header tc-header-always">
+                  <div class="tc-icon"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/></svg></div>
+                  <div class="tc-name">Always allow</div>
+                  <div class="tc-badge">Use with care</div>
+                </div>
+                <div class="tc-body">
+                  <div class="tc-section">
+                    <span class="tc-lbl tc-lbl-always">What it means</span>
+                    <p class="tc-text">Permit this kind of action for the rest of the session. Claude will not ask again; it just acts each time.</p>
+                  </div>
+                  <div class="tc-section">
+                    <span class="tc-lbl tc-lbl-always">Use when</span>
+                    <div class="tc-use-when always">Only for low-risk, fully understood actions like a web search or reading a file you own. Never for writes to shared systems. When in doubt, <b>Allow once</b> is safer.</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="tool-slide">
+                <div class="tc-header tc-header-approve">
+                  <div class="tc-icon"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg></div>
+                  <div class="tc-name">Approve a plan</div>
+                  <div class="tc-badge">Review the detail</div>
+                </div>
+                <div class="tc-body">
+                  <div class="tc-section">
+                    <span class="tc-lbl tc-lbl-approve">What it means</span>
+                    <p class="tc-text">When Claude proposes a plan or a change, it shows you what it intends to do before doing it. You can accept it, leave a comment to revise it, or deny it.</p>
+                  </div>
+                  <div class="tc-section">
+                    <span class="tc-lbl tc-lbl-approve">Use when</span>
+                    <div class="tc-use-when approve">Anything that writes, updates, or deletes: files, records, messages, commits. If you could not undo it by hand in thirty seconds, see it before it happens.</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="tool-slide">
+                <div class="tc-header tc-header-deny">
+                  <div class="tc-icon"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></div>
+                  <div class="tc-name">Deny</div>
+                  <div class="tc-badge">Block it</div>
+                </div>
+                <div class="tc-body">
+                  <div class="tc-section">
+                    <span class="tc-lbl tc-lbl-deny">What it means</span>
+                    <p class="tc-text">Block the action entirely. Claude stops, explains what it was trying to do, and waits for new instructions from you.</p>
+                  </div>
+                  <div class="tc-section">
+                    <span class="tc-lbl tc-lbl-deny">Use when</span>
+                    <div class="tc-use-when deny">Whenever something looks wrong or unexpected. Denying never breaks anything; it is always the safe choice. You can redirect Claude afterward.</div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <div class="tool-dots">
+              <button class="tool-dot allow active" aria-label="Allow once"></button>
+              <button class="tool-dot always" aria-label="Always allow"></button>
+              <button class="tool-dot approve" aria-label="Approve a plan"></button>
+              <button class="tool-dot deny" aria-label="Deny"></button>
+            </div>
+            <div class="tool-counter">1 of 4 · Allow once</div>
+          </div>
           <div class="callout tip">
             <div class="co-head"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1V18h6v-1.2c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2z"/></svg> Always allow the reads, approve the writes</div>
             <p>A common setup is to always allow read-only actions like web search, while still approving anything that writes or changes a system. You get speed where it is safe and a checkpoint where it counts.</p>
-          </div>
-          </div>
-
-          <div class="lesson-section section-orange">
-          <div class="section-eyebrow">Prompting with intention</div>
-          <h3>Prompt with Intention</h3>
-          <p>You do not need perfect prompts. Specific context produces accurate output; vague prompts produce guesswork. When you want a stronger response, <strong>RTCFC</strong> helps you decide what to include.</p>
-          <div class="rtcfc-builder" id="rtcfcBuilder">
-            <div class="seg-toggle" role="tablist" aria-label="RTCFC view">
-              <button type="button" class="seg-btn active" role="tab" aria-selected="true" data-view="build">Build a prompt</button>
-              <button type="button" class="seg-btn" role="tab" aria-selected="false" data-view="ref">Reference table</button>
-            </div>
-            <div class="rb-view" data-view="build">
-              <p class="rb-hint">Toggle the elements you want. Your prompt assembles below in order, ready to copy. Each element shows what it adds and why.</p>
-              <div class="rb-chips" role="group" aria-label="Prompt elements">
-                <button type="button" class="rb-chip" data-key="role" aria-pressed="false"><span class="rb-chip-k">R</span> Role &amp; audience</button>
-                <button type="button" class="rb-chip" data-key="task" aria-pressed="false"><span class="rb-chip-k">T</span> Task &amp; goal</button>
-                <button type="button" class="rb-chip" data-key="context" aria-pressed="false"><span class="rb-chip-k">C</span> Context</button>
-                <button type="button" class="rb-chip" data-key="format" aria-pressed="false"><span class="rb-chip-k">F</span> Format</button>
-                <button type="button" class="rb-chip" data-key="constraints" aria-pressed="false"><span class="rb-chip-k">C</span> Constraints</button>
-              </div>
-              <div class="rb-active" id="rbActive" hidden></div>
-              <div class="code rb-preview">
-                <div class="code-bar">
-                  <span class="code-label">Your prompt</span>
-                  <button class="code-copy" id="rbCopy" type="button" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy</button>
-                </div>
-                <pre><code id="rbOut" data-empty="Toggle elements above to start building your prompt."></code></pre>
-              </div>
-            </div>
-            <div class="rb-view" data-view="ref" hidden>
-              <div class="decision-table setting-table" role="table" aria-label="RTCFC prompt checklist">
-                <div class="dt-header" role="row">
-                  <div class="dt-q-head" role="columnheader">Prompt element</div>
-                  <div class="dt-q-head" role="columnheader">What to include</div>
-                  <div class="dt-q-head" role="columnheader">Example</div>
-                </div>
-                <div class="dt-row" role="row">
-                  <div class="dt-cell dt-choice" role="cell">Role and audience</div>
-                  <div class="dt-cell dt-use" role="cell">Tell Claude the perspective to use and who the output is for.</div>
-                  <div class="dt-cell dt-impact" role="cell">Act as a release manager writing for the wider team.</div>
-                </div>
-                <div class="dt-row" role="row">
-                  <div class="dt-cell dt-choice" role="cell">Task and goal</div>
-                  <div class="dt-cell dt-use" role="cell">Say exactly what to produce and what success looks like.</div>
-                  <div class="dt-cell dt-impact" role="cell">Summarize what changed and draft the announcement.</div>
-                </div>
-                <div class="dt-row" role="row">
-                  <div class="dt-cell dt-choice" role="cell">Context</div>
-                  <div class="dt-cell dt-use" role="cell">Give the details Claude needs so it does not guess.</div>
-                  <div class="dt-cell dt-impact" role="cell">Use the changelog in this folder and last release's note as a model.</div>
-                </div>
-                <div class="dt-row" role="row">
-                  <div class="dt-cell dt-choice" role="cell">Format</div>
-                  <div class="dt-cell dt-use" role="cell">Specify the shape of the answer.</div>
-                  <div class="dt-cell dt-impact" role="cell">A short email, then a bullet list of highlights.</div>
-                </div>
-                <div class="dt-row" role="row">
-                  <div class="dt-cell dt-choice" role="cell">Constraints</div>
-                  <div class="dt-cell dt-use" role="cell">Set guardrails for length, tone, and what to avoid.</div>
-                  <div class="dt-cell dt-impact" role="cell">Under 150 words, plainspoken, and flag anything I should verify.</div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="callout activity">
-            <div class="co-head"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg> Try this: let Claude improve your prompt</div>
-            <p>Not sure your prompt is strong enough? Paste it and ask Claude to make it better. Claude is patient, and asking it how to prompt is one of the fastest ways to learn.</p>
-            <div class="code">
-              <div class="code-bar">
-                <span class="code-label">Copy/paste prompt</span>
-                <button class="code-copy" data-copy><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy</button>
-              </div>
-              <pre><code>Here is a prompt I want to use: "[paste your rough prompt]".
-Tell me what is vague or missing, then rewrite it so it gives you clearer direction.</code></pre>
-            </div>
-          </div>
-          </div>
-
-          <div class="lesson-section section-purple">
-          <div class="section-eyebrow">Set it once</div>
-          <h3>Vague vs. Specific, Side by Side</h3>
-          <p>The same request, two ways. Flip between them to see what specifics add.</p>
-          <div class="promptflip" data-state="vague">
-            <div class="pf-toggle" role="group" aria-label="Prompt version: weak or strong">
-              <span class="pf-thumb" aria-hidden="true"></span>
-              <button type="button" class="pf-opt" data-v="vague" aria-pressed="true">Weak</button>
-              <button type="button" class="pf-opt" data-v="precise" aria-pressed="false">Strong</button>
-            </div>
-            <p class="pf-text" data-v="vague">Summarize this folder for me.</p>
-            <p class="pf-note" data-v="vague">Claude has to guess what matters, who it is for, and how long it should be.</p>
-            <p class="pf-text" data-v="precise" hidden>Read the files in this folder and write a <mark class="pf-hl">one-page status update for my manager</mark>. <mark class="pf-hl">Lead with what changed this week</mark>, <mark class="pf-hl">list open risks with owners</mark>, and <mark class="pf-hl">flag anything you inferred</mark> so I can check it.</p>
-            <p class="pf-note" data-v="precise" hidden>The role, the focus, the format, and the review cue give Claude a clear target instead of a guess.</p>
           </div>
           </div>
 
@@ -1578,73 +1438,29 @@ Tell me what is vague or missing, then rewrite it so it gives you clearer direct
           <p>Claude assists you. It does not replace you, and it does not own the result. You do. Do not have Claude generate something and pass it on unread. Claude is also not deterministic: the same prompt can produce different answers, which is one more reason to read what it gives you.</p>
           <div class="callout key">
             <div class="co-head"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1V18h6v-1.2c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2z"/></svg> Key Takeaway</div>
-            <p>Control what Claude may do, brief it with intention, let it remember the stable context, and read the result before you use it. Those four habits cover almost everything that goes wrong.</p>
+            <p>Control what Claude may do, let it remember the stable context, keep your work in focused folders, and read the result before you use it. Those habits cover almost everything that goes wrong.</p>
           </div>
           </div>
         </div>
       </section>
 
-<!-- ROUTINES & AUTOMATION -->
-<section class="segment" id="p-routines">
-        <div class="band band-hero">
-          <canvas class="hero-canvas" aria-hidden="true"></canvas>
-          <div class="band-top">
-            <span class="band-num">06</span>
-            <span class="pill type">Concept</span>
-            <span class="pill time">6 min</span>
-          </div>
-          <div class="band-eyebrow">Let work run on a schedule</div>
-          <h2>Routines &amp; Automation</h2>
-        </div>
-        <div class="panel">
-          <p class="lead">A routine is a task you ask Claude to run on a schedule instead of kicking off by hand each time. It is how a one-off prompt becomes something that quietly keeps you informed without you remembering to ask.</p>
-          <div class="callout checkpoint">
-            <div class="co-head"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2z"/><path d="M12 8v4l3 3"/></svg> Lesson Objective</div>
-            <p>Describe what a routine is, where to create one, and recognize a task in your own work that a routine could handle.</p>
-          </div>
-
-          <div class="lesson-section section-teal">
-          <div class="section-eyebrow">What it is</div>
-          <h3>A Task on a Timer</h3>
-          <p>You find routines near the top of the Claude Code window. A routine pairs a prompt with a schedule: every hour, every morning, or whatever cadence fits. When it runs, Claude does the task and can notify you, for example by sending a message in Slack or Teams, so the result comes to you instead of you going to look for it.</p>
-          </div>
-
-          <div class="lesson-section section-orange">
-          <div class="section-eyebrow">A concrete example</div>
-          <h3>A Daily Folder Summary</h3>
-          <p>Say a shared folder collects reports through the day and you want a quick read each morning. Instead of opening it and skimming, you set a routine.</p>
-          <ul class="steps">
-            <li><span class="step-t">Write the task</span><span class="step-d">"Each weekday at 8am, summarize any new files in this folder into five bullets, and call out anything that looks urgent."</span></li>
-            <li><span class="step-t">Set the schedule</span><span class="step-d">Choose the cadence in the routine settings, such as every weekday morning.</span></li>
-            <li><span class="step-t">Choose how you hear about it</span><span class="step-d">Ask Claude to send the summary to you on Slack or Teams so it lands where you already work.</span></li>
-          </ul>
-          <p>The same shape works for many jobs: a recurring digest, a periodic check on a status page, or a reminder built from whatever Claude can see.</p>
-          </div>
-
-          <div class="callout tip">
-            <div class="co-head"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1V18h6v-1.2c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2z"/></svg> The same care applies</div>
-            <p>A routine acts on your behalf while you are not watching, so scope it tightly and prefer read-and-report tasks over ones that change systems. Everything from the permissions lesson still holds when the work runs on a timer.</p>
-          </div>
-        </div>
-      </section>
-
-<!-- CONNECTION METHODS -->
+<!-- CONNECTING & AUTOMATING -->
 <section class="segment" id="p-connect">
         <div class="band band-hero">
           <canvas class="hero-canvas" aria-hidden="true"></canvas>
           <div class="band-top">
-            <span class="band-num">07</span>
+            <span class="band-num">04</span>
             <span class="pill type">Awareness</span>
-            <span class="pill time">9 min</span>
+            <span class="pill time">12 min</span>
           </div>
           <div class="band-eyebrow">Give Claude reach</div>
-          <h2>Connection Methods</h2>
+          <h2>Connecting &amp; Automating</h2>
         </div>
         <div class="panel">
-          <p class="lead">Claude Code is capable on its own, and more capable once it can reach the systems you already use. Those connections come in two flavors. Knowing which is which helps you set them up and reason about what Claude can touch.</p>
+          <p class="lead">Claude Code is capable on its own, and more capable once it can reach the systems you already use. Connections extend what it can touch; routines let a task run on a schedule without you kicking it off. Both add reach, and both deserve the same care you bring to permissions.</p>
           <div class="callout checkpoint">
             <div class="co-head"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2z"/><path d="M12 8v4l3 3"/></svg> Lesson Objective</div>
-            <p>Tell the difference between connector-based and command-line connections, manage per-tool approvals, and apply a safety habit before letting Claude write to a system.</p>
+            <p>Tell connector-based and command-line connections apart, manage per-tool approvals, set up a routine, and apply a safety habit before letting Claude write to a system or run unattended.</p>
           </div>
 
           <div class="lesson-section section-teal">
@@ -1686,32 +1502,76 @@ Tell me what is vague or missing, then rewrite it so it gives you clearer direct
             <p>When a connection can write to a real system, try it against a sandbox or non-production environment first. A change that looks harmless can trigger downstream automations you did not expect. Prove it is safe where mistakes do not matter, then point it at the real thing.</p>
           </div>
           </div>
+
+          <div class="lesson-section section-teal">
+          <div class="section-eyebrow">Work on a schedule</div>
+          <h3>Routines: A Task on a Timer</h3>
+          <p>A routine is a task you ask Claude to run on a schedule instead of kicking off by hand each time. You find routines near the top of the Claude Code window. A routine pairs a prompt with a schedule: every hour, every morning, or whatever cadence fits. When it runs, Claude does the task and can notify you, for example by sending a message in Slack or Teams, so the result comes to you instead of you going to look for it.</p>
+          </div>
+
+          <div class="lesson-section section-orange">
+          <div class="section-eyebrow">A concrete example</div>
+          <h3>A Daily Folder Summary</h3>
+          <p>Say a shared folder collects reports through the day and you want a quick read each morning. Instead of opening it and skimming, you set a routine.</p>
+          <ul class="steps">
+            <li><span class="step-t">Write the task</span><span class="step-d">"Each weekday at 8am, summarize any new files in this folder into five bullets, and call out anything that looks urgent."</span></li>
+            <li><span class="step-t">Set the schedule</span><span class="step-d">Choose the cadence in the routine settings, such as every weekday morning.</span></li>
+            <li><span class="step-t">Choose how you hear about it</span><span class="step-d">Ask Claude to send the summary to you on Slack or Teams so it lands where you already work.</span></li>
+          </ul>
+          <p>The same shape works for many jobs: a recurring digest, a periodic check on a status page, or a reminder built from whatever Claude can see.</p>
+          <div class="callout key">
+            <div class="co-head"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1V18h6v-1.2c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2z"/></svg> The same care applies</div>
+            <p>A connection or a routine acts on your behalf, sometimes while you are not watching. Scope it tightly, prefer read-and-report tasks over ones that change systems, and everything from the permissions lesson still holds when the work runs on a timer.</p>
+          </div>
+          </div>
         </div>
       </section>
 
-<!-- RUNNING A SKILL -->
-<section class="segment" id="p-run">
+<!-- SKILLS: UNDERSTAND, RUN, BUILD, FIND -->
+<section class="segment" id="p-skills">
         <div class="band band-hero">
           <canvas class="hero-canvas" aria-hidden="true"></canvas>
           <div class="band-top">
-            <span class="band-num">08</span>
+            <span class="band-num">05</span>
             <span class="pill type">Hands-On</span>
-            <span class="pill time">8 min</span>
+            <span class="pill time">20 min</span>
           </div>
-          <div class="band-eyebrow">Put a skill to work</div>
-          <h2>Running a Skill</h2>
+          <div class="band-eyebrow">Reusable playbooks for Claude</div>
+          <h2>Skills: Understand, Run, Build &amp; Find</h2>
         </div>
         <div class="panel">
-          <p class="lead">A skill is only useful once you run it. The good news is that running one is easy: install it, then ask for it by name. Let's get a skill onto your machine and watch Claude work through it.</p>
+          <p class="lead">Skills are how Claude Code stops repeating itself. Capture a task once and Claude follows the same playbook every time you ask. This lesson moves through the whole arc: what a skill is, how to run one, how to build your own, and where to find skills other teams have already made.</p>
           <div class="callout checkpoint">
             <div class="co-head"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2z"/><path d="M12 8v4l3 3"/></svg> Lesson Objective</div>
-            <p>Install a skill the simplest way, run it, and read what Claude is doing while it runs.</p>
+            <p>Explain what an Agent Skill is, install and run one, create a simple personal skill, and find a skill in the marketplace using any of the install methods.</p>
+          </div>
+
+          <div class="lesson-section section-purple">
+          <div class="section-eyebrow">Understand</div>
+          <h3>What is an Agent Skill?</h3>
+          <p>A skill is a reusable playbook you give Claude for a specific task. Instead of explaining what you need from scratch every session, a skill captures it once: the steps, the rules, and the expected output. Claude picks it up automatically when your request matches.</p>
+          <p>A skill is mostly just a folder with a text file. The most important file is <code>SKILL.md</code>. Its top section, called frontmatter, declares the skill's name and description. The rest is plain Markdown: the workflow, the rules, and examples.</p>
+          <div class="code">
+            <div class="code-bar">
+              <span class="code-label">A skill on disk</span>
+              <button class="code-copy" data-copy><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy</button>
+            </div>
+            <pre><code>meeting-notes-summarizer/
+  SKILL.md          # the instructions Claude reads
+  scripts/          # optional: code the skill can run for repeatable steps
+    format.py
+  references/       # optional: extra docs Claude loads only when needed</code></pre>
+          </div>
+          <div class="callout tip">
+            <div class="co-head"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1V18h6v-1.2c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2z"/></svg> Skills and scripts together</div>
+            <p>Skills handle judgment, context, and variation: the things that change case by case. Scripts handle what is fast and fixed: retrieval, formatting, and predictable transformations. Together they are more reliable than either alone, because Claude does not have to reinvent the routine steps every time.</p>
+          </div>
           </div>
 
           <div class="lesson-section section-teal">
-          <div class="section-eyebrow">Get a skill</div>
-          <h3>Install One the Easy Way</h3>
-          <p>The simplest path needs no extra setup: download a skill as a ZIP, unzip it, and install it with one command. Start with a read-only skill so the first run cannot change anything.</p>
+          <div class="section-eyebrow">Run</div>
+          <h3>Install One the Easy Way, Then Ask for It</h3>
+          <p>A skill is only useful once you run it, and running one is easy: install it, then ask for it by name. The simplest path needs no extra setup: download a skill as a ZIP, unzip it, and install it with one command. Start with a read-only skill so the first run cannot change anything.</p>
           <ul class="steps">
             <li><span class="step-t">Download and unzip</span><span class="step-d">Download the skill's ZIP and extract it, for example into your Downloads folder.</span></li>
             <li><span class="step-t">Install it</span><span class="step-d">In Claude Code, run the install command pointing at the unzipped folder.</span></li>
@@ -1723,13 +1583,7 @@ Tell me what is vague or missing, then rewrite it so it gives you clearer direct
             </div>
             <pre><code>/plugin install ~/Downloads/meeting-notes-summarizer</code></pre>
           </div>
-          <p class="learn-more"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1"/><path d="M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg> <span>Lesson 10 tours the marketplace where these skills come from, with more ways to install.</span></p>
-          </div>
-
-          <div class="lesson-section section-orange">
-          <div class="section-eyebrow">Run it</div>
-          <h3>Ask for It by Name</h3>
-          <p>Once a skill is installed, you run it by asking. Claude recognizes the request and follows the skill's playbook.</p>
+          <p>Once a skill is installed, you run it by asking. Claude recognizes the request and follows the skill's playbook, so a short request is enough.</p>
           <div class="code">
             <div class="code-bar">
               <span class="code-label">Run a skill</span>
@@ -1737,61 +1591,25 @@ Tell me what is vague or missing, then rewrite it so it gives you clearer direct
             </div>
             <pre><code>Run the meeting-notes-summarizer skill on the notes in this folder.</code></pre>
           </div>
-          <p>You do not have to remember exact steps. The skill carries them, so a short request is enough.</p>
-          </div>
-
-          <div class="lesson-section section-purple">
-          <div class="section-eyebrow">Watch it work</div>
-          <h3>Following Along</h3>
-          <p>A skill can take a moment, especially if it reads several files. You do not have to sit and watch. A few things in the interface help you keep track.</p>
+          <p>A skill can take a moment, especially if it reads several files. A few things in the interface help you keep track without sitting and watching.</p>
           <ul class="steps">
             <li><span class="step-t">Expand the steps</span><span class="step-d">Click into the messages to see what Claude is doing at each step, such as which files it is reading.</span></li>
             <li><span class="step-t">Let it run in the background</span><span class="step-d">Some skills launch parallel helpers to work through many items at once. You can start another session and come back.</span></li>
             <li><span class="step-t">Watch for the attention dot</span><span class="step-d">A session that needs you shows a dot in the session list. Open it, see what it needs, and continue.</span></li>
             <li><span class="step-t">Review and close</span><span class="step-d">When it finishes, read the output, then mark the session complete or move on.</span></li>
           </ul>
-          <div class="callout key">
-            <div class="co-head"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1V18h6v-1.2c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2z"/></svg> Key Takeaway</div>
-            <p>Install once, then run a skill with a plain-language request. Start with read-only skills, follow along by expanding the steps, and review the result before you use it.</p>
-          </div>
-          </div>
-        </div>
-      </section>
-
-<!-- CREATING A SKILL -->
-<section class="segment" id="p-create">
-        <div class="band band-hero">
-          <canvas class="hero-canvas" aria-hidden="true"></canvas>
-          <div class="band-top">
-            <span class="band-num">09</span>
-            <span class="pill type">Hands-On</span>
-            <span class="pill time">9 min</span>
-          </div>
-          <div class="band-eyebrow">Make it your own</div>
-          <h2>Creating a Skill for Personal Use</h2>
-        </div>
-        <div class="panel">
-          <p class="lead">If you find yourself typing the same long instructions over and over, that is a skill waiting to happen. You can build one on your own machine, just for you, with no approval process and no sharing required. It is just a folder with a text file.</p>
-          <div class="callout checkpoint">
-            <div class="co-head"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2z"/><path d="M12 8v4l3 3"/></svg> Lesson Objective</div>
-            <p>Create a simple personal skill, run it, and refine it, all locally.</p>
           </div>
 
-          <div class="lesson-section section-teal">
-          <div class="section-eyebrow">When to make one</div>
-          <h3>Good Candidates for a Skill</h3>
-          <p>A personal skill earns its keep when a task is repetitive and a little fiddly. If you keep re-explaining the same steps, capture them once.</p>
+          <div class="lesson-section section-orange">
+          <div class="section-eyebrow">Build</div>
+          <h3>Create a Skill for Personal Use</h3>
+          <p>If you find yourself typing the same long instructions over and over, that is a skill waiting to happen. You can build one on your own machine, just for you, with no approval process and no sharing required. Good candidates are repetitive and a little fiddly:</p>
           <ul class="clean">
             <li>A prompt you type constantly, with the same structure each time</li>
             <li>A multi-step routine you would rather not re-describe</li>
             <li>A formatting or summary job you want done the same way every time</li>
           </ul>
-          </div>
-
-          <div class="lesson-section section-orange">
-          <div class="section-eyebrow">Two ways to build it</div>
-          <h3>Let Claude Draft It, or Write It Yourself</h3>
-          <p>The easiest way is to ask Claude to build the skill for you. There is a skill-creator that scaffolds the folder and the <code>SKILL.md</code> for you, so you describe what you want and review the result.</p>
+          <p>The easiest way is to ask Claude to build the skill for you. There is a skill-creator that scaffolds the folder and the <code>SKILL.md</code>, so you describe what you want and review the result.</p>
           <div class="code">
             <div class="code-bar">
               <span class="code-label">Ask Claude to build a skill</span>
@@ -1821,48 +1639,13 @@ When the user provides rough notes, produce a status update:
 3. Lead with what changed; end with any open risks.
 4. Flag anything you inferred so the user can verify it.</code></pre>
           </div>
-          </div>
-
-          <div class="lesson-section section-purple">
-          <div class="section-eyebrow">Make it good</div>
-          <h3>Run, Check, Refine</h3>
-          <p>Building a skill is iterative. Your first version rarely handles every case, and that is fine.</p>
-          <ul class="steps">
-            <li><span class="step-t">Run it on a real example</span><span class="step-d">Give it actual notes and see what it produces.</span></li>
-            <li><span class="step-t">Notice what is off</span><span class="step-d">Too long? Missing the risks? An edge case it mishandled? Note it.</span></li>
-            <li><span class="step-t">Adjust the SKILL.md</span><span class="step-d">Tighten the instructions, or ask Claude to update the skill, then run it again.</span></li>
-          </ul>
-          <div class="callout key">
-            <div class="co-head"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1V18h6v-1.2c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2z"/></svg> Key Takeaway</div>
-            <p>A personal skill is a folder with a <code>SKILL.md</code>. Let Claude draft it or write it yourself, keep it local, and refine it by running it on real work. No pipeline required.</p>
-          </div>
-          </div>
-        </div>
-      </section>
-
-<!-- THE AI & AUTOMATION MARKETPLACE -->
-<section class="segment" id="p-market">
-        <div class="band band-hero">
-          <canvas class="hero-canvas" aria-hidden="true"></canvas>
-          <div class="band-top">
-            <span class="band-num">10</span>
-            <span class="pill type">Awareness</span>
-            <span class="pill time">6 min</span>
-          </div>
-          <div class="band-eyebrow">Find skills others have built</div>
-          <h2>The UiPath Enterprise AI &amp; Automation Marketplace</h2>
-        </div>
-        <div class="panel">
-          <p class="lead">You do not have to build every skill yourself. The UiPath Enterprise AI &amp; Automation Marketplace is a central place to discover skills, agents, and prompt libraries that teams across the company have built and vetted. This is a quick tour so you know where to look.</p>
-          <div class="callout checkpoint">
-            <div class="co-head"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2z"/><path d="M12 8v4l3 3"/></svg> Lesson Objective</div>
-            <p>Describe what the marketplace is, find a skill in it, and install one using any of the three methods.</p>
+          <p>Building a skill is iterative. Your first version rarely handles every case, and that is fine. Run it on a real example, notice what is off (too long? missing the risks?), then tighten the <code>SKILL.md</code> or ask Claude to update it, and run it again.</p>
           </div>
 
           <div class="lesson-section section-teal">
-          <div class="section-eyebrow">What it is</div>
-          <h3>Discover and Deploy Reusable Assets</h3>
-          <p>The marketplace is a centralized catalog of reusable AI assets: skills, automation agents, prompt libraries, and frameworks, vetted by your AI Automation Office. You browse by business domain, see what was published recently, or search for something specific.</p>
+          <div class="section-eyebrow">Find</div>
+          <h3>The UiPath Enterprise AI &amp; Automation Marketplace</h3>
+          <p>You do not have to build every skill yourself. The UiPath Enterprise AI &amp; Automation Marketplace is a centralized catalog of reusable AI assets: skills, automation agents, prompt libraries, and frameworks, vetted by your AI Automation Office. You browse by business domain, see what was published recently, or search for something specific.</p>
           <figure class="shot">
             <div class="shot-ph">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
@@ -1871,44 +1654,13 @@ When the user provides rough notes, produce a status update:
             </div>
             <figcaption>The marketplace home. Browse by domain, scan recent additions, or search across every published asset.</figcaption>
           </figure>
-          </div>
-
-          <div class="lesson-section section-orange">
-          <div class="section-eyebrow">A skill's page</div>
-          <h3>What You See on a Skill</h3>
-          <p>Each skill has a detail page so you can decide whether it fits before you install. Expect to find:</p>
-          <div class="split approved-tools">
-            <div class="split-card good">
-              <div class="split-tag">Overview</div>
-              <p>A plain description, business use cases, supported platforms, and tags so you can tell at a glance what it does and who it is for.</p>
-            </div>
-            <div class="split-card">
-              <div class="split-tag" style="color:var(--teal-50)">Versions &amp; Docs</div>
-              <p>The current version, version history, and documentation, so you know what you are installing and how to use it.</p>
-            </div>
-            <div class="split-card">
-              <div class="split-tag" style="color:var(--purple-50)">Reviews</div>
-              <p>What other people thought, plus the owner and when it was last updated.</p>
-            </div>
-          </div>
-          </div>
-
-          <div class="lesson-section section-purple">
-          <div class="section-eyebrow">Getting a skill</div>
-          <h3>Three Ways to Install</h3>
+          <p>Each skill has a detail page so you can decide whether it fits before you install: an overview with use cases and tags, the current version and docs, and reviews from other people.</p>
           <p>A skill's page offers a few install methods. Pick the one that matches your setup.</p>
           <ul class="steps">
-            <li><span class="step-t">Download ZIP</span><span class="step-d">No repository access needed. Download the ZIP, unzip it, and install from the folder. This is the method from the last lesson.</span></li>
+            <li><span class="step-t">Download ZIP</span><span class="step-d">No repository access needed. Download the ZIP, unzip it, and install from the folder, exactly as in the Run section above.</span></li>
             <li><span class="step-t">Full Catalog</span><span class="step-d">Download every skill in one bundle. Handy when you are getting started and want the whole set at once.</span></li>
             <li><span class="step-t">Marketplace</span><span class="step-d">If you have access to the internal repository, add the marketplace once, then install bundles by name. Updates flow through automatically.</span></li>
           </ul>
-          <div class="code">
-            <div class="code-bar">
-              <span class="code-label">Download ZIP, then install</span>
-              <button class="code-copy" data-copy><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy</button>
-            </div>
-            <pre><code>/plugin install ~/Downloads/&lt;skill-folder&gt;</code></pre>
-          </div>
           <div class="code">
             <div class="code-bar">
               <span class="code-label">Marketplace: add once, then install bundles</span>
@@ -1917,9 +1669,9 @@ When the user provides rough notes, produce a status update:
             <pre><code>/plugin marketplace add &lt;marketplace&gt;
 /plugin install &lt;bundle&gt;@&lt;marketplace&gt;</code></pre>
           </div>
-          <div class="callout tip">
-            <div class="co-head"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1V18h6v-1.2c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2z"/></svg> Same habits apply</div>
-            <p>A skill from the marketplace is still code that acts on your behalf. Read its description, start with read-only skills, and review what it does the first time you run it, exactly as you would for a skill you built.</p>
+          <div class="callout key">
+            <div class="co-head"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1V18h6v-1.2c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2z"/></svg> Key Takeaway</div>
+            <p>A skill is a folder with a <code>SKILL.md</code>. Install one with a plain command, run it with a plain request, build your own when a task repeats, and check the marketplace before you build. Start with read-only skills and review what they do the first time, whether you wrote them or downloaded them.</p>
           </div>
           </div>
         </div>
@@ -1930,7 +1682,7 @@ When the user provides rough notes, produce a status update:
         <div class="band band-hero">
           <canvas class="hero-canvas" aria-hidden="true"></canvas>
           <div class="band-top">
-            <span class="band-num">11</span>
+            <span class="band-num">06</span>
             <span class="pill type">Recap</span>
             <span class="pill time">4 min</span>
           </div>
@@ -1955,7 +1707,7 @@ When the user provides rough notes, produce a status update:
           <div class="lesson-section section-orange">
           <div class="section-eyebrow">What you covered</div>
           <h3>Where You Started, Where You Are</h3>
-          <p>You toured the desktop app, learned to choose models and read usage, kept sessions focused, set permissions and durable context, connected Claude to other systems, and ran, built, and found skills. That is the full loop of working in Claude Code.</p>
+          <p>You placed Claude Code among the other surfaces and toured the desktop app, learned to choose models and read usage, kept sessions focused, set permissions and durable context, connected Claude to other systems and put work on a schedule, and ran, built, and found skills. That is the full loop of working in Claude Code.</p>
           </div>
 
           <div class="lesson-section section-purple">
@@ -1974,7 +1726,7 @@ When the user provides rough notes, produce a status update:
         <div class="band band-hero">
           <canvas class="hero-canvas" aria-hidden="true"></canvas>
           <div class="band-top">
-            <span class="band-num">12</span>
+            <span class="band-num">07</span>
             <span class="pill type">Wrap-Up</span>
             <span class="pill time">3 min</span>
           </div>
@@ -2027,10 +1779,10 @@ When the user provides rough notes, produce a status update:
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
           <span><span class="bn-dir">Previous</span><span class="bn-label" id="prevLabel">Start</span></span>
         </button>
-        <div class="bn-count"><span class="pc-now" id="pcNow">1 / 13</span><span class="pc-of">Lesson</span></div>
+        <div class="bn-count"><span class="pc-now" id="pcNow">1 / 8</span><span class="pc-of">Lesson</span></div>
         <button class="bn-btn next" id="nextBtn">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
-          <span><span class="bn-dir">Next</span><span class="bn-label" id="nextLabel">Claude Code Overview</span></span>
+          <span><span class="bn-dir">Next</span><span class="bn-label" id="nextLabel">Claude Code & the Desktop App</span></span>
         </button>
       </nav>
 
@@ -2046,19 +1798,14 @@ When the user provides rough notes, produce a status update:
   "use strict";
 
   var PAGES = [
-    {id:"p-welcome",   num:"·",  name:"Welcome & Setup",            file:"lessons/00-welcome.html"},
-    {id:"p-overview",  num:"01", name:"Claude Code Overview",       file:"lessons/01-overview.html"},
-    {id:"p-desktop",   num:"02", name:"The Desktop Interface",      file:"lessons/02-desktop.html"},
-    {id:"p-models",    num:"03", name:"Models, Effort & Usage",     file:"lessons/03-models.html"},
-    {id:"p-context",   num:"04", name:"Context & Sessions",         file:"lessons/04-context.html"},
-    {id:"p-habits",    num:"05", name:"Best Practices",             file:"lessons/05-habits.html"},
-    {id:"p-routines",  num:"06", name:"Routines & Automation",      file:"lessons/06-routines.html"},
-    {id:"p-connect",   num:"07", name:"Connection Methods",         file:"lessons/07-connect.html"},
-    {id:"p-run",       num:"08", name:"Running a Skill",            file:"lessons/08-run.html"},
-    {id:"p-create",    num:"09", name:"Creating a Skill",           file:"lessons/09-create.html"},
-    {id:"p-market",    num:"10", name:"The AI Marketplace",         file:"lessons/10-marketplace.html"},
-    {id:"p-takeaways", num:"11", name:"Key Takeaways",              file:"lessons/11-takeaways.html"},
-    {id:"p-close",     num:"12", name:"What's Next",                file:"lessons/12-close.html"}
+    {id:"p-welcome",   num:"·",  name:"Welcome & Setup",              file:"lessons/00-welcome.html"},
+    {id:"p-overview",  num:"01", name:"Claude Code & the Desktop App"},
+    {id:"p-models",    num:"02", name:"Models, Usage & Context",      file:"lessons/02-models-context.html"},
+    {id:"p-working",   num:"03", name:"Permissions, Memory & Ownership"},
+    {id:"p-connect",   num:"04", name:"Connecting & Automating",      file:"lessons/04-connect-automate.html"},
+    {id:"p-skills",    num:"05", name:"Skills",                       file:"lessons/05-skills.html"},
+    {id:"p-takeaways", num:"06", name:"Key Takeaways",                file:"lessons/06-takeaways.html"},
+    {id:"p-close",     num:"07", name:"What's Next",                  file:"lessons/07-close.html"}
   ];
   var N = PAGES.length;
 

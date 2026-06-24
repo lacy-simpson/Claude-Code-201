@@ -1,0 +1,149 @@
+<!-- SKILLS: UNDERSTAND, RUN, BUILD, FIND -->
+<section class="segment" id="p-skills">
+        <div class="band band-hero">
+          <canvas class="hero-canvas" aria-hidden="true"></canvas>
+          <div class="band-top">
+            <span class="band-num">05</span>
+            <span class="pill type">Hands-On</span>
+            <span class="pill time">20 min</span>
+          </div>
+          <div class="band-eyebrow">Reusable playbooks for Claude</div>
+          <h2>Skills: Understand, Run, Build &amp; Find</h2>
+        </div>
+        <div class="panel">
+          <p class="lead">Skills are how Claude Code stops repeating itself. Capture a task once and Claude follows the same playbook every time you ask. This lesson moves through the whole arc: what a skill is, how to run one, how to build your own, and where to find skills other teams have already made.</p>
+          <div class="callout checkpoint">
+            <div class="co-head"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2z"/><path d="M12 8v4l3 3"/></svg> Lesson Objective</div>
+            <p>Explain what an Agent Skill is, install and run one, create a simple personal skill, and find a skill in the marketplace using any of the install methods.</p>
+          </div>
+
+          <div class="lesson-section section-purple">
+          <div class="section-eyebrow">Understand</div>
+          <h3>What is an Agent Skill?</h3>
+          <p>A skill is a reusable playbook you give Claude for a specific task. Instead of explaining what you need from scratch every session, a skill captures it once: the steps, the rules, and the expected output. Claude picks it up automatically when your request matches.</p>
+          <p>A skill is mostly just a folder with a text file. The most important file is <code>SKILL.md</code>. Its top section, called frontmatter, declares the skill's name and description. The rest is plain Markdown: the workflow, the rules, and examples.</p>
+          <div class="code">
+            <div class="code-bar">
+              <span class="code-label">A skill on disk</span>
+              <button class="code-copy" data-copy><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy</button>
+            </div>
+            <pre><code>meeting-notes-summarizer/
+  SKILL.md          # the instructions Claude reads
+  scripts/          # optional: code the skill can run for repeatable steps
+    format.py
+  references/       # optional: extra docs Claude loads only when needed</code></pre>
+          </div>
+          <div class="callout tip">
+            <div class="co-head"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1V18h6v-1.2c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2z"/></svg> Skills and scripts together</div>
+            <p>Skills handle judgment, context, and variation: the things that change case by case. Scripts handle what is fast and fixed: retrieval, formatting, and predictable transformations. Together they are more reliable than either alone, because Claude does not have to reinvent the routine steps every time.</p>
+          </div>
+          </div>
+
+          <div class="lesson-section section-teal">
+          <div class="section-eyebrow">Run</div>
+          <h3>Install One the Easy Way, Then Ask for It</h3>
+          <p>A skill is only useful once you run it, and running one is easy: install it, then ask for it by name. The simplest path needs no extra setup: download a skill as a ZIP, unzip it, and install it with one command. Start with a read-only skill so the first run cannot change anything.</p>
+          <ul class="steps">
+            <li><span class="step-t">Download and unzip</span><span class="step-d">Download the skill's ZIP and extract it, for example into your Downloads folder.</span></li>
+            <li><span class="step-t">Install it</span><span class="step-d">In Claude Code, run the install command pointing at the unzipped folder.</span></li>
+          </ul>
+          <div class="code">
+            <div class="code-bar">
+              <span class="code-label">Install a downloaded skill</span>
+              <button class="code-copy" data-copy><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy</button>
+            </div>
+            <pre><code>/plugin install ~/Downloads/meeting-notes-summarizer</code></pre>
+          </div>
+          <p>Once a skill is installed, you run it by asking. Claude recognizes the request and follows the skill's playbook, so a short request is enough.</p>
+          <div class="code">
+            <div class="code-bar">
+              <span class="code-label">Run a skill</span>
+              <button class="code-copy" data-copy><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy</button>
+            </div>
+            <pre><code>Run the meeting-notes-summarizer skill on the notes in this folder.</code></pre>
+          </div>
+          <p>A skill can take a moment, especially if it reads several files. A few things in the interface help you keep track without sitting and watching.</p>
+          <ul class="steps">
+            <li><span class="step-t">Expand the steps</span><span class="step-d">Click into the messages to see what Claude is doing at each step, such as which files it is reading.</span></li>
+            <li><span class="step-t">Let it run in the background</span><span class="step-d">Some skills launch parallel helpers to work through many items at once. You can start another session and come back.</span></li>
+            <li><span class="step-t">Watch for the attention dot</span><span class="step-d">A session that needs you shows a dot in the session list. Open it, see what it needs, and continue.</span></li>
+            <li><span class="step-t">Review and close</span><span class="step-d">When it finishes, read the output, then mark the session complete or move on.</span></li>
+          </ul>
+          </div>
+
+          <div class="lesson-section section-orange">
+          <div class="section-eyebrow">Build</div>
+          <h3>Create a Skill for Personal Use</h3>
+          <p>If you find yourself typing the same long instructions over and over, that is a skill waiting to happen. You can build one on your own machine, just for you, with no approval process and no sharing required. Good candidates are repetitive and a little fiddly:</p>
+          <ul class="clean">
+            <li>A prompt you type constantly, with the same structure each time</li>
+            <li>A multi-step routine you would rather not re-describe</li>
+            <li>A formatting or summary job you want done the same way every time</li>
+          </ul>
+          <p>The easiest way is to ask Claude to build the skill for you. There is a skill-creator that scaffolds the folder and the <code>SKILL.md</code>, so you describe what you want and review the result.</p>
+          <div class="code">
+            <div class="code-bar">
+              <span class="code-label">Ask Claude to build a skill</span>
+              <button class="code-copy" data-copy><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy</button>
+            </div>
+            <pre><code>Create a personal skill called "weekly-update" that takes my rough notes
+and turns them into a five-bullet status update for my manager.
+Keep it local. Ask me anything you need before you write it.</code></pre>
+          </div>
+          <p>If you would rather write it by hand, you do not need much. A skill is a folder with a <code>SKILL.md</code> file. The frontmatter at the top names the skill and describes when to use it; the rest is plain Markdown.</p>
+          <div class="code">
+            <div class="code-bar">
+              <span class="code-label">SKILL.md</span>
+              <button class="code-copy" data-copy><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy</button>
+            </div>
+            <pre><code>---
+name: weekly-update
+description: Turn rough notes into a five-bullet status update for a manager.
+---
+
+# Weekly update
+
+When the user provides rough notes, produce a status update:
+
+1. Read the notes and group them by theme.
+2. Write at most five bullets, each one sentence.
+3. Lead with what changed; end with any open risks.
+4. Flag anything you inferred so the user can verify it.</code></pre>
+          </div>
+          <p>Building a skill is iterative. Your first version rarely handles every case, and that is fine. Run it on a real example, notice what is off (too long? missing the risks?), then tighten the <code>SKILL.md</code> or ask Claude to update it, and run it again.</p>
+          </div>
+
+          <div class="lesson-section section-teal">
+          <div class="section-eyebrow">Find</div>
+          <h3>The UiPath Enterprise AI &amp; Automation Marketplace</h3>
+          <p>You do not have to build every skill yourself. The UiPath Enterprise AI &amp; Automation Marketplace is a centralized catalog of reusable AI assets: skills, automation agents, prompt libraries, and frameworks, vetted by your AI Automation Office. You browse by business domain, see what was published recently, or search for something specific.</p>
+          <figure class="shot">
+            <div class="shot-ph">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+              <span>Screenshot placeholder</span>
+              <span class="ph-note">Capture the marketplace home: the "Discover &amp; Deploy Reusable AI Assets" header, the Browse by Domain cards, and the Recently Published list.</span>
+            </div>
+            <figcaption>The marketplace home. Browse by domain, scan recent additions, or search across every published asset.</figcaption>
+          </figure>
+          <p>Each skill has a detail page so you can decide whether it fits before you install: an overview with use cases and tags, the current version and docs, and reviews from other people.</p>
+          <p>A skill's page offers a few install methods. Pick the one that matches your setup.</p>
+          <ul class="steps">
+            <li><span class="step-t">Download ZIP</span><span class="step-d">No repository access needed. Download the ZIP, unzip it, and install from the folder, exactly as in the Run section above.</span></li>
+            <li><span class="step-t">Full Catalog</span><span class="step-d">Download every skill in one bundle. Handy when you are getting started and want the whole set at once.</span></li>
+            <li><span class="step-t">Marketplace</span><span class="step-d">If you have access to the internal repository, add the marketplace once, then install bundles by name. Updates flow through automatically.</span></li>
+          </ul>
+          <div class="code">
+            <div class="code-bar">
+              <span class="code-label">Marketplace: add once, then install bundles</span>
+              <button class="code-copy" data-copy><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy</button>
+            </div>
+            <pre><code>/plugin marketplace add &lt;marketplace&gt;
+/plugin install &lt;bundle&gt;@&lt;marketplace&gt;</code></pre>
+          </div>
+          <div class="callout key">
+            <div class="co-head"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1V18h6v-1.2c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2z"/></svg> Key Takeaway</div>
+            <p>A skill is a folder with a <code>SKILL.md</code>. Install one with a plain command, run it with a plain request, build your own when a task repeats, and check the marketplace before you build. Start with read-only skills and review what they do the first time, whether you wrote them or downloaded them.</p>
+          </div>
+          </div>
+        </div>
+      </section>
